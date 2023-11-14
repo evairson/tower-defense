@@ -17,6 +17,7 @@ abstract class Ennemies {
     public int getDegat(){
         return this.degat;
     }
+    abstract public void attaque();
 
 }
 
