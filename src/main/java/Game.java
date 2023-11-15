@@ -1,6 +1,6 @@
-package main.java;
+package java;
 
-import main.java.Maps.Plateau;
+import java.Maps.Plateau;
 
 public class Game {
     private Plateau map;

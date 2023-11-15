@@ -1,4 +1,4 @@
-package main.java.Maps;
+package java.Maps;
 
 public class Plateau {
     private Case[][] grid;
