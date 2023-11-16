@@ -54,6 +54,10 @@ public abstract class Ennemis implements Perso {
         }
     }
 
+    public void avancer(){
+        pos.setX(pos.getX()-1);
+    }
+
 }
 
 
