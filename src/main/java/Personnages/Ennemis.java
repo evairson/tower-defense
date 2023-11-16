@@ -3,12 +3,12 @@ package java.Personnages;
 import java.Maps.Cordonnee;
 
 public abstract class Ennemis implements Perso {
-    private int pv;
-    private int valeur;
+    protected int pv;
+    protected int valeur;
     private int vitesse;
     private int degat;
     private String image;
-    private int porte;
+    private int range;
     private int vitessedegat;
     private Cordonnee pos;
 
@@ -24,8 +24,8 @@ public abstract class Ennemis implements Perso {
     public int getDegat(){
         return this.degat;
     }
-    public int getPorte(){
-        return porte;
+    public int getRange(){
+        return range;
     }
 
     public int getVitesseDegat(){
@@ -38,7 +38,7 @@ public abstract class Ennemis implements Perso {
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= porte){
+            if(this.pos.getX() - t.getPos().getX()<= range){
                 t.enleverPv(this.degat);
             }
         }

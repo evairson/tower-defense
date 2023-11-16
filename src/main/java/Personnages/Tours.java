@@ -3,14 +3,14 @@ package java.Personnages;
 import java.Maps.Cordonnee;
 
 public abstract class Tours implements Perso{
-    private int pv;
-    private int degat;
-    private int prix;
-    private int niveau;
-    private String image;
-    private int porte;
-    private int vitessedegat;
-    private Cordonnee pos;
+    protected int pv;
+    protected int degat;
+    protected int prix;
+    protected int niveau;
+    protected String image;
+    protected int range;
+    protected int vitessedegat;
+    protected Cordonnee pos;
 
 
     public int getPv(){
@@ -19,8 +19,8 @@ public abstract class Tours implements Perso{
     public int getDegat(){
         return this.degat;
     }
-    public int getPorte(){
-        return porte;
+    public int getRange(){
+        return range;
     }
     public int getVitesseDegat(){
         return vitessedegat;
@@ -48,7 +48,7 @@ public abstract class Tours implements Perso{
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= porte){
+            if(this.pos.getX() - t.getPos().getX()<= range){
                 t.enleverPv(this.degat);
             }
         }
