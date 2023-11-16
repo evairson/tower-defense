@@ -5,12 +5,12 @@ import java.Maps.Cordonnee;
 public abstract class Ennemis implements Perso {
     protected int pv;
     protected int valeur;
-    private int vitesse;
-    private int degat;
-    private String image;
-    private int range;
-    private int vitessedegat;
-    private Cordonnee pos;
+    protected int vitesse;
+    protected int degat;
+    protected String image;
+    protected int range;
+    protected int vitessedegat;
+    protected Cordonnee pos;
 
     public int getPv(){
         return this.pv;
