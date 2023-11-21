@@ -1,8 +1,11 @@
 package jav;
+import java.util.HashMap;
+import jav.Personnages.Tours;
 
 
 public class Joueur {
     private int monnaie;
+    private HashMap<Tours,Integer> inventaire;
 
     public int getMonnaie() {
         return monnaie;
@@ -19,5 +22,17 @@ public class Joueur {
 
     public Joueur(){
         monnaie = 300;
+        inventaire = new HashMap<>(8);
     }
+    public void addTours(int n,Tours t){
+        inventaire.put(t,inventaire.get(t)+n);
+    }
+    public void removeTours(int n,Tours t){
+        if (n >= inventaire.get(t)){
+            inventaire.put(t,0);
+        }else{
+            inventaire.put(t,inventaire.get(t)-n);
+        }
+    }
+    
 }
