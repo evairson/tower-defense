@@ -1,6 +1,8 @@
-package java.Personnages;
+package jav.Personnages;
 
-import java.Maps.Cordonnee;
+import jav.Game;
+import jav.Maps.Coordonnee;
+import java.util.ArrayList;
 
 public abstract class Tours implements Perso{
     protected int pv;
@@ -10,7 +12,8 @@ public abstract class Tours implements Perso{
     protected String image;
     protected int range;
     protected int vitessedegat;
-    protected Cordonnee pos;
+    protected Coordonnee pos;
+    protected boolean mort;
 
 
     public int getPv(){
@@ -33,7 +36,7 @@ public abstract class Tours implements Perso{
         return this.niveau;
     }
 
-    public Cordonnee getPos(){
+    public Coordonnee getPos(){
         return this.pos;
     }
 
@@ -42,17 +45,24 @@ public abstract class Tours implements Perso{
             pv = pv - degat;
         }
         else {
-            this.mort();
+            this.meurt();
         }
     }
 
-    public boolean attaque(Tours t){
-        if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= range){
-                t.enleverPv(this.degat);
-            }
+    public void meurt(){
+        mort=true;
+    }
+
+    public void mort(ArrayList<Tours> tours){
+        tours.remove(this);
+    }
+
+
+    public void update(Game game){
+
+        if(mort){
+            mort(game.getToursEnJeu());
         }
-        return false;
     }
 
 
