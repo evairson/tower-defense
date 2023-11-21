@@ -1,10 +1,10 @@
-package java.Maps;
+package jav.Maps;
 
-public class Cordonnee {
+public class Coordonnee {
     private int x;
     private int y;
 
-    Cordonnee(int x, int y){
+    public Coordonnee(int x, int y){
         this.x = x; this.y=y;
     }
 
