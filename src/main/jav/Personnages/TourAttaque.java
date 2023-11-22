@@ -1,6 +1,8 @@
 package jav.Personnages;
 
 import jav.Game;
+import jav.Personnages.Ennemis.Ennemis;
+
 import java.util.ArrayList;
 
 public class TourAttaque extends Tours {

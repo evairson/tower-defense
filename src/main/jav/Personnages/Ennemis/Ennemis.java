@@ -1,7 +1,10 @@
-package jav.Personnages;
+package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Personnages.Perso;
+import jav.Personnages.Tours;
+
 import java.util.ArrayList;
 
 public abstract class Ennemis implements Perso {

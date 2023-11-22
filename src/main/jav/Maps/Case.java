@@ -1,8 +1,8 @@
 package jav.Maps;
 
-import jav.Personnages.Ennemis;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours;
+import jav.Personnages.Ennemis.Ennemis;
 
 public class Case {
     private boolean base;

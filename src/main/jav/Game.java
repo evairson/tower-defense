@@ -3,9 +3,10 @@ package jav;
 import jav.Maps.Case;
 import jav.Maps.Coordonnee;
 import jav.Maps.Plateau;
-import jav.Personnages.Ebasique;
-import jav.Personnages.Ennemis;
 import jav.Personnages.Tours;
+import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Ennemis.Goomba;
+
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -80,7 +81,7 @@ public class Game {
         if( System.currentTimeMillis()- timeEnnemi>4000){
             int i = (int)(Math.random()*(map.getLongeur()));
                 if(map.getGrid()[i][map.getLargeur()-1].getContenu()==null){
-                    Ennemis e = new Ebasique();
+                    Ennemis e = new Goomba();
                     ennemis.add(e);
                     e.setPos(new Coordonnee(map.getLargeur()-1, i));
                 }
