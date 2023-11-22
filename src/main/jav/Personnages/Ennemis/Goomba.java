@@ -5,7 +5,7 @@ public class Goomba extends Ennemis {
         super();
         pv=20;
         valeur=2;
-        vitesse=2000;
+        vitesse=1000;
         degat=2;
         range=1;
         vitessedegat=2000;

@@ -7,7 +7,7 @@ import jav.Personnages.Tours;
 
 import java.util.ArrayList;
 
-public abstract class Ennemis implements Perso {
+public class Ennemis implements Perso {
     protected int pv;
     protected int valeur;
     protected int vitesse;
@@ -75,8 +75,26 @@ public abstract class Ennemis implements Perso {
         mort=true;
     }
 
-    public void avancer(){
-        pos.setX(pos.getX()-1);
+    public boolean canMove(Game g){
+        for(Ennemis e : g.getEnnemis()){
+            if(e.getPos().getY()==pos.getY() && e.getPos().getX()==pos.getX()-1){
+                return false;
+            }
+        }
+        for(Tours t : g.getToursEnJeu()){
+            if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getX()-1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public void avancer(Game g){
+        if(canMove(g)){
+            pos.setX(pos.getX()-1);
+        }
+
     }
 
     public void attaquer(ArrayList<Tours> tours){
@@ -95,7 +113,7 @@ public abstract class Ennemis implements Perso {
 
     public void update(Game game){
         if(System.currentTimeMillis()- timeMov>vitesse){
-            avancer();
+            avancer(game);
             timeMov =System.currentTimeMillis();
         }
 
