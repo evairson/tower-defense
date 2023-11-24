@@ -1,7 +1,7 @@
 package jav.Maps;
 
 import jav.Game;
-import jav.Personnages.Ennemis;
+import jav.Personnages.Ennemis.Ennemis;
 
 public class Plateau {
     private Case[][] grid;

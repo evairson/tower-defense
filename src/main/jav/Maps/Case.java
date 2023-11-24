@@ -1,8 +1,13 @@
 package jav.Maps;
 
-import jav.Personnages.Ennemis;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours;
+import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Ennemis.Goomba;
+import jav.Personnages.Ennemis.Koopa;
+import jav.Personnages.Ennemis.Lakitu;
+import jav.Personnages.Ennemis.Plante;
+import jav.Personnages.Ennemis.Boo;
 
 public class Case {
     private boolean base;
@@ -34,7 +39,11 @@ public class Case {
     public void afficher(){
         String perso = ".";
         if(contenu!=null){
-            if(contenu instanceof Ennemis) perso ="e";
+            if(contenu.getClass() == Boo.class) perso ="B";
+            if(contenu.getClass() == Goomba.class) perso ="G";
+            if(contenu.getClass() == Koopa.class) perso ="K";
+            if(contenu.getClass() == Lakitu.class) perso ="L";
+            if(contenu.getClass() == Plante.class) perso ="P";
             if(contenu instanceof Tours) perso ="t";
         }
         System.out.print(perso+" ");
