@@ -2,10 +2,13 @@ package jav;
 
 import java.util.Scanner;
 
+import jav.Personnages.Tours.Tours;
+
 public class JeuTexte {
     public static void main(String[] args){
         Game g = new Game(5, 30,5);
         g.update();
+        g.getToursEnJeu().add(new Tours());
         updateUtilisateur(g);
     }
     
