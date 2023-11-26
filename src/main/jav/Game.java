@@ -98,10 +98,10 @@ public class Game {
         
             int i = typeEnnemi + (int)(Math.random()*(30));
             typeEnnemi += 100/nbEnnemis;
-            if(i<30) return new Goomba();
-            if(i<40) return new Koopa();
-            if(i<50) return new Plante();
-            if(i<60) return new Boo();
+            if(i<25) return new Goomba();
+            if(i<50) return new Koopa();
+            if(i<75) return new Plante();
+            if(i<100) return new Boo();
             if(i<=130) return new Lakitu();
             
         return null;

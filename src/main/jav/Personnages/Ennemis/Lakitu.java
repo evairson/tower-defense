@@ -12,11 +12,11 @@ public class Lakitu extends Ennemis implements Lanceur {
         lettre='L';
         pv=50;
         valeur=60;
-        vitesse=5000;
+        vitesse=1000;
         degat=30;
         range=1;
         vitessedegat=4000;
-        rangeProj = 4;
+        rangeProj = 8;
         hasProj = true;
     }
 
@@ -26,13 +26,15 @@ public class Lakitu extends Ennemis implements Lanceur {
 
 
     public boolean lancer(Tours t, Game g){
-        if(t.getPos().getY()+1==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= rangeProj && this.pos.getX() - t.getPos().getX()>= 2){
-                Carapace car = new Carapace();
-                car.setPos(new Coordonnee(pos.getX()-1, pos.getY()-1));
-                g.getEnnemis().add(car);
-                g.getMap().updateContenu(g);
-                hasProj=false;
+       if(pos.getY()<g.getMap().getLongeur()-1){
+            if(t.getPos().getY()==pos.getY()+1){
+                if(this.pos.getX() - t.getPos().getX()<= rangeProj && this.pos.getX() - t.getPos().getX()>= 2){
+                    Heriss her = new Heriss();
+                    her.setPos(new Coordonnee(pos.getX()-1, pos.getY()+1));
+                    g.getEnnemis().add(her);
+                    g.getMap().updateContenu(g);
+                    hasProj=false;
+                }
             }
         }
         return false;
@@ -68,14 +70,14 @@ public class Lakitu extends Ennemis implements Lanceur {
         super.avancer(g);
        
         int i = (int)(Math.random()*(100));
-        if(i>70){
+        if(i>90){
             if(pos.getY()>0){
             if(!isPersoY(g, -1)){
                 pos.setY(pos.getY()-1);
             }
             }
         }
-        if(i<30){
+        if(i<10){
             if(pos.getY()<g.getMap().getLongeur()-1){
             if(!isPersoY(g, 1)){
                 pos.setY(pos.getY()+1);
@@ -86,6 +88,14 @@ public class Lakitu extends Ennemis implements Lanceur {
     }
 
     public void pouvoir(Game g){
+        if(hasProj){
+            int i=0;
+            if(g.getToursEnJeu().size()!=0){
+                while(i<g.getToursEnJeu().size() && !lancer(g.getToursEnJeu().get(i), g)){
+                    i++;
+                }
+            }
+        }
     }
  
 }
