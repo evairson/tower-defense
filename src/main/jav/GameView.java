@@ -10,6 +10,7 @@ public class GameView extends JFrame{
         this.setTitle("Tower Defense");
         this.setSize(1200, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
     }
 
 
