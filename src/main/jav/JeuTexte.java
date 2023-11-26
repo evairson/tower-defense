@@ -5,8 +5,9 @@ import java.util.Scanner;
 import jav.Personnages.Tours.Tours;
 
 public class JeuTexte {
-    public static void main(String[] args){
-        Game g = new Game(5, 30,5);
+
+    public JeuTexte(int longeur, int largeur, int nbEnnemis){
+        Game g = new Game(longeur, largeur,nbEnnemis);
         g.update();
         updateUtilisateur(g);
     }
