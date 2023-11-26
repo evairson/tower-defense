@@ -17,13 +17,6 @@ public class Tours implements Perso{
     protected Coordonnee pos;
     protected boolean mort;
 
-    public Tours(){
-        pos = new Coordonnee(10, 1);
-        pv = 6;
-        degat = 1;
-    }
-
-
     public int getPv(){
         return this.pv;
     }

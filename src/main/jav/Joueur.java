@@ -1,6 +1,7 @@
 package jav;
 import java.util.HashMap;
-import jav.Personnages.Tours;
+
+import jav.Personnages.Tours.Tours;
 
 
 public class Joueur {
