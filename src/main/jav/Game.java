@@ -3,13 +3,13 @@ package jav;
 import jav.Maps.Case;
 import jav.Maps.Coordonnee;
 import jav.Maps.Plateau;
-import jav.Personnages.Tours;
 import jav.Personnages.Ennemis.Boo;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
 import jav.Personnages.Ennemis.Plante;
+import jav.Personnages.Tours.Tours;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -96,17 +96,14 @@ public class Game {
 
     public Ennemis selecEnnemi(){
         
-            int i = (int)(Math.random()*(typeEnnemi));
-            System.out.println(i);
-            System.out.println(nbEnnemis);
+            int i = typeEnnemi + (int)(Math.random()*(30));
             typeEnnemi += 100/nbEnnemis;
-            if(i<30) return new Goomba();
+            if(i<25) return new Goomba();
             if(i<50) return new Koopa();
-            if(i<65) return new Plante();
-            if(i<85) return new Boo();
-            if(i<100) return new Lakitu();
+            if(i<75) return new Plante();
+            if(i<100) return new Boo();
+            if(i<=130) return new Lakitu();
             
-        
         return null;
 
     }

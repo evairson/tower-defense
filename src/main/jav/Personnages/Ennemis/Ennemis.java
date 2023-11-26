@@ -3,11 +3,11 @@ package jav.Personnages.Ennemis;
 import jav.Game;
 import jav.Maps.Coordonnee;
 import jav.Personnages.Perso;
-import jav.Personnages.Tours;
+import jav.Personnages.Tours.Tours;
 
 import java.util.ArrayList;
 
-public class Ennemis implements Perso {
+public abstract class Ennemis implements Perso {
     protected int pv;
     protected int valeur;
     protected int vitesse;
@@ -19,6 +19,7 @@ public class Ennemis implements Perso {
     protected boolean mort;
     protected long timeMov;
     protected long timeAttaque;
+    protected char lettre;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
@@ -49,6 +50,10 @@ public class Ennemis implements Perso {
         return this.pos;
     }
 
+    public char getLettre(){
+        return lettre;
+    }
+
     public void setPos(Coordonnee c){
         pos = c;
     }
@@ -76,11 +81,7 @@ public class Ennemis implements Perso {
     }
 
     public boolean canMove(Game g){
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getY()==pos.getY() && e.getPos().getX()==pos.getX()-1){
-                return false;
-            }
-        }
+
         for(Tours t : g.getToursEnJeu()){
             if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getX()-1){
                 return false;
@@ -89,18 +90,34 @@ public class Ennemis implements Perso {
         return true;
     }
 
+    public boolean depasser(Game g){
+        for(Ennemis e : g.getEnnemis()){
+            if(e.getPos().getY()==pos.getY() && e.getPos().getX()==pos.getX()-1){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void avancer(Game g){
         if(canMove(g)){
-            pos.setX(pos.getX()-1);
+            if(depasser(g)){
+                pos.setX(pos.getX()-2);
+            }
+            else {
+                pos.setX(pos.getX()-1);
+            }
+
         }
+        
 
     }
 
     public void attaquer(ArrayList<Tours> tours){
         int i=0;
         if(tours.size()!=0){
-            while(!attaque(tours.get(i)) && i<=tours.size()){
+            while(i<tours.size() && !attaque(tours.get(i))){
                 i++;
             }
         }
@@ -112,8 +129,11 @@ public class Ennemis implements Perso {
 
 
     public void update(Game game){
+        this.pouvoir(game);
+
         if(System.currentTimeMillis()- timeMov>vitesse){
             avancer(game);
+            game.getMap().afficher();
             timeMov =System.currentTimeMillis();
         }
 
@@ -130,6 +150,8 @@ public class Ennemis implements Perso {
             game.gameOver();
         }
     }
+
+    public abstract void pouvoir(Game g);
 
 }
 

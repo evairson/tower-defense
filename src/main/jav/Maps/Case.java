@@ -1,12 +1,12 @@
 package jav.Maps;
 
 import jav.Personnages.Perso;
-import jav.Personnages.Tours;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
 import jav.Personnages.Ennemis.Plante;
+import jav.Personnages.Tours.Tours;
 import jav.Personnages.Ennemis.Boo;
 
 public class Case {
@@ -37,14 +37,10 @@ public class Case {
     }
 
     public void afficher(){
-        String perso = ".";
+        char perso = '.';
         if(contenu!=null){
-            if(contenu.getClass() == Boo.class) perso ="B";
-            if(contenu.getClass() == Goomba.class) perso ="G";
-            if(contenu.getClass() == Koopa.class) perso ="K";
-            if(contenu.getClass() == Lakitu.class) perso ="L";
-            if(contenu.getClass() == Plante.class) perso ="P";
-            if(contenu instanceof Tours) perso ="t";
+            if(contenu instanceof Tours) perso ='t';
+            else perso = ((Ennemis)contenu).getLettre();
         }
         System.out.print(perso+" ");
     }
