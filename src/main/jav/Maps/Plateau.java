@@ -19,6 +19,10 @@ public class Plateau {
     public int getLongeur(){
         return longeur;
     }
+    public void setCase(int x,int y,Case c){
+        grid[x][y] = c;
+
+    }
 
     public Plateau(int longeur, int largeur){
         this.largeur=largeur;

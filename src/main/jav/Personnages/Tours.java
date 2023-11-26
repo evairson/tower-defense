@@ -39,6 +39,10 @@ public abstract class Tours implements Perso{
     public Coordonnee getPos(){
         return this.pos;
     }
+    public void setPos(int x,int y){
+        pos.setX(x);
+        pos.setY(y);
+    }
 
     public void enleverPv(int degat){
         if(pv-degat >0){
@@ -64,6 +68,8 @@ public abstract class Tours implements Perso{
             mort(game.getToursEnJeu());
         }
     }
+    //abstract public void toFlower(String image);
+    //abstract public void toStar(String image);
 
 
 }

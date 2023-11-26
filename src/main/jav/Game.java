@@ -38,9 +38,15 @@ public class Game {
     public ArrayList<Tours> getToursEnJeu() {
         return toursEnJeu;
     }
+    public void addToursEnJeu(Tours t){
+        toursEnJeu.add(t);
+    }
 
     public void gameOver(){
         end = true;
+    }
+    public Joueur getJoueur(){
+        return this.joueur;
     }
     
 

@@ -1,13 +1,18 @@
 package jav.Maps;
 
+import jav.Personnages.Luigi;
+import jav.Personnages.Mario;
+import jav.Personnages.Peach;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours;
+import jav.Personnages.TuyauTank;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
 import jav.Personnages.Ennemis.Plante;
 import jav.Personnages.Ennemis.Boo;
+import jav.*;
 
 public class Case {
     private boolean base;
@@ -44,7 +49,10 @@ public class Case {
             if(contenu.getClass() == Koopa.class) perso ="K";
             if(contenu.getClass() == Lakitu.class) perso ="L";
             if(contenu.getClass() == Plante.class) perso ="P";
-            if(contenu instanceof Tours) perso ="t";
+            if(contenu instanceof Mario) perso ="M";
+            if(contenu instanceof Peach) perso ="PE";
+            if(contenu instanceof Luigi) perso ="LU";
+            if(contenu instanceof TuyauTank) perso ="T";
         }
         System.out.print(perso+" ");
     }

@@ -1,5 +1,5 @@
 package jav.Personnages;
 
-public class ToursRalenti extends Tours{
+public class ToursRalenti{
     
 }
