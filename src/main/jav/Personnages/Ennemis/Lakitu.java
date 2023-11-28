@@ -2,6 +2,7 @@ package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Tours.Tours;
 
 public class Lakitu extends Ennemis implements Lanceur {
@@ -26,11 +27,11 @@ public class Lakitu extends Ennemis implements Lanceur {
 
 
     public boolean lancer(Tours t, Game g){
-       if(pos.getY()<g.getMap().getLongeur()-1){
-            if(t.getPos().getY()==pos.getY()+1){
-                if(this.pos.getX() - t.getPos().getX()<= rangeProj && this.pos.getX() - t.getPos().getX()>= 2){
+       if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()+1){
+                if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= rangeProj && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()>= 2){
                     Heriss her = new Heriss();
-                    her.setPos(new Coordonnee(pos.getX()-1, pos.getY()+1));
+                    her.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()+1));
                     g.getEnnemis().add(her);
                     g.getMap().updateContenu(g);
                     hasProj=false;
@@ -45,7 +46,7 @@ public class Lakitu extends Ennemis implements Lanceur {
             if(g.getEnnemis().size()!=0){
                 for(int k =0; k<g.getEnnemis().size(); k++){
                     Ennemis e = g.getEnnemis().get(k);
-                    if(e.getPos().getX()==pos.getX() && e.getPos().getY()==pos.getY()+i){
+                    if(e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX() && e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()+i){
                         return true;
                     }
                 }
@@ -53,7 +54,7 @@ public class Lakitu extends Ennemis implements Lanceur {
             if(g.getToursEnJeu().size()!=0){
                 for(int k =0; k<g.getToursEnJeu().size(); k++){
                     Tours t = g.getToursEnJeu().get(k);
-                    if(t.getPos().getX()==pos.getX() && t.getPos().getY()==pos.getY()+i){
+                    if(t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX() && t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()+i){
                         return true;
                     }
                 }
@@ -71,16 +72,16 @@ public class Lakitu extends Ennemis implements Lanceur {
        
         int i = (int)(Math.random()*(100));
         if(i>90){
-            if(pos.getY()>0){
+            if(pos.getIntCoordonnee().getY()>0){
             if(!isPersoY(g, -1)){
                 pos.setY(pos.getY()-1);
             }
             }
         }
         if(i<10){
-            if(pos.getY()<g.getMap().getLongeur()-1){
+            if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1){
             if(!isPersoY(g, 1)){
-                pos.setY(pos.getY()+1);
+                pos.setY(pos.getY()+Game.sizecase);
             }
             }
         }

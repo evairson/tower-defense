@@ -3,6 +3,7 @@ package jav;
 import jav.Maps.Case;
 import jav.Maps.Coordonnee;
 import jav.Maps.Plateau;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Boo;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
@@ -26,6 +27,8 @@ public class Game {
     private int vitesseApparition;
     private int typeEnnemi; // un entier qui augmente petit à petit pour ajouter des ennemis plus dur
     private int nbEnnemis; // nombre d'ennemis qui apparaissent dans une partie (doit être un diviseur de 100)
+    private GameView view;
+    public static int sizecase;
 
     public ArrayList<Ennemis> getEnnemis() {
         return ennemis;
@@ -44,7 +47,8 @@ public class Game {
     }
     
 
-    Game(int longeur, int largeur, int nbEnnemis){
+    public Game(int longeur, int largeur, int nbEnnemis, GameView view){
+        this.view = view;
         end = false;
         time = System.currentTimeMillis();
         timeEnnemi = System.currentTimeMillis();
@@ -69,6 +73,10 @@ public class Game {
          {
             
             public void run() {
+                if(view!=null){
+                    view.setImage();
+                }
+
                 
                 map.updateContenu(g);
                  
@@ -91,7 +99,7 @@ public class Game {
 
                 }},
                  0,
-                 200);
+                 10);
         }
 
     public Ennemis selecEnnemi(){
@@ -99,10 +107,10 @@ public class Game {
             int i = typeEnnemi + (int)(Math.random()*(30));
             typeEnnemi += 100/nbEnnemis;
             if(i<25) return new Goomba();
-            if(i<50) return new Koopa();
-            if(i<75) return new Plante();
-            if(i<100) return new Boo();
-            if(i<=130) return new Lakitu();
+            if(i<50) return new Goomba();
+            if(i<75) return new Goomba();
+            if(i<100) return new Goomba();
+            if(i<=130) return new Goomba();
             
         return null;
 
@@ -117,9 +125,12 @@ public class Game {
                 if(map.getGrid()[i][map.getLargeur()-1].getContenu()==null){
                     Ennemis e = selecEnnemi();
                     ennemis.add(e);
-                    e.setPos(new Coordonnee(map.getLargeur()-1, i));
+                    e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
                     map.updateContenu(this);
-                    map.afficher();
+                    if(view==null){
+                        map.afficher();
+                    }
+
                 }
             timeEnnemi=System.currentTimeMillis();
         }

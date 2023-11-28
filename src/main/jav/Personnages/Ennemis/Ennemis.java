@@ -2,29 +2,47 @@ package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
 
 public abstract class Ennemis implements Perso {
     protected int pv;
     protected int valeur;
     protected int vitesse;
     protected int degat;
-    protected String image;
+    protected String url;
     protected int range;
     protected int vitessedegat;
-    protected Coordonnee pos;
+    protected RealCoordonnee pos;
     protected boolean mort;
     protected long timeMov;
     protected long timeAttaque;
     protected char lettre;
+    protected JLabel image;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
     }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public JLabel getImage(){
+        return image;
+    }
+
+
+    public void setImage(JLabel jlabel){
+        image = jlabel;
+    }
+
 
     public int getPv(){
         return this.pv;
@@ -46,7 +64,7 @@ public abstract class Ennemis implements Perso {
         return vitessedegat;
     }
 
-    public Coordonnee getPos(){
+    public RealCoordonnee getPos(){
         return this.pos;
     }
 
@@ -54,13 +72,13 @@ public abstract class Ennemis implements Perso {
         return lettre;
     }
 
-    public void setPos(Coordonnee c){
+    public void setPos(RealCoordonnee c){
         pos = c;
     }
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
                 t.enleverPv(this.degat);
             }
         }
@@ -83,7 +101,12 @@ public abstract class Ennemis implements Perso {
     public boolean canMove(Game g){
 
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getX()-1){
+                return false;
+            }
+        }
+        for(Ennemis e : g.getEnnemis()){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getY() && e.getPos().getIntCoordonnee().getX()==pos.getX()-1){
                 return false;
             }
         }
@@ -92,7 +115,7 @@ public abstract class Ennemis implements Perso {
 
     public boolean depasser(Game g){
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getY()==pos.getY() && e.getPos().getX()==pos.getX()-1){
+            if(e.getClass() != this.getClass() && e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
                 return true;
             }
         }
@@ -102,16 +125,13 @@ public abstract class Ennemis implements Perso {
 
     public void avancer(Game g){
         if(canMove(g)){
-            if(depasser(g)){
-                pos.setX(pos.getX()-2);
-            }
-            else {
-                pos.setX(pos.getX()-1);
-            }
-
+            pos.setX(pos.getX()-(Game.sizecase/100));
         }
-        
-
+        else {
+            if(depasser(g)){ // a regler
+                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
+            }
+        }
     }
 
     public void attaquer(ArrayList<Tours> tours){
@@ -131,13 +151,12 @@ public abstract class Ennemis implements Perso {
     public void update(Game game){
         this.pouvoir(game);
 
-        if(System.currentTimeMillis()- timeMov>vitesse){
+        if(System.currentTimeMillis() - timeMov > (vitesse/100)){
             avancer(game);
-            game.getMap().afficher();
             timeMov =System.currentTimeMillis();
         }
 
-        if(System.currentTimeMillis()- timeAttaque>vitessedegat){
+        if(System.currentTimeMillis() - timeAttaque > vitessedegat){
             attaquer(game.getToursEnJeu());
             timeAttaque =System.currentTimeMillis();
         }

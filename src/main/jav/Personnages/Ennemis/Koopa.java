@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Tours.Tours;
 
 public class Koopa extends Ennemis implements Lanceur {
@@ -31,7 +32,7 @@ public class Koopa extends Ennemis implements Lanceur {
         if(t.getPos().getY()==pos.getY()){
             if(this.pos.getX() - t.getPos().getX()<= rangeCara && this.pos.getX() - t.getPos().getX()>= 2){
                 Carapace car = new Carapace();
-                car.setPos(new Coordonnee(pos.getX()-1, pos.getY()));
+                car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()));
                 g.getEnnemis().add(car);
                 g.getMap().updateContenu(g);
                 hasCarapace=false;

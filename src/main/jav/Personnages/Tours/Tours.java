@@ -2,6 +2,7 @@ package jav.Personnages.Tours;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 
 import java.util.ArrayList;
@@ -11,11 +12,15 @@ public class Tours implements Perso{
     protected int degat;
     protected int prix;
     protected int niveau;
-    protected String image;
+    protected String url;
     protected int range;
     protected int vitessedegat;
-    protected Coordonnee pos;
+    protected RealCoordonnee pos;
     protected boolean mort;
+
+    public String getUrl(){
+        return url;
+    }
 
     public int getPv(){
         return this.pv;
@@ -37,7 +42,7 @@ public class Tours implements Perso{
         return this.niveau;
     }
 
-    public Coordonnee getPos(){
+    public RealCoordonnee getPos(){
         return this.pos;
     }
 

@@ -10,7 +10,7 @@ public class TourAttaque extends Tours {
 
     public boolean attaque(Ennemis e){
         if(e.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - e.getPos().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - e.getPos().getIntCoordonnee().getX()<= range){
                 e.enleverPv(this.degat);
             }
         }

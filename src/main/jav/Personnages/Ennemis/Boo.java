@@ -7,7 +7,7 @@ public class Boo extends Ennemis {
     public Boo(){
         super();
         lettre='.';
-        image="";
+        url="";
         pv=60;
         valeur=50;
         vitesse=5000;
@@ -19,7 +19,7 @@ public class Boo extends Ennemis {
     public boolean nextIsTour(Game g){
         if(g.getToursEnJeu().size()!=0){
             for(Tours t : g.getToursEnJeu()){
-                if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getY()-1){
+                if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getY()-1){
                     return true;
                 }
             }
@@ -29,7 +29,7 @@ public class Boo extends Ennemis {
 
     public void pouvoir(Game g){ // Boo est invisible les premières cases du jeu sauf s'il rencontre une tour
         if(pos.getX()<=(g.getMap().getLargeur()-g.getMap().getLargeur()/3) || nextIsTour(g)){
-            image="Boo.png";
+            url="Boo.png";
             lettre='B';
         }
     }

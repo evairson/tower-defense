@@ -9,7 +9,7 @@ public class Carapace extends Ennemis {
     public Carapace(){
         super();
         lettre='C';
-        image="";
+        url="";
         pv=100;
         valeur=50;
         vitesse=500;
@@ -22,7 +22,7 @@ public class Carapace extends Ennemis {
     @Override
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
                 t.enleverPv(this.degat);
                 mort = true;
             }

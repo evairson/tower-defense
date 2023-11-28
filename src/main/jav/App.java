@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
-    private Game game;
 
     public static void main(String[] args){
         App app = new App();
@@ -17,14 +16,14 @@ public class App {
         System.out.println("1: Jeu avec l'interface graphique 2: Jeu sur le terminal");
         int rep = Integer.valueOf(sc.nextLine());
         switch(rep){
-            case 1: Game();
-            case 2: GameTerminal();
-            default: TypeGame();;
+            case 1: GameInterface(); break;
+            case 2: GameTerminal(); break;
+            default: TypeGame(); break;
         }
     }
 
-    public void Game(){
-        view = new GameView();
+    public void GameInterface(){
+        view = new GameView(5,10,5);
         view.setVisible(true);
     }
 
