@@ -8,18 +8,18 @@ import jav.Personnages.Tours.Tours;
 public class Goomba extends Ennemis {
     private int sprintRange;
     private int sprint;
-    private int vitesseBasique;
+    private int timebetweenMovBasique;
 
     public Goomba(){
         super();
         lettre='G';
         pv=20;
         valeur=2;
-        vitesseBasique=2000;
-        vitesse = vitesseBasique;
+        timebetweenMovBasique =2000;
+        timebetweenMov = timebetweenMovBasique;
         degat=2;
         range=1;
-        vitessedegat=2000;
+        timebetweendegat=2000;
         sprintRange = 4;
         sprint=500;
         url = "ennemis/goomba/goomba";
@@ -41,10 +41,10 @@ public class Goomba extends Ennemis {
 
     public void pouvoir(Game g){
         if(RangeIsTour(g)){
-            vitesse = sprint;
+            timebetweenMov = sprint;
         }
         else{
-            vitesse = vitesseBasique;
+            timebetweenMov = timebetweenMovBasique;
         }
     }
 }

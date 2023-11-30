@@ -15,11 +15,11 @@ public class Koopa extends Ennemis implements Lanceur {
         lettre='K';
         pv=40;
         valeur=20;
-        vitesse=3000;
+        timebetweenMov=3000;
         degat=2;
         range=1;
         rangeCara = 6;
-        vitessedegat=5000;
+        timebetweendegat=5000;
         hasCarapace = true;
     }
 

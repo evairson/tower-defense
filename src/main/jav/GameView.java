@@ -53,7 +53,6 @@ public class GameView extends JFrame {
         plateauGame.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
 
 
-
         casesPanel = new JPanel[game.getMap().getLongeur()][game.getMap().getLargeur()];
 
         for(int i =0;i<game.getMap().getLongeur();i++){
@@ -72,12 +71,15 @@ public class GameView extends JFrame {
         plateauSprite = new JPanel();
         plateauSprite.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*(longeur));
         plateauSprite.setLayout(null);
+        plateauSprite.setOpaque(false);
 
 
-        this.getContentPane().add(inventairePane);
-        this.getContentPane().add(plateauGame);
-        this.getContentPane().add(plateauSprite);
+        this.getContentPane().add(inventairePane,0);
+        this.getContentPane().add(plateauSprite,1);
+        this.getContentPane().add(plateauGame,2);
 
+
+        
         this.setImage();
         game.update();
 
@@ -94,7 +96,7 @@ public class GameView extends JFrame {
                     ImageIcon imageIcon = new ImageIcon(bufferedImage);
                     ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance(3*sizeCase/4, 3*sizeCase/4, Image.SCALE_DEFAULT));
                     e.setImage(new JLabel(image));
-                    e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+1, 3*sizeCase/4, 3*sizeCase/4);
+                    e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+sizeCase/6, 3*sizeCase/4, 3*sizeCase/4);
                     plateauSprite.add(e.getImage());
                     plateauSprite.repaint();
     
@@ -105,7 +107,8 @@ public class GameView extends JFrame {
                 }
             }
             else {
-                e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+1, 3*sizeCase/4, 3*sizeCase/4);
+                
+                e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+sizeCase/6, 3*sizeCase/4, 3*sizeCase/4);
                 plateauSprite.repaint();
             }
 

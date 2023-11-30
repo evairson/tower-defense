@@ -13,10 +13,10 @@ public class Lakitu extends Ennemis implements Lanceur {
         lettre='L';
         pv=50;
         valeur=60;
-        vitesse=3000;
+        timebetweenMov=3000;
         degat=30;
         range=1;
-        vitessedegat=4000;
+        timebetweendegat=4000;
         rangeProj = 8;
         hasProj = true;
     }

@@ -12,10 +12,10 @@ public class Carapace extends Ennemis {
         url="";
         pv=100;
         valeur=50;
-        vitesse=500;
+        timebetweenMov=500;
         degat=3;
         range=1;
-        vitessedegat=100;
+        timebetweendegat=100;
 
     }
 

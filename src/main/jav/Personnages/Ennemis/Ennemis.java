@@ -18,11 +18,11 @@ import java.awt.*;
 public abstract class Ennemis implements Perso {
     protected int pv;
     protected int valeur;
-    protected int vitesse;
+    protected int timebetweenMov;
     protected int degat;
     protected String url;
     protected int range;
-    protected int vitessedegat;
+    protected int timebetweendegat;
     protected RealCoordonnee pos;
     protected boolean mort;
     protected long timeMov;
@@ -32,12 +32,14 @@ public abstract class Ennemis implements Perso {
     protected int nbimageAnimation;
     protected int numAnimation;
     protected double timeAnim;
+    private int frame;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
+        frame = 100;
     }
 
     public String getUrl(){
@@ -60,8 +62,8 @@ public abstract class Ennemis implements Perso {
     public int getValeur(){
         return this.valeur;
     }
-    public int getVitesse(){
-        return this.vitesse;
+    public int getTimebetweenMov(){
+        return this.timebetweenMov;
     }
     public int getDegat(){
         return this.degat;
@@ -70,8 +72,8 @@ public abstract class Ennemis implements Perso {
         return range;
     }
 
-    public int getVitesseDegat(){
-        return vitessedegat;
+    public int getTimebetweenDegat(){
+        return timebetweendegat;
     }
 
     public RealCoordonnee getPos(){
@@ -135,7 +137,7 @@ public abstract class Ennemis implements Perso {
 
     public void avancer(Game g){
         if(canMove(g)){
-            pos.setX(pos.getX()-(Game.sizecase/100));
+            pos.setX(pos.getX()-(Game.sizecase/ frame));
         }
         else {
             if(depasser(g)){ // a regler
@@ -180,19 +182,22 @@ public abstract class Ennemis implements Perso {
     public void update(Game game){
         this.pouvoir(game);
 
-        if(System.currentTimeMillis() - timeAnim > 200){
-            nextImage();
-            timeAnim =System.currentTimeMillis();
+        if(image!=null){
+            if(System.currentTimeMillis() - timeAnim > 200){
+                nextImage();
+                timeAnim =System.currentTimeMillis();
+            }
         }
 
-        if(System.currentTimeMillis() - timeMov > (vitesse/100)){
+
+        if(System.currentTimeMillis() - timeMov > (timebetweenMov / frame)){
             avancer(game);
             timeMov =System.currentTimeMillis();
         }
 
 
 
-        if(System.currentTimeMillis() - timeAttaque > vitessedegat){
+        if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
             attaquer(game.getToursEnJeu());
             timeAttaque =System.currentTimeMillis();
         }

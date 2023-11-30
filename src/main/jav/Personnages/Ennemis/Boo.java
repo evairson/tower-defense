@@ -10,10 +10,10 @@ public class Boo extends Ennemis {
         url="";
         pv=60;
         valeur=50;
-        vitesse=5000;
+        timebetweenMov=5000;
         degat=10;
         range=1;
-        vitessedegat=2000;
+        timebetweendegat=2000;
     }
 
     public boolean nextIsTour(Game g){

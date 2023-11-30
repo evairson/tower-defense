@@ -8,10 +8,10 @@ public class Plante extends Ennemis {
         lettre='P';
         pv=50;
         valeur=2;
-        vitesse=5000;
+        timebetweenMov=5000;
         degat=10;
         range=2;
-        vitessedegat=4000;
+        timebetweendegat=4000;
     }
 
     public void pouvoir(Game g){

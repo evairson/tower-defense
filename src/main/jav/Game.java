@@ -42,6 +42,10 @@ public class Game {
         return toursEnJeu;
     }
 
+    public GameView getView(){
+        return view;
+    }
+
     public void gameOver(){
         end = true;
     }
