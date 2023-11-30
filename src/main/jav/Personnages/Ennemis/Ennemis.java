@@ -6,9 +6,14 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.*;
 
 public abstract class Ennemis implements Perso {
     protected int pv;
@@ -24,10 +29,15 @@ public abstract class Ennemis implements Perso {
     protected long timeAttaque;
     protected char lettre;
     protected JLabel image;
+    protected int nbimageAnimation;
+    protected int numAnimation;
+    protected double timeAnim;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
+        timeAnim=System.currentTimeMillis();
+        numAnimation=1;
     }
 
     public String getUrl(){
@@ -134,6 +144,25 @@ public abstract class Ennemis implements Perso {
         }
     }
 
+    public void nextImage(){
+        if(numAnimation<nbimageAnimation){
+            numAnimation++;
+        }
+        else numAnimation =1;
+        try{
+            String currentDirectory = System.getProperty("user.dir");
+            File file = new File(currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
+            Image bufferedImage = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(3*Game.sizecase/4, 3*Game.sizecase/4, Image.SCALE_DEFAULT));
+            image.setIcon(imageIcon2);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
     public void attaquer(ArrayList<Tours> tours){
         int i=0;
         if(tours.size()!=0){
@@ -151,10 +180,17 @@ public abstract class Ennemis implements Perso {
     public void update(Game game){
         this.pouvoir(game);
 
+        if(System.currentTimeMillis() - timeAnim > 200){
+            nextImage();
+            timeAnim =System.currentTimeMillis();
+        }
+
         if(System.currentTimeMillis() - timeMov > (vitesse/100)){
             avancer(game);
             timeMov =System.currentTimeMillis();
         }
+
+
 
         if(System.currentTimeMillis() - timeAttaque > vitessedegat){
             attaquer(game.getToursEnJeu());

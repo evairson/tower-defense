@@ -1,5 +1,7 @@
 package jav.Personnages.Ennemis;
 
+import java.util.ArrayList;
+
 import jav.Game;
 import jav.Personnages.Tours.Tours;
 
@@ -20,7 +22,8 @@ public class Goomba extends Ennemis {
         vitessedegat=2000;
         sprintRange = 4;
         sprint=500;
-        url = "goomba.png";
+        url = "ennemis/goomba/goomba";
+        nbimageAnimation = 5;
     }
 
     public boolean RangeIsTour(Game g){

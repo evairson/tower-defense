@@ -52,10 +52,7 @@ public class GameView extends JFrame {
         plateauGame.setLayout(new GridLayout(game.getMap().getLongeur(), game.getMap().getLargeur()));
         plateauGame.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
 
-        plateauSprite = new JPanel();
-        plateauSprite.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*(longeur));
-        plateauSprite.setLayout(null);
-        plateauSprite.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
+
 
         casesPanel = new JPanel[game.getMap().getLongeur()][game.getMap().getLargeur()];
 
@@ -72,6 +69,11 @@ public class GameView extends JFrame {
             }
         }
 
+        plateauSprite = new JPanel();
+        plateauSprite.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*(longeur));
+        plateauSprite.setLayout(null);
+
+
         this.getContentPane().add(inventairePane);
         this.getContentPane().add(plateauGame);
         this.getContentPane().add(plateauSprite);
@@ -87,7 +89,7 @@ public class GameView extends JFrame {
             if(e.getImage() == null){
                 try {
                     String currentDirectory = System.getProperty("user.dir");
-                    File file = new File(currentDirectory + "/src/main/resources/" + e.getUrl());
+                    File file = new File(currentDirectory + "/src/main/resources/" + e.getUrl()+"1.png");
                     Image bufferedImage = ImageIO.read(file);
                     ImageIcon imageIcon = new ImageIcon(bufferedImage);
                     ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance(3*sizeCase/4, 3*sizeCase/4, Image.SCALE_DEFAULT));
