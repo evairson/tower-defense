@@ -100,7 +100,7 @@ public class Ennemis implements Perso {
     public void attaquer(ArrayList<Tours> tours){
         int i=0;
         if(tours.size()!=0){
-            while(!attaque(tours.get(i)) && i<=tours.size()){
+            while(i<tours.size() && !attaque(tours.get(i))){
                 i++;
             }
         }
