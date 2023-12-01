@@ -9,13 +9,14 @@ public class Carapace extends Ennemis {
     public Carapace(){
         super();
         lettre='C';
-        url="";
+        url="ennemis/carapace/carapace";
         pv=100;
         valeur=50;
         timebetweenMov=500;
         degat=3;
         range=1;
         timebetweendegat=100;
+        nbimageAnimation=6;
 
     }
 

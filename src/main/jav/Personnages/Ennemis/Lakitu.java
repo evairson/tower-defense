@@ -19,6 +19,8 @@ public class Lakitu extends Ennemis implements Lanceur {
         timebetweendegat=4000;
         rangeProj = 8;
         hasProj = true;
+        url = "ennemis/lakitu/lakitu";
+        nbimageAnimation=3;
     }
 
     public int GetrangeProj(){
@@ -70,15 +72,16 @@ public class Lakitu extends Ennemis implements Lanceur {
 
         super.avancer(g);
        
-        int i = (int)(Math.random()*(100));
-        if(i>90){
+        int i = (int)(Math.random()*(500));
+        System.out.println(g.getMap().getLongeur()-1);
+        if(i==499){
             if(pos.getIntCoordonnee().getY()>0){
             if(!isPersoY(g, -1)){
-                pos.setY(pos.getY()-1);
+                pos.setY(pos.getY()-Game.sizecase);
             }
             }
         }
-        if(i<10){
+        if(i==0){
             if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1){
             if(!isPersoY(g, 1)){
                 pos.setY(pos.getY()+Game.sizecase);

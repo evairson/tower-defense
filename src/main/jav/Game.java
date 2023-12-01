@@ -9,7 +9,6 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
-import jav.Personnages.Ennemis.Plante;
 import jav.Personnages.Tours.Tours;
 
 import java.util.ArrayList;
@@ -110,11 +109,11 @@ public class Game {
         
             int i = typeEnnemi + (int)(Math.random()*(30));
             typeEnnemi += 100/nbEnnemis;
-            if(i<25) return new Goomba();
-            if(i<50) return new Goomba();
-            if(i<75) return new Goomba();
+            if(i<25) return new Boo();
+            if(i<50) return new Boo();
+            if(i<75) return new Lakitu();
             if(i<100) return new Goomba();
-            if(i<=130) return new Goomba();
+            if(i<=130) return new Lakitu();
             
         return null;
 

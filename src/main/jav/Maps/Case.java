@@ -5,7 +5,6 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
-import jav.Personnages.Ennemis.Plante;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Ennemis.Boo;
 
