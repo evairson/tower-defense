@@ -73,7 +73,6 @@ public class Lakitu extends Ennemis implements Lanceur {
         super.avancer(g);
        
         int i = (int)(Math.random()*(500));
-        System.out.println(g.getMap().getLongeur()-1);
         if(i==499){
             if(pos.getIntCoordonnee().getY()>0){
             if(!isPersoY(g, -1)){

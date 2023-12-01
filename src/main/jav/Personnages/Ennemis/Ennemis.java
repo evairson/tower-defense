@@ -15,22 +15,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.*;
 
-public abstract class Ennemis implements Perso {
-    protected int pv;
+public abstract class Ennemis extends Perso {
+
     protected int valeur;
     protected int timebetweenMov;
-    protected int degat;
-    protected String url;
-    protected int range;
     protected int timebetweendegat;
-    protected RealCoordonnee pos;
-    protected boolean mort;
     protected long timeMov;
     protected long timeAttaque;
-    protected char lettre;
-    protected JLabel image;
-    protected int nbimageAnimation;
-    protected int numAnimation;
     protected double timeAnim;
     private int frame;
 
@@ -42,47 +33,19 @@ public abstract class Ennemis implements Perso {
         frame = 100;
     }
 
-    public String getUrl(){
-        return url;
-    }
-
-    public JLabel getImage(){
-        return image;
-    }
-
-
-    public void setImage(JLabel jlabel){
-        image = jlabel;
-    }
-
-
-    public int getPv(){
-        return this.pv;
-    }
     public int getValeur(){
         return this.valeur;
     }
     public int getTimebetweenMov(){
         return this.timebetweenMov;
     }
-    public int getDegat(){
-        return this.degat;
-    }
-    public int getRange(){
-        return range;
-    }
+
 
     public int getTimebetweenDegat(){
         return timebetweendegat;
     }
 
-    public RealCoordonnee getPos(){
-        return this.pos;
-    }
 
-    public char getLettre(){
-        return lettre;
-    }
 
     public void setPos(RealCoordonnee c){
         pos = c;
@@ -95,19 +58,6 @@ public abstract class Ennemis implements Perso {
             }
         }
         return false;
-    }
-
-    public void enleverPv(int degat){
-        if(pv-degat >0){
-            pv = pv - degat;
-        }
-        else {
-            this.meurt();
-        }
-    }
-
-    public void meurt(){
-        mort=true;
     }
 
     public boolean canMove(Game g){
