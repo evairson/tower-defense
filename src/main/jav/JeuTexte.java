@@ -22,13 +22,13 @@ public class JeuTexte {
         Scanner sc = new Scanner(System.in);
         System.out.println("1: Montrer le jeu 2: Placer une tour 3: Acheter une tour 4: Finir le jeu");
         g.getJoueur().afficheInventaire();
-        int rep = Integer.valueOf(sc.nextLine());
-        switch(rep){
-            case 1: updateUtilisateur(g);
-            case 2: placerTour(g); updateUtilisateur(g);
-            case 3: acheterTour(g); updateUtilisateur(g);
-            case 4: System.exit(0);
-            default: updateUtilisateur(g);
+        String reponse = sc.nextLine();
+        switch(reponse){
+            case "1": updateUtilisateur(g); break;
+            case "2": placerTour(g); updateUtilisateur(g); break;
+            case "3": acheterTour(g); updateUtilisateur(g); break;
+            case "4": System.exit(0); break;
+            default: updateUtilisateur(g); break;
         }
     }
 
@@ -51,30 +51,31 @@ public class JeuTexte {
                 g.addToursEnJeu(mario); 
                 Case newTours = new Case();
                 newTours.setContenu(mario);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);}
+                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
+                break;}
             case "luigi" -> {Luigi luigi = new Luigi(); 
                 luigi.setPos(x, y);
                 g.addToursEnJeu(luigi); 
                 Case newTours = new Case();
                 newTours.setContenu(luigi);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);}
+                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
+                break;}
             case "peach" -> {Peach peach = new Peach(); 
                 peach.setPos(x, y);
                 g.addToursEnJeu(peach); 
                 Case newTours = new Case();
                 newTours.setContenu(peach);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);}
+                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
+                break;}
             case "tuyauTank" -> {TuyauTank tuyauTank = new TuyauTank(); 
                 tuyauTank.setPos(x, y);
                 g.addToursEnJeu(tuyauTank); 
                 Case newTours = new Case();
                 newTours.setContenu(tuyauTank);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);}
+                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
+                break;}
+            default -> { placerTour(g); break; }
         }
-        
-    
-
-
 
     }
 
