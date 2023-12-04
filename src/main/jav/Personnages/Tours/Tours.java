@@ -1,10 +1,12 @@
-package jav.Personnages;
+package jav.Personnages.Tours;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Personnages.Perso;
+
 import java.util.ArrayList;
 
-public abstract class Tours implements Perso{
+public class Tours implements Perso{
     protected int pv;
     protected int degat;
     protected int prix;
@@ -14,7 +16,6 @@ public abstract class Tours implements Perso{
     protected int vitessedegat;
     protected Coordonnee pos;
     protected boolean mort;
-
 
     public int getPv(){
         return this.pv;

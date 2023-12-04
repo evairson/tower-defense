@@ -2,7 +2,8 @@ package jav.Maps;
 
 import jav.Game;
 import jav.Personnages.Ennemis.Ennemis;
-import jav.Personnages.Tours;
+
+import jav.Personnages.Tours.Tours;
 
 public class Plateau {
     private Case[][] grid;
@@ -58,6 +59,7 @@ public class Plateau {
     }
 
     public void afficher(){
+        System.out.println();
         for(Case[] line : grid){
             for(Case cas : line){
                 cas.afficher();

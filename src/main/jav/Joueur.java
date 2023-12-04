@@ -1,11 +1,7 @@
 package jav;
 import java.util.HashMap;
+import jav.Personnages.Tours.*;
 
-import jav.Personnages.Luigi;
-import jav.Personnages.Mario;
-import jav.Personnages.Peach;
-import jav.Personnages.Tours;
-import jav.Personnages.TuyauTank;
 
 
 public class Joueur {

@@ -1,13 +1,10 @@
 
 package jav;
 
-import jav.Personnages.Luigi;
-import jav.Personnages.Mario;
-import jav.Personnages.Peach;
-import jav.Personnages.Tours;
-import jav.Personnages.TuyauTank;
-import jav.Personnages.TuyauTeleportation;
-
+import jav.Personnages.Tours.Luigi;
+import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Peach;
+import jav.Personnages.Tours.*;
 import java.util.Scanner;
 
 

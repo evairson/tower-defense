@@ -1,19 +1,19 @@
 package jav.Maps;
 
-import jav.Personnages.Luigi;
-import jav.Personnages.Mario;
-import jav.Personnages.Peach;
+import jav.Personnages.Tours.Luigi;
+import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Peach;
 import jav.Personnages.Perso;
-import jav.Personnages.Tours;
-import jav.Personnages.TuyauTank;
-import jav.Personnages.TuyauTeleportation;
+import jav.Personnages.Tours.*;
+import jav.Personnages.Tours.TuyauTank;
+import jav.Personnages.Tours.TuyauTeleportation;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
 import jav.Personnages.Ennemis.Plante;
+import jav.Personnages.Tours.Tours;
 import jav.Personnages.Ennemis.Boo;
-import jav.*;
 
 public class Case {
     private boolean base;
@@ -55,6 +55,7 @@ public class Case {
             if(contenu instanceof Luigi) perso ="LU";
             if(contenu instanceof TuyauTank) perso ="T";
             if (contenu instanceof TuyauTeleportation) perso = "TT";
+
         }
         System.out.print(perso+" ");
     }
