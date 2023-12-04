@@ -6,6 +6,7 @@ import jav.Personnages.Peach;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours;
 import jav.Personnages.TuyauTank;
+import jav.Personnages.TuyauTeleportation;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
@@ -53,6 +54,7 @@ public class Case {
             if(contenu instanceof Peach) perso ="PE";
             if(contenu instanceof Luigi) perso ="LU";
             if(contenu instanceof TuyauTank) perso ="T";
+            if (contenu instanceof TuyauTeleportation) perso = "TT";
         }
         System.out.print(perso+" ");
     }

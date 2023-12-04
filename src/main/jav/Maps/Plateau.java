@@ -2,6 +2,7 @@ package jav.Maps;
 
 import jav.Game;
 import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Tours;
 
 public class Plateau {
     private Case[][] grid;
@@ -19,8 +20,8 @@ public class Plateau {
     public int getLongeur(){
         return longeur;
     }
-    public void setCase(int x,int y,Case c){
-        grid[x][y] = c;
+    public Case getCase(int x,int y){
+        return grid[x][y];
 
     }
 
@@ -43,6 +44,12 @@ public class Plateau {
                     Ennemis e = g.getEnnemis().get(k);
                     if(e.getPos().getX()==j && e.getPos().getY()==i){
                         grid[i][j].setContenu(e);
+                    }
+                }
+                for(int k =0; k<g.getToursEnJeu().size(); k++){
+                    Tours t = g.getToursEnJeu().get(k);
+                    if(t.getPos().getX()==j && t.getPos().getY()==i){
+                        grid[i][j].setContenu(t);
                     }
                 }
             }

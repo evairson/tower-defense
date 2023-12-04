@@ -1,14 +1,15 @@
 
 package jav;
 
-import java.util.Scanner;
-
-import jav.Maps.Case;
 import jav.Personnages.Luigi;
 import jav.Personnages.Mario;
 import jav.Personnages.Peach;
 import jav.Personnages.Tours;
 import jav.Personnages.TuyauTank;
+import jav.Personnages.TuyauTeleportation;
+
+import java.util.Scanner;
+
 
 public class JeuTexte {
     public static void main(String[] args){
@@ -45,59 +46,111 @@ public class JeuTexte {
         int x = Integer.valueOf(sc.nextLine());
         System.out.println("Sur quelle colone voulez vous poser "+toursJouer);
         int y = Integer.valueOf(sc.nextLine());
-        switch(toursJouer){
-            case "mario" -> {Mario mario = new Mario(); 
-                mario.setPos(x, y);
-                g.addToursEnJeu(mario); 
-                Case newTours = new Case();
-                newTours.setContenu(mario);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
-                break;}
-            case "luigi" -> {Luigi luigi = new Luigi(); 
-                luigi.setPos(x, y);
-                g.addToursEnJeu(luigi); 
-                Case newTours = new Case();
-                newTours.setContenu(luigi);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
-                break;}
-            case "peach" -> {Peach peach = new Peach(); 
-                peach.setPos(x, y);
-                g.addToursEnJeu(peach); 
-                Case newTours = new Case();
-                newTours.setContenu(peach);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
-                break;}
-            case "tuyauTank" -> {TuyauTank tuyauTank = new TuyauTank(); 
-                tuyauTank.setPos(x, y);
-                g.addToursEnJeu(tuyauTank); 
-                Case newTours = new Case();
-                newTours.setContenu(tuyauTank);
-                g.getMap().setCase(Integer.valueOf(x), Integer.valueOf(y), newTours);
-                break;}
-            default -> { placerTour(g); break; }
-        }
+        createTours(g, toursJouer, x, y);
 
     }
 
+
     public static void acheterTour(Game g){
         Scanner sc = new Scanner(System.in);
-        System.out.println("Quelle Tours Voulez vous acheter");
+        g.getJoueur().afficheBoutique();
         String tours = sc.nextLine();
-        Tours acheter = convertStringToTours(tours);
-        if (acheter.getPrix() > g.getJoueur().getMonnaie()){
-            System.out.println("Vous ne pouvez pas acheter cette tours");
+        if (g.getJoueur().getBoutique().get(tours) > g.getJoueur().getMonnaie()){
+            System.out.println("Vous ne pouvez pas acheter cet objet");
         }else{
             g.getJoueur().addTours(1, tours);
         }
     }
-    public static Tours convertStringToTours(String tours){
-        switch(tours){
-            case "mario" -> {return new Mario();}
-            case "luigi" -> {return new Luigi();}
-            case "peach" -> {return new Peach();}
-            case "tuyauTank" ->{return new TuyauTank();}
-            default -> {return null;}
+    public static void createTours(Game g,String toursJouer,int x,int y){
+        switch(toursJouer){
+            case "mario" -> {if (g.getJoueur().getInventaire().get("mario") >= 1){
+                Mario mario = new Mario(); 
+                mario.setPos(x, y);
+                g.addToursEnJeu(mario); 
+                g.getMap().getCase(x,y).setContenu(mario);
+                g.getJoueur().removeTours(1, toursJouer);
+                break;
+            }else{
+                System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+            }}
+            case "luigi" -> { if (g.getJoueur().getInventaire().get("luigi") >= 1){
+                Luigi luigi = new Luigi(); 
+                luigi.setPos(x, y);
+                g.addToursEnJeu(luigi); 
+                g.getMap().getCase(x,y).setContenu(luigi);
+                g.getJoueur().removeTours(1, toursJouer);
+                break;
+                }else{
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                }}
+            case "peach" -> {if (g.getJoueur().getInventaire().get("peach") >= 1){
+                Peach peach = new Peach(); 
+                peach.setPos(x, y);
+                g.addToursEnJeu(peach); 
+                g.getMap().getCase(x,y).setContenu(peach);
+                g.getJoueur().removeTours(1, toursJouer);
+                break;
+                }else{
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                }}
+            case "tuyauTank" -> {if (g.getJoueur().getInventaire().get("tuyauTank") >= 1){
+                TuyauTank tuyauTank = new TuyauTank(); 
+                tuyauTank.setPos(x, y);
+                g.addToursEnJeu(tuyauTank); 
+                g.getMap().getCase(x,y).setContenu(tuyauTank);
+                g.getJoueur().removeTours(1, toursJouer);
+                break;
+                }else{
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                }}
+            case "TuyauTeleportation " -> {if (g.getJoueur().getInventaire().get("TuyauTeleportation")>=1){
+                TuyauTeleportation tuyau = new TuyauTeleportation();
+                tuyau.setPos(x, y);
+                g.addToursEnJeu(tuyau);
+                g.getMap().getCase(x, y).setContenu(tuyau);
+                g.getJoueur().removeTours(1, toursJouer);
+                break;
+                }else{
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                } }
+            case "fleur" -> {if (g.getMap().getCase(x, y).getContenu() == null){
+                System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur une case où il n'y a rien");
+                break;
+                }else{
+                    if (g.getJoueur().getInventaire().get("fleur")>= 1){
+                    g.getMap().getCase(x, y).getContenu().toFlower(imageUrl(toursJouer));
+                    g.getJoueur().removeTours(1, toursJouer);
+                    break;
+                    }else{
+                        System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                    }
+                }
+            }
+            case "étoile" -> {if (g.getMap().getCase(x, y).getContenu() == null){
+                System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur une case où il n'y a rien");
+                break;
+                }else{
+                    if (g.getJoueur().getInventaire().get("étoile")>=1){
+                    g.getMap().getCase(x, y).getContenu().toStar(imageUrl(toursJouer));
+                    g.getJoueur().removeTours(1, toursJouer);
+                    break;
+                    }else{
+                        System.out.println("Vous ne pouvez pas poser "+ toursJouer);break;
+                    }
+
+                }
+            }
+            default -> { placerTour(g); break; }
         }
+
+    }
+    public static boolean canUsePower(Game g,int x,int y){
+        return g.getMap().getCase(x, y).getContenu() instanceof Peach || g.getMap().getCase(x, y).getContenu() instanceof Mario || g.getMap().getCase(x, y).getContenu() instanceof Luigi;
+
+    }
+    public static String imageUrl(String Tours){
+        return "";
+
     }
 
 }

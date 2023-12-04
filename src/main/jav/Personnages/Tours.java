@@ -68,8 +68,13 @@ public abstract class Tours implements Perso{
             mort(game.getToursEnJeu());
         }
     }
-    //abstract public void toFlower(String image);
-    //abstract public void toStar(String image);
+    public void toFlower(String image){
+        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur cette tours");
+    }
+
+    public void toStar(String image){
+        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
+    }
 
 
 }

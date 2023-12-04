@@ -11,4 +11,7 @@ public interface Perso {
     public void meurt();
 
     public void update(Game game);
+    public void toFlower(String image);
+    public void toStar(String image);
+
 }

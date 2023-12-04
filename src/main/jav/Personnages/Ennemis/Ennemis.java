@@ -24,6 +24,13 @@ public class Ennemis implements Perso {
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
     }
+    public void toFlower(String image){
+        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
+    }
+
+    public void toStar(String image){
+       System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
+    }
 
     public int getPv(){
         return this.pv;

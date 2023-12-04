@@ -13,6 +13,5 @@ public class TuyauTank extends Tours{
         mort = false;
         pos = new Coordonnee(0, 0);
     }
-
     
 }
