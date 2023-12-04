@@ -56,6 +56,7 @@ public class JeuTexte {
             System.out.println("Vous ne pouvez pas acheter cet objet");
         }else{
             g.getJoueur().addTours(1, tours);
+            g.getJoueur().acheter(g.getJoueur().getBoutique().get(tours));
         }
     }
     public static void createTours(Game g,String toursJouer,int x,int y){

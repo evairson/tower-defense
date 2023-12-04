@@ -1,4 +1,4 @@
-package jav.Personnages;
+package jav.Personnages.Tours;
 
 import jav.Maps.Coordonnee;
 

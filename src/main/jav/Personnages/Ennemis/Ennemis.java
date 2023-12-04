@@ -140,7 +140,7 @@ public abstract class Ennemis implements Perso {
 
         if(System.currentTimeMillis()- timeMov>vitesse){
             avancer(game);
-            game.getMap().afficher();
+            //game.getMap().afficher();
             timeMov =System.currentTimeMillis();
         }
 

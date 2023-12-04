@@ -22,7 +22,7 @@ public class Plateau {
         return longeur;
     }
     public Case getCase(int x,int y){
-        return grid[x][y];
+        return grid[y][x];
 
     }
 
