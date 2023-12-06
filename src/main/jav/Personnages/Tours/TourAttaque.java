@@ -30,4 +30,22 @@ public class TourAttaque extends Tours {
 
         super.update(game);
     }
+    
+    public void toFlower(){
+        this.url = "";
+        switch(this.niveau){
+            case 0 -> {this.pv = 100; this.degat+=15;this.niveau++;return;}
+            case 2 -> {this.pv = 100;this.degat-=15;this.niveau--;return;}
+            default -> {return;}
+        }
+    }
+
+    public void toStar(){
+        this.url = "";
+        switch(this.niveau){
+            case 0 -> {this.pv = 150;this.degat+=35;this.niveau+=2;return;}
+            case 1 -> {this.pv = 150;this.degat+=15;this.niveau++;return;}
+            default -> {return;}
+        }
+    }
 }

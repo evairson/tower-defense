@@ -1,6 +1,12 @@
 package jav.Maps;
 
+import jav.Personnages.Tours.Luigi;
+import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Peach;
 import jav.Personnages.Perso;
+import jav.Personnages.Tours.*;
+import jav.Personnages.Tours.TuyauTank;
+import jav.Personnages.Tours.TuyauTeleportation;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
@@ -36,10 +42,9 @@ public class Case {
     }
 
     public void afficher(){
-        char perso = '.';
+        String perso = ".";
         if(contenu!=null){
-            if(contenu instanceof Tours) perso ='t';
-            else perso = ((Ennemis)contenu).getLettre();
+            perso = contenu.getLettre();
         }
         System.out.print(perso+" ");
     }

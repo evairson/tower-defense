@@ -8,7 +8,7 @@ import jav.Personnages.Tours.Tours;
 public class Carapace extends Ennemis {
     public Carapace(){
         super();
-        lettre='C';
+        lettre="C";
         url="ennemis/carapace/carapace";
         pv=100;
         valeur=50;

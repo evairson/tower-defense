@@ -9,7 +9,12 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
+import jav.Personnages.Tours.Luigi;
+import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Peach;
 import jav.Personnages.Tours.Tours;
+import jav.Personnages.Tours.TuyauTank;
+import jav.Personnages.Tours.TuyauTeleportation;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -40,6 +45,9 @@ public class Game {
     public ArrayList<Tours> getToursEnJeu() {
         return toursEnJeu;
     }
+    public void addToursEnJeu(Tours t){
+        toursEnJeu.add(t);
+    }
 
     public GameView getView(){
         return view;
@@ -47,6 +55,9 @@ public class Game {
 
     public void gameOver(){
         end = true;
+    }
+    public Joueur getJoueur(){
+        return this.joueur;
     }
     
 
@@ -109,10 +120,9 @@ public class Game {
         
             int i = typeEnnemi + (int)(Math.random()*(30));
             typeEnnemi += 100/nbEnnemis;
-            if(i<25) return new Boo();
-            if(i<50) return new Boo();
-            if(i<75) return new Lakitu();
-            if(i<100) return new Goomba();
+            if(i<50) return new Goomba();
+            if(i<75) return new Koopa();
+            if(i<100) return new Boo();
             if(i<=130) return new Lakitu();
             
         return null;
@@ -137,6 +147,50 @@ public class Game {
                 }
             timeEnnemi=System.currentTimeMillis();
         }
+    }
+
+    public  boolean canUsePower(int x,int y){
+        return this.getMap().getCase(x, y).getContenu() instanceof Peach || this.getMap().getCase(x, y).getContenu() instanceof Mario || this.getMap().getCase(x, y).getContenu() instanceof Luigi;
+    }
+
+
+
+    public void createTours(String toursJouer,int x,int y){
+        if(toursJouer.equals("mario") || toursJouer.equals("luigi") || toursJouer.equals("peach") || toursJouer.equals("tuyauTank") || toursJouer.equals("TuyauTeleportation")){
+            if (this.getJoueur().getInventaire().get(toursJouer) >= 1){
+                Tours tour = switch (toursJouer) {
+                    case "mario"->new Mario(new RealCoordonnee(x, y)); 
+                    case "luigi"->new Luigi(new RealCoordonnee(x, y)); 
+                    case "peach"->new Peach(new RealCoordonnee(x, y)); 
+                    case "tuyauTank" ->new TuyauTank(new RealCoordonnee(x, y)); 
+                    case "TuyauTeleportation " -> new TuyauTeleportation(new RealCoordonnee(x, y));
+                    default -> new Mario(new RealCoordonnee(x, y)); 
+                };
+                this.addToursEnJeu(tour); 
+                this.getMap().getCase(x,y).setContenu(tour);
+                this.getJoueur().removeTours(1, toursJouer);
+            }
+            else{
+                System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                }
         }
+        else if (toursJouer.equals("fleur") || toursJouer.equals("etoile")){
+            if (this.getMap().getCase(x, y).getContenu() == null){
+                System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur une case où il n'y a rien");
+                }
+            else{
+                if (this.getJoueur().getInventaire().get(toursJouer)>= 1 && this.canUsePower(x, y)){
+                    if(toursJouer.equals("fleur")) {
+                        ((Tours)(this.getMap().getCase(x, y).getContenu())).toFlower();}
+                    else {
+                        ((Tours)(this.getMap().getCase(x, y).getContenu())).toStar();}
+                    this.getJoueur().removeTours(1, toursJouer);
+                }
+                else{
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                }
+            }
+        }
+    }
     
 }

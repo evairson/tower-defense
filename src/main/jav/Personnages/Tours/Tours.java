@@ -7,10 +7,11 @@ import jav.Personnages.Perso;
 
 import java.util.ArrayList;
 
-public class Tours extends Perso{
+public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
     protected int vitessedegat;
+
 
     public int getVitesseDegat(){
         return vitessedegat;
@@ -34,6 +35,10 @@ public class Tours extends Perso{
             mort(game.getToursEnJeu());
         }
     }
+    
+    public abstract void toFlower();
+
+    public abstract void toStar();
 
 
 }

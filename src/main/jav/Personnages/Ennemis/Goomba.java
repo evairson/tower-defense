@@ -12,7 +12,7 @@ public class Goomba extends Ennemis {
 
     public Goomba(){
         super();
-        lettre='G';
+        lettre="G";
         pv=20;
         valeur=2;
         timebetweenMovBasique =2000;

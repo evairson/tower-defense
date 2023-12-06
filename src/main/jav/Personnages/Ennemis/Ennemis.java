@@ -32,6 +32,13 @@ public abstract class Ennemis extends Perso {
         numAnimation=1;
         frame = 100;
     }
+    public void toFlower(String image){
+        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
+    }
+
+    public void toStar(String image){
+       System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
+    }
 
     public int getValeur(){
         return this.valeur;
@@ -43,12 +50,6 @@ public abstract class Ennemis extends Perso {
 
     public int getTimebetweenDegat(){
         return timebetweendegat;
-    }
-
-
-
-    public void setPos(RealCoordonnee c){
-        pos = c;
     }
 
     public boolean attaque(Tours t){

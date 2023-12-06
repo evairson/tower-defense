@@ -17,8 +17,13 @@ public abstract class Perso {
     protected int nbimageAnimation;
     protected int numAnimation;
     protected int range;
-    protected char lettre;
+    protected String lettre;
     protected RealCoordonnee pos;
+
+
+    public void setPos(RealCoordonnee c){
+        pos = c;
+    }
 
     public void enleverPv(int degat){
         if(pv-degat >0){
@@ -41,7 +46,7 @@ public abstract class Perso {
         return this.pos;
     }
 
-    public char getLettre(){
+    public String getLettre(){
         return lettre;
     }
 

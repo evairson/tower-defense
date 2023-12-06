@@ -2,6 +2,7 @@ package jav.Maps;
 
 import jav.Game;
 import jav.Personnages.Ennemis.Ennemis;
+
 import jav.Personnages.Tours.Tours;
 
 public class Plateau {
@@ -19,6 +20,10 @@ public class Plateau {
 
     public int getLongeur(){
         return longeur;
+    }
+    public Case getCase(int x,int y){
+        return grid[y][x];
+
     }
 
     public Plateau(int longeur, int largeur){
