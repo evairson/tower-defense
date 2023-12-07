@@ -3,6 +3,8 @@ package jav.Personnages.Ennemis;
 import jav.Game;
 import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
+import jav.Personnages.Lanceur;
+import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 
 public class Lakitu extends Ennemis implements Lanceur {
@@ -28,7 +30,7 @@ public class Lakitu extends Ennemis implements Lanceur {
     }
 
 
-    public boolean lancer(Tours t, Game g){
+    public boolean lancer(Perso t, Game g){
        if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1){
             if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()+1){
                 if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= rangeProj && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()>= 2){
@@ -37,6 +39,7 @@ public class Lakitu extends Ennemis implements Lanceur {
                     g.getEnnemis().add(her);
                     g.getMap().updateContenu(g);
                     hasProj=false;
+                    return true;
                 }
             }
         }

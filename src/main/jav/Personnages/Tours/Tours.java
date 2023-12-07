@@ -10,12 +10,6 @@ import java.util.ArrayList;
 public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
-    protected int vitessedegat;
-
-
-    public int getVitesseDegat(){
-        return vitessedegat;
-    }
 
     public int getPrix(){
         return this.prix;
@@ -30,6 +24,8 @@ public abstract class Tours extends Perso{
 
 
     public void update(Game game){
+        this.pouvoir(game);
+
 
         if(mort){
             mort(game.getToursEnJeu());

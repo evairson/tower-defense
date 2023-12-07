@@ -19,12 +19,18 @@ public abstract class Perso {
     protected int range;
     protected String lettre;
     protected RealCoordonnee pos;
+    protected int timebetweendegat;
+    protected long timeAttaque;
 
 
     public void setPos(RealCoordonnee c){
         pos = c;
     }
 
+    public int getTimebetweenDegat(){
+        return timebetweendegat;
+    }
+    
     public void enleverPv(int degat){
         if(pv-degat >0){
             pv = pv - degat;
@@ -71,4 +77,5 @@ public abstract class Perso {
     }
 
     public abstract void update(Game game);
+    public abstract void pouvoir(Game g);
 }

@@ -19,11 +19,11 @@ public abstract class Ennemis extends Perso {
 
     protected int valeur;
     protected int timebetweenMov;
-    protected int timebetweendegat;
+
     protected long timeMov;
-    protected long timeAttaque;
+
     protected double timeAnim;
-    private int frame;
+    protected int frame;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
@@ -31,13 +31,6 @@ public abstract class Ennemis extends Perso {
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
         frame = 100;
-    }
-    public void toFlower(String image){
-        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
-    }
-
-    public void toStar(String image){
-       System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
     }
 
     public int getValeur(){
@@ -47,10 +40,6 @@ public abstract class Ennemis extends Perso {
         return this.timebetweenMov;
     }
 
-
-    public int getTimebetweenDegat(){
-        return timebetweendegat;
-    }
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
@@ -64,12 +53,12 @@ public abstract class Ennemis extends Perso {
     public boolean canMove(Game g){
 
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
                 return false;
             }
         }
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getY() && e.getPos().getIntCoordonnee().getX()==pos.getX()-1){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
                 return false;
             }
         }
@@ -92,7 +81,7 @@ public abstract class Ennemis extends Perso {
         }
         else {
             if(depasser(g)){ // a regler
-                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
+                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/frame));
             }
         }
     }
@@ -147,7 +136,6 @@ public abstract class Ennemis extends Perso {
         }
 
 
-
         if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
             attaquer(game.getToursEnJeu());
             timeAttaque =System.currentTimeMillis();
@@ -162,7 +150,7 @@ public abstract class Ennemis extends Perso {
         }
     }
 
-    public abstract void pouvoir(Game g);
+
 
 }
 

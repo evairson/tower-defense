@@ -1,4 +1,5 @@
 package jav.Personnages.Tours;
+import jav.Game;
 import jav.Maps.*;
 
 public class TuyauTeleportation extends Tours{
@@ -24,5 +25,8 @@ public class TuyauTeleportation extends Tours{
     public void toStar() {
         System.out.println("vous ne pouvez pas sur cette tour");
     }
-    
+
+    public void pouvoir(Game g){
+
+    }
 }

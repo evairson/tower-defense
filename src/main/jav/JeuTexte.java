@@ -50,7 +50,7 @@ public class JeuTexte {
         }
         if (g.getJoueur().getInventaire().get(toursJouer) == 0){
             System.out.println("Vous n'avez plus de " + toursJouer);
-            toursJouer = sc.nextLine();
+            return;
         }
         try{
             choisirCor(g, sc, toursJouer);
@@ -71,16 +71,25 @@ public class JeuTexte {
         return toursJouer;
     }
 
-    public static void choisirCor(Game g, Scanner sc, String toursJouer) throws choisirToursException{
+    public static void choisirCor(Game g, Scanner sc, String toursJouer) throws choisirToursException, StringIndexOutOfBoundsException{
         System.out.println("Choisissez les coordonnées (ex : A3) de "+toursJouer);
         String coordString = sc.nextLine();
-        try {
-            Integer.parseInt(String.valueOf(coordString.charAt(1)));
+        int x = 0;
+        if(coordString.substring(1).length()==2){
+            try {
+                x = Integer.parseInt(String.valueOf(coordString.substring(1, 3)));
+            }
+            catch (NumberFormatException f) {
+                throw new choisirToursException();
+            }
         }
-        catch (NumberFormatException e) {
+        else if(coordString.substring(1).length()==1){
+            x = Integer.parseInt(String.valueOf(coordString.charAt(1)));
+        }
+        else {
             throw new choisirToursException();
-        }
-        int x = Integer.parseInt(String.valueOf(coordString.charAt(1)));
+        } 
+
         if(Plateau.alphabet.indexOf(coordString.charAt(0))==-1){
             throw new choisirToursException();
         }

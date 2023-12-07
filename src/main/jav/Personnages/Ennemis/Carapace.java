@@ -3,10 +3,13 @@ package jav.Personnages.Ennemis;
 import java.util.ArrayList;
 
 import jav.Game;
+import jav.Personnages.Tours.TourAttaque;
 import jav.Personnages.Tours.Tours;
 
-public class Carapace extends Ennemis {
-    public Carapace(){
+public class Carapace extends Ennemis implements TourAttaque {
+    private boolean isEnnemis;
+
+    public Carapace(boolean isEnnemis){
         super();
         lettre="C ";
         url="ennemis/carapace/carapace";
@@ -17,6 +20,7 @@ public class Carapace extends Ennemis {
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
+        this.isEnnemis = isEnnemis;
 
     }
 
@@ -30,6 +34,62 @@ public class Carapace extends Ennemis {
         }
         return false;
     }
+
+    public boolean attaque(Ennemis e){
+        if(e.getPos().getY()==pos.getY()){
+            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
+                e.enleverPv(this.degat);
+                mort = true;
+            }
+        }
+        return false;
+    }
+
+    public boolean depasserTour(Game g){
+        for(Tours t : g.getToursEnJeu()){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public void avancer(Game g){
+        if(isEnnemis){
+            if(canMove(g)){
+                pos.setX(pos.getX()-(Game.sizecase/ frame));
+            }
+            else {
+                if(depasser(g)){ // a regler
+                    pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
+                }
+            }
+        }
+        else {
+            if(canMove(g) && !(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1)){
+                pos.setX(pos.getX()+(Game.sizecase/ frame));
+            }
+            else {
+                if(depasserTour(g)){ // a regler
+                    pos.setX(pos.getX()+(Game.sizecase)+(Game.sizecase/frame));
+                }
+            }
+
+        }
+
+    }
+
+    @Override
+    public void update(Game g){
+        super.update(g);
+        if(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1){
+            meurt();
+        }
+    }
+
+
 
     public void pouvoir(Game g){
         // pas besoin
