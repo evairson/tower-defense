@@ -140,9 +140,6 @@ public class Game {
                     ennemis.add(e);
                     e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
                     map.updateContenu(this);
-                    if(view==null){
-                        map.afficher();
-                    }
 
                 }
             timeEnnemi=System.currentTimeMillis();

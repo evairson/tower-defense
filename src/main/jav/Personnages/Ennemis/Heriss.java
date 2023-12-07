@@ -6,7 +6,7 @@ public class Heriss extends Ennemis {
 
     public Heriss(){
         super();
-        lettre="H";
+        lettre="H ";
         url="";
         pv=20;
         valeur=10;

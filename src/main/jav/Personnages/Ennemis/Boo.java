@@ -6,7 +6,7 @@ import jav.Personnages.Tours.Tours;
 public class Boo extends Ennemis {
     public Boo(){
         super();
-        lettre=".";
+        lettre=". ";
         url="ennemis/booinvisible/boo";
         pv=60;
         valeur=50;
@@ -32,7 +32,7 @@ public class Boo extends Ennemis {
         if(pos.getIntCoordonnee().getX()<=(g.getMap().getLargeur()-g.getMap().getLargeur()/2) || nextIsTour(g)){
             url="ennemis/boo/boo";
             nbimageAnimation=3;
-            lettre="B";
+            lettre="B ";
         }
     }
 }

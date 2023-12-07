@@ -42,7 +42,7 @@ public class Case {
     }
 
     public void afficher(){
-        String perso = ".";
+        String perso = ". ";
         if(contenu!=null){
             perso = contenu.getLettre();
         }

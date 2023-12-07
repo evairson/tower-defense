@@ -12,7 +12,7 @@ public class Koopa extends Ennemis implements Lanceur {
     private boolean hasCarapace;
     public Koopa(){
         super();
-        lettre="K";
+        lettre="K ";
         pv=40;
         valeur=20;
         timebetweenMov=3000;

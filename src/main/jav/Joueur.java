@@ -59,12 +59,15 @@ public class Joueur {
         return this.boutique;
     }
     public void afficheInventaire(){
+        System.out.println();
+        System.out.println("| Inventaire |");
         for (String key : inventaire.keySet()){
             System.out.print(key+": "+inventaire.get(key)+", ");
         }
         System.out.println();
     }
     public void afficheBoutique(){
+        System.out.println();
         System.out.println("Vous disposez de "+this.monnaie +" pièces d'or en banque, que souhaitez vous acheter ?");
         for (String key : boutique.keySet()){
             System.out.print(key+": "+boutique.get(key)+", ");

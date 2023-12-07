@@ -10,7 +10,7 @@ public class Lakitu extends Ennemis implements Lanceur {
     private boolean hasProj;
     public Lakitu(){
         super();
-        lettre="L";
+        lettre="L ";
         pv=50;
         valeur=60;
         timebetweenMov=3000;

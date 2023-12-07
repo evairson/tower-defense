@@ -13,7 +13,7 @@ public class TuyauTank extends Tours{
         vitessedegat = 0;
         mort = false;
         this.pos = pos;
-        lettre = "T";
+        lettre = "T ";
     }
 
     @Override

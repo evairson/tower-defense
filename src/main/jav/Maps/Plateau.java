@@ -8,7 +8,8 @@ import jav.Personnages.Tours.Tours;
 public class Plateau {
     private Case[][] grid;
     private int largeur;
-    private int longeur;
+    private int longueur;
+    public final static String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public Case[][] getGrid(){
         return grid;
@@ -19,7 +20,7 @@ public class Plateau {
     }
 
     public int getLongeur(){
-        return longeur;
+        return longueur;
     }
     public Case getCase(int x,int y){
         return grid[y][x];
@@ -28,7 +29,7 @@ public class Plateau {
 
     public Plateau(int longeur, int largeur){
         this.largeur=largeur;
-        this.longeur=longeur;
+        this.longueur=longeur;
         grid = new Case[longeur][largeur];
         for(int i =0; i < longeur; i ++){
             for(int j = 0; j <largeur; j++){
@@ -38,7 +39,7 @@ public class Plateau {
     }
 
     public void updateContenu(Game g){
-        for(int i =0; i < longeur; i ++){
+        for(int i =0; i < longueur; i ++){
             for(int j = 0; j <largeur; j++){
                 grid[i][j].setContenu(null);
                 for(int k =0; k<g.getEnnemis().size(); k++){
@@ -60,8 +61,18 @@ public class Plateau {
 
     public void afficher(){
         System.out.println();
-        for(Case[] line : grid){
-            for(Case cas : line){
+        for(int i =0; i<Math.min(largeur, 10); i++){
+            System.out.print(i + "  ");
+        }
+        if(largeur>=10){
+            for(int i=10; i<=largeur; i++){
+            System.out.print(i + " ");
+            }
+        }
+        System.out.println();
+        for(int j =0; j< longueur; j++){
+            System.out.print(alphabet.charAt(j) + "  ");
+            for(Case cas : grid[j]){
                 cas.afficher();
             }
             System.out.println();
