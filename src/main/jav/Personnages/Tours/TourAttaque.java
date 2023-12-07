@@ -10,7 +10,7 @@ public class TourAttaque extends Tours {
 
     public boolean attaque(Ennemis e){
         if(e.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - e.getPos().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - e.getPos().getIntCoordonnee().getX()<= range){
                 e.enleverPv(this.degat);
             }
         }
@@ -30,8 +30,9 @@ public class TourAttaque extends Tours {
 
         super.update(game);
     }
-    public void toFlower(String image){
-        this.image = image;
+    
+    public void toFlower(){
+        this.url = "";
         switch(this.niveau){
             case 0 -> {this.pv = 100; this.degat+=15;this.niveau++;return;}
             case 2 -> {this.pv = 100;this.degat-=15;this.niveau--;return;}
@@ -39,8 +40,8 @@ public class TourAttaque extends Tours {
         }
     }
 
-    public void toStar(String image){
-        this.image = image;
+    public void toStar(){
+        this.url = "";
         switch(this.niveau){
             case 0 -> {this.pv = 150;this.degat+=35;this.niveau+=2;return;}
             case 1 -> {this.pv = 150;this.degat+=15;this.niveau++;return;}

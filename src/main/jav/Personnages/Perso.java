@@ -1,17 +1,74 @@
 package jav.Personnages;
 
+import java.util.ArrayList;
+
+import javax.swing.JLabel;
+
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 
-public interface Perso {
-    public int getPv();
-    public int getDegat();
-    public Coordonnee getPos();
-    public void enleverPv(int degat);
-    public void meurt();
+public abstract class Perso {
+    protected int degat;
+    protected String url;
+    protected int pv;
+    protected boolean mort;
+    protected JLabel image;
+    protected int nbimageAnimation;
+    protected int numAnimation;
+    protected int range;
+    protected String lettre;
+    protected RealCoordonnee pos;
 
-    public void update(Game game);
-    public void toFlower(String image);
-    public void toStar(String image);
 
+    public void setPos(RealCoordonnee c){
+        pos = c;
+    }
+
+    public void enleverPv(int degat){
+        if(pv-degat >0){
+            pv = pv - degat;
+        }
+        else {
+            this.meurt();
+        }
+    }
+
+    public void meurt(){
+        mort=true;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public RealCoordonnee getPos(){
+        return this.pos;
+    }
+
+    public String getLettre(){
+        return lettre;
+    }
+
+    public JLabel getImage(){
+        return image;
+    }
+
+    public void setImage(JLabel jlabel){
+        image = jlabel;
+    }
+
+
+    public int getPv(){
+        return this.pv;
+    }
+
+    public int getDegat(){
+        return this.degat;
+    }
+    public int getRange(){
+        return range;
+    }
+
+    public abstract void update(Game game);
 }

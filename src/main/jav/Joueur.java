@@ -34,7 +34,7 @@ public class Joueur {
         inventaire.put("tuyauTank",0);
         inventaire.put("TuyauTeleportation",0);
         inventaire.put("fleur",0);
-        inventaire.put("étoile",0);
+        inventaire.put("etoile",0);
         boutique = new HashMap<>();
         boutique.put("mario",20);
         boutique.put("luigi",20);
@@ -42,7 +42,7 @@ public class Joueur {
         boutique.put("tuyauTank",30);
         boutique.put("TuyauTeleportation",30);
         boutique.put("fleur",25);
-        boutique.put("étoile",50);
+        boutique.put("etoile",50);
 
     }
     public void addTours(int n,String tours){

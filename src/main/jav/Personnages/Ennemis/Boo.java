@@ -6,20 +6,21 @@ import jav.Personnages.Tours.Tours;
 public class Boo extends Ennemis {
     public Boo(){
         super();
-        lettre='.';
-        image="";
+        lettre=".";
+        url="ennemis/booinvisible/boo";
         pv=60;
         valeur=50;
-        vitesse=5000;
+        timebetweenMov=1000;
         degat=10;
         range=1;
-        vitessedegat=2000;
+        timebetweendegat=2000;
+        nbimageAnimation=1;
     }
 
     public boolean nextIsTour(Game g){
         if(g.getToursEnJeu().size()!=0){
             for(Tours t : g.getToursEnJeu()){
-                if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getY()-1){
+                if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getY()-1){
                     return true;
                 }
             }
@@ -28,9 +29,10 @@ public class Boo extends Ennemis {
     }
 
     public void pouvoir(Game g){ // Boo est invisible les premières cases du jeu sauf s'il rencontre une tour
-        if(pos.getX()<=(g.getMap().getLargeur()-g.getMap().getLargeur()/3) || nextIsTour(g)){
-            image="Boo.png";
-            lettre='B';
+        if(pos.getIntCoordonnee().getX()<=(g.getMap().getLargeur()-g.getMap().getLargeur()/2) || nextIsTour(g)){
+            url="ennemis/boo/boo";
+            nbimageAnimation=3;
+            lettre="B";
         }
     }
 }

@@ -2,28 +2,35 @@ package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Maps.Coordonnee;
+import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public abstract class Ennemis implements Perso {
-    protected int pv;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.*;
+
+public abstract class Ennemis extends Perso {
+
     protected int valeur;
-    protected int vitesse;
-    protected int degat;
-    protected String image;
-    protected int range;
-    protected int vitessedegat;
-    protected Coordonnee pos;
-    protected boolean mort;
+    protected int timebetweenMov;
+    protected int timebetweendegat;
     protected long timeMov;
     protected long timeAttaque;
-    protected char lettre;
+    protected double timeAnim;
+    private int frame;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
+        timeAnim=System.currentTimeMillis();
+        numAnimation=1;
+        frame = 100;
     }
     public void toFlower(String image){
         System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
@@ -33,64 +40,36 @@ public abstract class Ennemis implements Perso {
        System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur un ennemi");
     }
 
-    public int getPv(){
-        return this.pv;
-    }
     public int getValeur(){
         return this.valeur;
     }
-    public int getVitesse(){
-        return this.vitesse;
-    }
-    public int getDegat(){
-        return this.degat;
-    }
-    public int getRange(){
-        return range;
+    public int getTimebetweenMov(){
+        return this.timebetweenMov;
     }
 
-    public int getVitesseDegat(){
-        return vitessedegat;
-    }
 
-    public Coordonnee getPos(){
-        return this.pos;
-    }
-
-    public char getLettre(){
-        return lettre;
-    }
-
-    public void setPos(Coordonnee c){
-        pos = c;
+    public int getTimebetweenDegat(){
+        return timebetweendegat;
     }
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
                 t.enleverPv(this.degat);
             }
         }
         return false;
     }
 
-    public void enleverPv(int degat){
-        if(pv-degat >0){
-            pv = pv - degat;
-        }
-        else {
-            this.meurt();
-        }
-    }
-
-    public void meurt(){
-        mort=true;
-    }
-
     public boolean canMove(Game g){
 
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getY()==pos.getY() && t.getPos().getX()==pos.getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getX()-1){
+                return false;
+            }
+        }
+        for(Ennemis e : g.getEnnemis()){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getY() && e.getPos().getIntCoordonnee().getX()==pos.getX()-1){
                 return false;
             }
         }
@@ -99,7 +78,7 @@ public abstract class Ennemis implements Perso {
 
     public boolean depasser(Game g){
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getY()==pos.getY() && e.getPos().getX()==pos.getX()-1){
+            if(e.getClass() != this.getClass() && e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
                 return true;
             }
         }
@@ -109,15 +88,31 @@ public abstract class Ennemis implements Perso {
 
     public void avancer(Game g){
         if(canMove(g)){
-            if(depasser(g)){
-                pos.setX(pos.getX()-2);
-            }
-            else {
-                pos.setX(pos.getX()-1);
-            }
-
+            pos.setX(pos.getX()-(Game.sizecase/ frame));
         }
-        
+        else {
+            if(depasser(g)){ // a regler
+                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
+            }
+        }
+    }
+
+    public void nextImage(){
+        if(numAnimation<nbimageAnimation){
+            numAnimation++;
+        }
+        else numAnimation =1;
+        try{
+            String currentDirectory = System.getProperty("user.dir");
+            File file = new File(currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
+            Image bufferedImage = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(3*Game.sizecase/4, 3*Game.sizecase/4, Image.SCALE_DEFAULT));
+            image.setIcon(imageIcon2);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
     }
 
@@ -138,13 +133,22 @@ public abstract class Ennemis implements Perso {
     public void update(Game game){
         this.pouvoir(game);
 
-        if(System.currentTimeMillis()- timeMov>vitesse){
+        if(image!=null){
+            if(System.currentTimeMillis() - timeAnim > 200){
+                nextImage();
+                timeAnim =System.currentTimeMillis();
+            }
+        }
+
+
+        if(System.currentTimeMillis() - timeMov > (timebetweenMov / frame)){
             avancer(game);
-            //game.getMap().afficher();
             timeMov =System.currentTimeMillis();
         }
 
-        if(System.currentTimeMillis()- timeAttaque>vitessedegat){
+
+
+        if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
             attaquer(game.getToursEnJeu());
             timeAttaque =System.currentTimeMillis();
         }

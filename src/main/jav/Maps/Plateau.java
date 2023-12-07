@@ -43,13 +43,13 @@ public class Plateau {
                 grid[i][j].setContenu(null);
                 for(int k =0; k<g.getEnnemis().size(); k++){
                     Ennemis e = g.getEnnemis().get(k);
-                    if(e.getPos().getX()==j && e.getPos().getY()==i){
+                    if(e.getPos().getIntCoordonnee().getX()==j && e.getPos().getIntCoordonnee().getY()==i){
                         grid[i][j].setContenu(e);
                     }
                 }
                 for(int k =0; k<g.getToursEnJeu().size(); k++){
                     Tours t = g.getToursEnJeu().get(k);
-                    if(t.getPos().getX()==j && t.getPos().getY()==i){
+                    if(t.getPos().getIntCoordonnee().getX()==j && t.getPos().getIntCoordonnee().getY()==i){
                         grid[i][j].setContenu(t);
                     }
                 }
