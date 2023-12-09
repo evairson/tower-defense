@@ -1,7 +1,6 @@
 package jav.Personnages.Ennemis;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;

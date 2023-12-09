@@ -1,33 +1,32 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
-import jav.Personnages.Ennemis.Carapace;
-import jav.Personnages.Ennemis.Ennemis;
 
 public class Mario extends Tours implements Lanceur{
+
     public Mario(RealCoordonnee pos){
-    timeAttaque = System.currentTimeMillis();
-    timebetweendegat = 4000;
-    pv=60;
-    degat = 20;
-    prix = 20;
-    range = 6;
-    range= 6;
-    mort = false;
-    this.pos = pos;
-    lettre = "MA";
+        super();
+        timeAttaque = System.currentTimeMillis();
+        timebetweendegat = 4000;
+        pv=40;
+        degat = 20;
+        prix = 20;
+        range = 6;
+        range= 6;
+        mort = false;
+        this.pos = pos;
+        lettre = "MA";
     }
 
     public boolean lancer(Perso e, Game g){
         if(e.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - e.getPos().getX()<= range && this.pos.getX() - e.getPos().getX()>= 2){
-                Carapace car = new Carapace(false);
+            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
+                CarapaceTours car = new CarapaceTours();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
-                g.getEnnemis().add(car);
+                g.getToursEnJeu().add(car);
                 g.getMap().updateContenu(g);
                 return true;
             }

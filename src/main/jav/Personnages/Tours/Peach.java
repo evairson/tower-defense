@@ -1,12 +1,13 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Ennemis;
 
 public class Peach extends Tours implements TourAttaque{
+
     public Peach(RealCoordonnee pos){
+        super();
         pv=80;
         degat = 0;
         prix = 20;

@@ -1,11 +1,8 @@
 package jav.Personnages;
 
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 
 public abstract class Perso {

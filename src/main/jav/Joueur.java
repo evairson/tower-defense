@@ -1,6 +1,5 @@
 package jav;
 import java.util.HashMap;
-import jav.Personnages.Tours.*;
 
 
 
@@ -31,16 +30,16 @@ public class Joueur {
         inventaire.put("mario",1);
         inventaire.put("luigi",1);
         inventaire.put("peach",1);
-        inventaire.put("tuyauTank",0);
-        inventaire.put("TuyauTeleportation",0);
+        inventaire.put("tank",0);
+        inventaire.put("tuyau",0);
         inventaire.put("fleur",0);
         inventaire.put("etoile",0);
         boutique = new HashMap<>();
         boutique.put("mario",20);
         boutique.put("luigi",20);
         boutique.put("peach",20);
-        boutique.put("tuyauTank",30);
-        boutique.put("TuyauTeleportation",30);
+        boutique.put("tank",30);
+        boutique.put("tuyau",30);
         boutique.put("fleur",25);
         boutique.put("etoile",50);
 

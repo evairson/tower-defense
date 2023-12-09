@@ -1,15 +1,10 @@
 
 package jav;
 
-import jav.Personnages.Tours.Luigi;
-import jav.Personnages.Tours.Mario;
-import jav.Personnages.Tours.Peach;
-import jav.Exception.choisirToursException;
-import jav.Maps.Plateau;
-import jav.Maps.RealCoordonnee;
-import jav.Personnages.Tours.*;
 
-import java.io.EOFException;
+import jav.Exception.choisirToursException;
+import jav.Exception.choixActionException;
+import jav.Maps.Plateau;
 import java.util.Scanner;
 
 public class JeuTexte {
@@ -18,22 +13,33 @@ public class JeuTexte {
         Game.sizecase = 100;
         Game g = new Game(longeur, largeur,nbEnnemis, null);
         g.update();
-        updateUtilisateur(g);
+        tryUpdateUtilisateur(g);
+
+    }
+
+    public static void tryUpdateUtilisateur(Game g){
+        try{       
+            Scanner sc = new Scanner(System.in);
+            updateUtilisateur(g, sc);
+
+       } catch (choixActionException e){
+            System.out.println("Vous avez mal écris votre action recommencez :");
+           tryUpdateUtilisateur(g);
+       }
     }
     
-    public static void updateUtilisateur(Game g){
+    public static void updateUtilisateur(Game g, Scanner sc) throws choixActionException{
         g.getMap().afficher();
-        Scanner sc = new Scanner(System.in);
         System.out.println();
         System.out.println("1: Montrer le jeu 2: Placer une tour 3: Acheter une tour 4: Finir le jeu");
         g.getJoueur().afficheInventaire();
         String reponse = sc.nextLine();
         switch(reponse){
-            case "1": updateUtilisateur(g); break;
-            case "2": placerTour(g); updateUtilisateur(g); break;
-            case "3": acheterTour(g); updateUtilisateur(g); break;
+            case "1": tryUpdateUtilisateur(g); break;
+            case "2": placerTour(g); tryUpdateUtilisateur(g); break;
+            case "3": acheterTour(g); tryUpdateUtilisateur(g); break;
             case "4": System.exit(0); break;
-            default: updateUtilisateur(g); break;
+            default: throw new choixActionException();
         }
     }
 
@@ -42,7 +48,7 @@ public class JeuTexte {
         g.getJoueur().afficheInventaire();
         String toursJouer = "";
         try{
-            toursJouer = choisirTour(g, sc);
+            toursJouer = choisirTour(sc);
         } catch(choisirToursException e){
             System.out.println("Vous avez mal écrit le nom de la tour. Recommencez :");
             placerTour(g);
@@ -61,11 +67,11 @@ public class JeuTexte {
         
     }
 
-    public static String choisirTour(Game g, Scanner sc) throws choisirToursException{
+    public static String choisirTour(Scanner sc) throws choisirToursException{
         System.out.println("Choissez la tour à jouer");
         String toursJouer =sc.nextLine();
-        if(!(toursJouer.equals("mario") ||toursJouer.equals("luigi") || toursJouer.equals("peach") ||toursJouer.equals("tuyauTank") 
-        ||toursJouer.equals("TuyauTeleportation") ||toursJouer.equals("etoile") ||toursJouer.equals("fleur"))){
+        if(!(toursJouer.equals("mario") ||toursJouer.equals("luigi") || toursJouer.equals("peach") ||toursJouer.equals("tank") 
+        ||toursJouer.equals("tuyau") ||toursJouer.equals("etoile") ||toursJouer.equals("fleur"))){
             throw new choisirToursException();
         }
         return toursJouer;
@@ -84,7 +90,12 @@ public class JeuTexte {
             }
         }
         else if(coordString.substring(1).length()==1){
-            x = Integer.parseInt(String.valueOf(coordString.charAt(1)));
+            try {
+                x = Integer.parseInt(String.valueOf(coordString.substring(1)));
+            }
+            catch (NumberFormatException f) {
+                throw new choisirToursException();
+            }
         }
         else {
             throw new choisirToursException();

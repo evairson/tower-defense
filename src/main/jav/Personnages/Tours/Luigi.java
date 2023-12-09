@@ -1,13 +1,13 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Ennemis;
 
 public class Luigi extends Tours implements TourAttaque {
 
     public Luigi(RealCoordonnee pos){
+        super();
         pv=100;
         degat = 40;
         prix = 20;

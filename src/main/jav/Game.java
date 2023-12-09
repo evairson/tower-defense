@@ -1,7 +1,6 @@
 package jav;
 
 import jav.Maps.Case;
-import jav.Maps.Coordonnee;
 import jav.Maps.Plateau;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Boo;
@@ -13,8 +12,8 @@ import jav.Personnages.Tours.Luigi;
 import jav.Personnages.Tours.Mario;
 import jav.Personnages.Tours.Peach;
 import jav.Personnages.Tours.Tours;
-import jav.Personnages.Tours.TuyauTank;
-import jav.Personnages.Tours.TuyauTeleportation;
+import jav.Personnages.Tours.Tank;
+import jav.Personnages.Tours.Tuyau;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -25,7 +24,6 @@ public class Game {
     private Joueur joueur;
     private ArrayList<Tours> toursEnJeu;
     private ArrayList<Ennemis> ennemis;
-    private long time;
     private long timeEnnemi;
     private boolean end;
     private int vitesseApparition;
@@ -64,7 +62,6 @@ public class Game {
     public Game(int longeur, int largeur, int nbEnnemis, GameView view){
         this.view = view;
         end = false;
-        time = System.currentTimeMillis();
         timeEnnemi = System.currentTimeMillis();
         joueur = new Joueur();
         map = new Plateau(longeur,largeur);
@@ -153,14 +150,14 @@ public class Game {
 
 
     public void createTours(String toursJouer,int x,int y){
-        if(toursJouer.equals("mario") || toursJouer.equals("luigi") || toursJouer.equals("peach") || toursJouer.equals("tuyauTank") || toursJouer.equals("TuyauTeleportation")){
+        if(toursJouer.equals("mario") || toursJouer.equals("luigi") || toursJouer.equals("peach") || toursJouer.equals("tank") || toursJouer.equals("tuyau")){
             if (this.getJoueur().getInventaire().get(toursJouer) >= 1){
                 Tours tour = switch (toursJouer) {
                     case "mario"->new Mario(new RealCoordonnee(x, y)); 
                     case "luigi"->new Luigi(new RealCoordonnee(x, y)); 
                     case "peach"->new Peach(new RealCoordonnee(x, y)); 
-                    case "tuyauTank" ->new TuyauTank(new RealCoordonnee(x, y)); 
-                    case "TuyauTeleportation " -> new TuyauTeleportation(new RealCoordonnee(x, y));
+                    case "tank" ->new Tank(new RealCoordonnee(x, y)); 
+                    case "tuyau " -> new Tuyau(new RealCoordonnee(x, y));
                     default -> new Mario(new RealCoordonnee(x, y)); 
                 };
                 this.addToursEnJeu(tour); 

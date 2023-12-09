@@ -1,8 +1,6 @@
 package jav.Personnages.Ennemis;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
-import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 
@@ -12,7 +10,6 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import java.awt.*;
 
 public abstract class Ennemis extends Perso {
@@ -23,14 +20,13 @@ public abstract class Ennemis extends Perso {
     protected long timeMov;
 
     protected double timeAnim;
-    protected int frame;
+    public static final int frame = 100;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
         timeAttaque=System.currentTimeMillis();
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
-        frame = 100;
     }
 
     public int getValeur(){
@@ -51,7 +47,6 @@ public abstract class Ennemis extends Perso {
     }
 
     public boolean canMove(Game g){
-
         for(Tours t : g.getToursEnJeu()){
             if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
                 return false;

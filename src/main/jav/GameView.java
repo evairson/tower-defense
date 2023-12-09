@@ -3,15 +3,11 @@ package jav;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import jav.Maps.Case;
-import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Ennemis;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class GameView extends JFrame {
     private GameController control;
