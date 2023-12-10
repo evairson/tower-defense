@@ -59,7 +59,7 @@ public class CarapaceTours extends Tours {
             }
         }
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getX()-pos.getX()<=3*Game.sizecase/4){
                  return false;
             }
         }

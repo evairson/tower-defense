@@ -41,17 +41,17 @@ public class Plateau {
     public void updateContenu(Game g){
         for(int i =0; i < longueur; i ++){
             for(int j = 0; j <largeur; j++){
-                grid[i][j].setContenu(null);
+                grid[i][j].resetContenu();
                 for(int k =0; k<g.getEnnemis().size(); k++){
                     Ennemis e = g.getEnnemis().get(k);
                     if(e.getPos().getIntCoordonnee().getX()==j && e.getPos().getIntCoordonnee().getY()==i){
-                        grid[i][j].setContenu(e);
+                        grid[i][j].addContenuEnnemis(e);
                     }
                 }
                 for(int k =0; k<g.getToursEnJeu().size(); k++){
                     Tours t = g.getToursEnJeu().get(k);
                     if(t.getPos().getIntCoordonnee().getX()==j && t.getPos().getIntCoordonnee().getY()==i){
-                        grid[i][j].setContenu(t);
+                        grid[i][j].setContenuTours(t);
                     }
                 }
             }

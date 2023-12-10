@@ -49,36 +49,17 @@ public abstract class Ennemis extends Perso {
 
     public boolean canMove(Game g){
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                return false;
-            }
-        }
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
                 return false;
             }
         }
         return true;
     }
 
-    public boolean depasser(Game g){
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getClass() != this.getClass() && e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     public void avancer(Game g){
         if(canMove(g)){
             pos.setX(pos.getX()-(Game.sizecase/ frame));
-        }
-        else {
-            if(depasser(g)){ // a regler
-                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/frame));
-            }
         }
     }
 
@@ -139,8 +120,10 @@ public abstract class Ennemis extends Perso {
         }
 
         if(mort){
+            if(game.getView()!=null){
+                image.setIcon(null);
+            }
             mort(game.getEnnemis());
-            image.setIcon(null);
         }
 
         if(pos.getX()==0){

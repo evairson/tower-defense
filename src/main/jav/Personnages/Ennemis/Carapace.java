@@ -18,7 +18,7 @@ public class Carapace extends Ennemis implements TourAttaque {
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
-        scale = 0.7;
+        scale = 0.5;
     }
 
     @Override
@@ -58,9 +58,9 @@ public class Carapace extends Ennemis implements TourAttaque {
             pos.setX(pos.getX()-(Game.sizecase/ frame));
         }
         else {
-            if(depasser(g)){ // a regler
+            /*if(depasser(g)){ // a regler
                 pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
-            }
+            }*/
         }
 
     }
