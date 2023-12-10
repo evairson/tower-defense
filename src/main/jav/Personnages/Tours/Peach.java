@@ -1,16 +1,18 @@
 package jav.Personnages.Tours;
 
-import jav.Maps.Coordonnee;
+import jav.Game;
 import jav.Maps.RealCoordonnee;
+import jav.Personnages.Ennemis.Ennemis;
 
-public class Peach extends Tours{
+public class Peach extends Tours implements TourAttaque{
+
     public Peach(RealCoordonnee pos){
+        super();
         pv=80;
         degat = 0;
         prix = 20;
-        niveau= 0;
         range = 8;
-        vitessedegat = 4000;
+        timebetweendegat = 4000;
         mort = false;
         this.pos = pos;
         lettre="PE";
@@ -31,6 +33,15 @@ public class Peach extends Tours{
                 case 1 -> {this.pv = 180;this.degat+=15;this.niveau++;return;}
                 default -> {return;}
             }
+        }
+
+        public void pouvoir(Game g){
+
+        }
+        @Override
+        public boolean attaque(Ennemis e) {
+            // TODO Auto-generated method stub
+            throw new UnsupportedOperationException("Unimplemented method 'attaque'");
         }
     
     

@@ -1,11 +1,9 @@
 package jav.Personnages.Ennemis;
 
-import java.util.ArrayList;
-
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
-import jav.Personnages.Tours.Tours;
+import jav.Personnages.Lanceur;
+import jav.Personnages.Perso;
 
 public class Koopa extends Ennemis implements Lanceur {
     private int rangeCara;
@@ -30,14 +28,15 @@ public class Koopa extends Ennemis implements Lanceur {
     }
 
     
-    public boolean lancer(Tours t, Game g){
+    public boolean lancer(Perso t, Game g){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getX() - t.getPos().getX()<= rangeCara && this.pos.getX() - t.getPos().getX()>= 2){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= rangeCara && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()>= 2){
                 Carapace car = new Carapace();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()));
                 g.getEnnemis().add(car);
                 g.getMap().updateContenu(g);
                 hasCarapace=false;
+                return true;
             }
         }
         return false;

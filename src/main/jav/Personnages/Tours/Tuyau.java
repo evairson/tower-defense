@@ -1,20 +1,22 @@
 package jav.Personnages.Tours;
+import jav.Game;
+import jav.Maps.*;
 
-import jav.Maps.Coordonnee;
-import jav.Maps.RealCoordonnee;
-
-public class TuyauTank extends Tours{
-    public TuyauTank(RealCoordonnee pos){
-        pv=300;
+public class Tuyau extends Tours{
+    
+    public Tuyau(RealCoordonnee pos){
+        super();
+        pv=1;                      //pv symbolique puisque normalement il ne devrait pas être attaqué
         degat = 0;
         prix = 30;
         niveau= 0;
         range = 0;
-        vitessedegat = 0;
         mort = false;
         this.pos = pos;
-        lettre = "T ";
+        lettre = "TT";
     }
+    
+
 
     @Override
     public void toFlower() {
@@ -25,5 +27,8 @@ public class TuyauTank extends Tours{
     public void toStar() {
         System.out.println("vous ne pouvez pas sur cette tour");
     }
-    
+
+    public void pouvoir(Game g){
+
+    }
 }

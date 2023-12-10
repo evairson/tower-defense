@@ -1,21 +1,21 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
-import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
+import jav.Personnages.Ennemis.Ennemis;
 
 import java.util.ArrayList;
 
 public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
-    protected int vitessedegat;
 
 
-    public int getVitesseDegat(){
-        return vitessedegat;
+    public Tours(){
+
+        timeAttaque=System.currentTimeMillis();
     }
+
 
     public int getPrix(){
         return this.prix;
@@ -29,7 +29,32 @@ public abstract class Tours extends Perso{
     }
 
 
+    public boolean attaque(Ennemis e){
+        if(e.getPos().getY()==pos.getY()){
+            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
+                e.enleverPv(this.degat);
+            }
+        }
+        return false;
+    }
+
+    public void attaquer(ArrayList<Ennemis> e){
+        int i=0;
+        if(e.size()!=0){
+            while(i<e.size() && !attaque(e.get(i))){
+                i++;
+            }
+        }
+    }
+
+
     public void update(Game game){
+        this.pouvoir(game);
+
+        if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
+            attaquer(game.getEnnemis());
+            timeAttaque =System.currentTimeMillis();
+        }
 
         if(mort){
             mort(game.getToursEnJeu());
@@ -39,6 +64,5 @@ public abstract class Tours extends Perso{
     public abstract void toFlower();
 
     public abstract void toStar();
-
 
 }

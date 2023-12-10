@@ -1,18 +1,6 @@
 package jav.Maps;
 
-import jav.Personnages.Tours.Luigi;
-import jav.Personnages.Tours.Mario;
-import jav.Personnages.Tours.Peach;
 import jav.Personnages.Perso;
-import jav.Personnages.Tours.*;
-import jav.Personnages.Tours.TuyauTank;
-import jav.Personnages.Tours.TuyauTeleportation;
-import jav.Personnages.Ennemis.Ennemis;
-import jav.Personnages.Ennemis.Goomba;
-import jav.Personnages.Ennemis.Koopa;
-import jav.Personnages.Ennemis.Lakitu;
-import jav.Personnages.Tours.Tours;
-import jav.Personnages.Ennemis.Boo;
 
 public class Case {
     private boolean base;

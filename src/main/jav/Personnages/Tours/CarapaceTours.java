@@ -1,34 +1,22 @@
-package jav.Personnages.Ennemis;
-
+package jav.Personnages.Tours;
 
 import jav.Game;
-import jav.Personnages.Tours.TourAttaque;
-import jav.Personnages.Tours.Tours;
+import jav.Personnages.Ennemis.Ennemis;
 
-public class Carapace extends Ennemis implements TourAttaque {
-
-    public Carapace(){
-        super();
+public class CarapaceTours extends Tours {
+    private int timebetweenMov;
+    private long timeMov;
+    
+    public CarapaceTours(){
         lettre="C ";
         url="ennemis/carapace/carapace";
         pv=100;
-        valeur=50;
         timebetweenMov=500;
         degat=3;
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
-    }
-
-    @Override
-    public boolean attaque(Tours t){
-        if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
-                t.enleverPv(this.degat);
-                mort = true;
-            }
-        }
-        return false;
+        timeMov=System.currentTimeMillis();
     }
 
     public boolean attaque(Ennemis e){
@@ -51,28 +39,26 @@ public class Carapace extends Ennemis implements TourAttaque {
     }
 
 
-    @Override
     public void avancer(Game g){
-        if(canMove(g)){
-            pos.setX(pos.getX()-(Game.sizecase/ frame));
-        }
-        else {
-            if(depasser(g)){ // a regler
-                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
+            if(canMove(g) && !(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1)){
+                pos.setX(pos.getX()+(Game.sizecase/Ennemis.frame));
             }
-        }
+            else {
+                if(depasserTour(g)){ // a regler
+                    pos.setX(pos.getX()+(Game.sizecase)+(Game.sizecase/Ennemis.frame));
+                }
+            }
 
     }
 
-    @Override
     public boolean canMove(Game g){
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
                 return false;
             }
         }
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
                  return false;
             }
         }
@@ -83,8 +69,10 @@ public class Carapace extends Ennemis implements TourAttaque {
     @Override
     public void update(Game g){
         super.update(g);
-        if(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1){
-            meurt();
+
+        if(System.currentTimeMillis() - timeMov > (timebetweenMov / Ennemis.frame)){
+            avancer(g);
+            timeMov =System.currentTimeMillis();
         }
     }
 
@@ -93,4 +81,13 @@ public class Carapace extends Ennemis implements TourAttaque {
     public void pouvoir(Game g){
         // pas besoin
     }
+
+    public void toFlower(){
+
+    }
+
+    public void toStar(){
+
+    }
 }
+

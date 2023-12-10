@@ -1,11 +1,8 @@
 package jav.Personnages;
 
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 
 import jav.Game;
-import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 
 public abstract class Perso {
@@ -19,12 +16,18 @@ public abstract class Perso {
     protected int range;
     protected String lettre;
     protected RealCoordonnee pos;
+    protected int timebetweendegat;
+    protected long timeAttaque;
 
 
     public void setPos(RealCoordonnee c){
         pos = c;
     }
 
+    public int getTimebetweenDegat(){
+        return timebetweendegat;
+    }
+    
     public void enleverPv(int degat){
         if(pv-degat >0){
             pv = pv - degat;
@@ -71,4 +74,5 @@ public abstract class Perso {
     }
 
     public abstract void update(Game game);
+    public abstract void pouvoir(Game g);
 }

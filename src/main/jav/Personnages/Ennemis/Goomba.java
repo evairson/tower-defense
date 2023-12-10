@@ -1,6 +1,5 @@
 package jav.Personnages.Ennemis;
 
-import java.util.ArrayList;
 
 import jav.Game;
 import jav.Personnages.Tours.Tours;
@@ -17,7 +16,7 @@ public class Goomba extends Ennemis {
         valeur=2;
         timebetweenMovBasique =2000;
         timebetweenMov = timebetweenMovBasique;
-        degat=2;
+        degat=4;
         range=1;
         timebetweendegat=2000;
         sprintRange = 4;
