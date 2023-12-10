@@ -14,6 +14,7 @@ public class Heriss extends Ennemis {
         degat=4;
         range=1;
         timebetweendegat=1000;
+        scale = 0.7;
     }
 
     public void pouvoir(Game g){

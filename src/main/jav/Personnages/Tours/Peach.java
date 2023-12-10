@@ -16,6 +16,7 @@ public class Peach extends Tours implements TourAttaque{
         mort = false;
         this.pos = pos;
         lettre="PE";
+        scale = 1;
         }
         public void toFlower(){
             this.url = "";

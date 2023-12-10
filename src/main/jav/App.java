@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
+    public static final String currentDirectory = System.getProperty("user.dir");
 
     public static void main(String[] args) {
         App app = new App();

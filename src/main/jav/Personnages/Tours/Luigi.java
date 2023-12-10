@@ -16,6 +16,7 @@ public class Luigi extends Tours implements TourAttaque {
         mort = false;
         this.pos = pos;
         lettre = "LU";
+        scale = 1;
         }
 
         public boolean attaque(Ennemis e){

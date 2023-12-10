@@ -12,7 +12,6 @@ public abstract class Tours extends Perso{
 
 
     public Tours(){
-
         timeAttaque=System.currentTimeMillis();
     }
 
@@ -58,6 +57,7 @@ public abstract class Tours extends Perso{
 
         if(mort){
             mort(game.getToursEnJeu());
+            image.setIcon(null);
         }
     }
     

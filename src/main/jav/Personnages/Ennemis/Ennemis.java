@@ -1,5 +1,6 @@
 package jav.Personnages.Ennemis;
 
+import jav.App;
 import jav.Game;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
@@ -87,11 +88,12 @@ public abstract class Ennemis extends Perso {
         }
         else numAnimation =1;
         try{
-            String currentDirectory = System.getProperty("user.dir");
-            File file = new File(currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
+            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
             Image bufferedImage = ImageIO.read(file);
             ImageIcon imageIcon = new ImageIcon(bufferedImage);
-            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(3*Game.sizecase/4, 3*Game.sizecase/4, Image.SCALE_DEFAULT));
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
             image.setIcon(imageIcon2);
         }
         catch (IOException exception) {
@@ -138,6 +140,7 @@ public abstract class Ennemis extends Perso {
 
         if(mort){
             mort(game.getEnnemis());
+            image.setIcon(null);
         }
 
         if(pos.getX()==0){

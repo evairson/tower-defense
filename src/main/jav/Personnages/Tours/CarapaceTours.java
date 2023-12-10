@@ -17,6 +17,7 @@ public class CarapaceTours extends Tours {
         timebetweendegat=100;
         nbimageAnimation=6;
         timeMov=System.currentTimeMillis();
+        scale = 0.5;
     }
 
     public boolean attaque(Ennemis e){

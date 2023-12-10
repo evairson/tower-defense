@@ -19,6 +19,8 @@ public class Mario extends Tours implements Lanceur{
         mort = false;
         this.pos = pos;
         lettre = "MA";
+        url = "tours/mario/mario";
+        scale = 1;
     }
 
     public boolean lancer(Perso e, Game g){

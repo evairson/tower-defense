@@ -3,11 +3,17 @@ package jav;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import jav.Maps.RealCoordonnee;
+import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Tours.Mario;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 public class GameView extends JFrame {
     private GameController control;
@@ -18,6 +24,7 @@ public class GameView extends JFrame {
     private Game game;
     private int sizeCase;
     private JPanel[][] casesPanel;
+    private HashMap<String, JButton> buttonTours;
 
     public void setGame(Game g){
         this.game = g;
@@ -25,7 +32,10 @@ public class GameView extends JFrame {
 
     GameView(int longeur, int largeur, int ennemis){    
 
+        buttonTours = new HashMap<>();
+
         game = new Game(longeur, largeur, ennemis, this);
+
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
@@ -34,6 +44,12 @@ public class GameView extends JFrame {
         sizeCase = (int)Math.min(width/largeur, height/(longeur+1));
         Game.sizecase = sizeCase;
 
+        Mario mario = new Mario(new RealCoordonnee(1, 3));
+        game.addToursEnJeu(mario);
+        Mario mario2 = new Mario(new RealCoordonnee(1, 2));
+        game.addToursEnJeu(mario2);
+        game.getMap().updateContenu(game);
+
         this.setTitle("Tower Defense");
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
         this.setResizable(false); 
@@ -41,9 +57,9 @@ public class GameView extends JFrame {
 
         setLayout(null);
 
-        inventairePane = new JPanel();
-        inventairePane.setBounds(0, 0, sizeCase*largeur, sizeCase);
-        inventairePane.setBackground(new Color(250, 237, 205));
+
+        inventairePane = createInventairePane(largeur);
+
         plateauGame = new JPanel();
         plateauGame.setLayout(new GridLayout(game.getMap().getLongeur(), game.getMap().getLargeur()));
         plateauGame.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
@@ -78,22 +94,71 @@ public class GameView extends JFrame {
         
         this.setImage();
         game.update();
-
-
     }
 
+    public JPanel createInventairePane(int largeur){
+        inventairePane = new JPanel();
+        inventairePane.setLayout(null);
+        inventairePane.setBounds(0, 0, sizeCase*largeur, sizeCase);
+        inventairePane.setBackground(new Color(250, 237, 205));
+        
+        try{
+            JButton mario = createButtonInventaireTours("mario", 0);
+            buttonTours.put("mario", mario);
+            inventairePane.add(mario);
+            JButton luigi = createButtonInventaireTours("luigi", 1);
+            buttonTours.put("luigi", luigi);
+            inventairePane.add(luigi);
+            JButton peach = createButtonInventaireTours("peach", 2);
+            buttonTours.put("peach", peach);
+            inventairePane.add(peach);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+
+        return inventairePane;
+    }
+
+    public JButton createButtonInventaireTours(String tour, int x) throws IOException {
+        File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+"1.png");
+        Image bufferedImage = ImageIO.read(file);
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+        int width = imageIcon.getIconWidth();
+        int height = imageIcon.getIconHeight();
+        ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*0.5), (int)(sizeCase*0.5), Image.SCALE_DEFAULT));
+        JButton tourButton = new JButton("1",image);
+        tourButton.setVerticalTextPosition(SwingConstants.TOP);
+        
+        tourButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        tourButton.setBounds(x*sizeCase + sizeCase/8, sizeCase/8, 3*sizeCase/4, 3*sizeCase/4);  // sizeCase/8 * 2 + 3*sizeCase/4 = sizeCase
+
+        return tourButton;
+    }
+
+
+
     public void setImage()  {
-        for(Ennemis e : game.getEnnemis()){
-            if(e.getImage() == null){
+            setImagePerso(game.getEnnemis());
+            setImagePerso(game.getToursEnJeu());
+        }
+
+
+
+    public <T extends Perso> void setImagePerso(ArrayList<T> l){
+        for(Perso p : l){
+            if(p.getImage() == null){
                 try {
-                    String currentDirectory = System.getProperty("user.dir");
-                    File file = new File(currentDirectory + "/src/main/resources/" + e.getUrl()+"1.png");
+                    File file = new File(App.currentDirectory + "/src/main/resources/" + p.getUrl()+"1.png");
                     Image bufferedImage = ImageIO.read(file);
                     ImageIcon imageIcon = new ImageIcon(bufferedImage);
-                    ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance(3*sizeCase/4, 3*sizeCase/4, Image.SCALE_DEFAULT));
-                    e.setImage(new JLabel(image));
-                    e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+sizeCase/6, 3*sizeCase/4, 3*sizeCase/4);
-                    plateauSprite.add(e.getImage());
+                    int width = imageIcon.getIconWidth();
+                    int height = imageIcon.getIconHeight();
+                    ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*p.getScale()), (int)(sizeCase*p.getScale()), Image.SCALE_DEFAULT));
+                    p.setImage(new JLabel(image));
+                    p.getImage().setBounds((int)p.getPos().getX(), (int)p.getPos().getY(), (int)(sizeCase*p.getScale())+1, (int)(sizeCase*p.getScale())+1);
+                    plateauSprite.add(p.getImage());
                     plateauSprite.repaint();
     
                     } 
@@ -104,13 +169,12 @@ public class GameView extends JFrame {
             }
             else {
                 
-                e.getImage().setBounds((int)e.getPos().getX(), (int)e.getPos().getY()+sizeCase/6, 3*sizeCase/4, 3*sizeCase/4);
+                p.getImage().setBounds((int)p.getPos().getX(), (int)p.getPos().getY(), (int)(sizeCase*p.getScale())+1, (int)(sizeCase*p.getScale())+1);
                 plateauSprite.repaint();
             }
 
-                }
-
-            }
+    }
+    }
 
 
 }

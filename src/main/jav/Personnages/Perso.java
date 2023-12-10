@@ -18,6 +18,11 @@ public abstract class Perso {
     protected RealCoordonnee pos;
     protected int timebetweendegat;
     protected long timeAttaque;
+    protected double scale;
+
+    public double getScale(){
+        return scale;
+    }
 
 
     public void setPos(RealCoordonnee c){

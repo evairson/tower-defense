@@ -18,6 +18,7 @@ public class Carapace extends Ennemis implements TourAttaque {
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
+        scale = 0.7;
     }
 
     @Override
