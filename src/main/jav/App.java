@@ -1,5 +1,8 @@
 package jav;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.Scanner;
 
 public class App {
@@ -32,6 +35,36 @@ public class App {
     public void GameInterface(){
         view = new GameView(5,10,5);
         view.setVisible(true);
+        view.control = new GameController(view);
+        view.getButton("mario").addChangeListener((event) -> {
+            if(view.getGame().getJoueur().getInventaire().get("mario")!=0){
+                view.control.Selectionnercase("mario");
+                mouseMoved("mario");
+            }
+        });
+        view.getButton("luigi").addChangeListener((event) -> {
+            view.control.Selectionnercase("luigi");
+            mouseMoved("luigi");
+        });
+        view.getButton("peach").addChangeListener((event) -> {
+            view.control.Selectionnercase("peach");
+            mouseMoved("peach");
+        });
+    }
+
+    public void mouseMoved(String s){
+        MouseMotionAdapter mouse = new MouseMotionAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                view.control.suivreMouse(e, s);
+            }
+        };
+        view.addMouseMotionListener(mouse);
+        view.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                view.removeMouseMotionListener(mouse);
+                view.control.ajouterTour(s);
+            }
+        });
     }
 
     public void GameTerminal(){

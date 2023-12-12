@@ -167,7 +167,9 @@ public class Game {
                 this.getJoueur().removeTours(1, toursJouer);
             }
             else{
-                System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                if(view==null){
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                }
                 }
         }
         else if (toursJouer.equals("fleur") || toursJouer.equals("etoile")){

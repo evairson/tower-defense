@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class GameView extends JFrame {
-    private GameController control;
+    public GameController control;
     private App app;
     private JPanel inventairePane;
     private JPanel plateauGame;
@@ -25,14 +25,33 @@ public class GameView extends JFrame {
     private int sizeCase;
     private JPanel[][] casesPanel;
     private HashMap<String, JButton> buttonTours;
+    private HashMap<String, JLabel> imageTours;
+    private JPanel panelTour;
+
+    public JPanel getPanelTour(){
+        return panelTour;
+    }
+
+    public JLabel getImageTours(String s){
+        return imageTours.get(s);
+    }
+
+    public JButton getButton(String s){
+        return buttonTours.get(s);
+    }
 
     public void setGame(Game g){
         this.game = g;
     }
 
+    public Game getGame(){
+        return game;
+    }
+
     GameView(int longeur, int largeur, int ennemis){    
 
         buttonTours = new HashMap<>();
+        imageTours = new HashMap<>();
 
         game = new Game(longeur, largeur, ennemis, this);
 
@@ -48,7 +67,6 @@ public class GameView extends JFrame {
         game.addToursEnJeu(mario);
         Mario mario2 = new Mario(new RealCoordonnee(1, 2));
         game.addToursEnJeu(mario2);
-        game.getMap().updateContenu(game);
 
         this.setTitle("Tower Defense");
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
@@ -57,6 +75,17 @@ public class GameView extends JFrame {
 
         setLayout(null);
 
+        panelTour = new JPanel();
+        panelTour.setLayout(null);
+        panelTour.setOpaque(false);
+        panelTour.setBounds(0, 0, sizeCase*largeur, sizeCase*(longeur+1));
+
+
+        try {
+            createImageTourPanel();
+        }catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
         inventairePane = createInventairePane(largeur);
 
@@ -85,10 +114,10 @@ public class GameView extends JFrame {
         plateauSprite.setLayout(null);
         plateauSprite.setOpaque(false);
 
-
-        this.getContentPane().add(inventairePane,0);
-        this.getContentPane().add(plateauSprite,1);
-        this.getContentPane().add(plateauGame,2);
+        this.getContentPane().add(panelTour, 0);
+        this.getContentPane().add(inventairePane,1);
+        this.getContentPane().add(plateauSprite,2);
+        this.getContentPane().add(plateauGame,3);
 
 
         
@@ -121,6 +150,25 @@ public class GameView extends JFrame {
         return inventairePane;
     }
 
+
+    public void createImageTourPanel() throws IOException{
+        String[]  liste = {"mario","luigi","peach"};
+        for(String tour : liste ){
+                File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+"1.png");
+                Image bufferedImage = ImageIO.read(file);
+                ImageIcon imageIcon = new ImageIcon(bufferedImage);
+                int width = imageIcon.getIconWidth();
+                int height = imageIcon.getIconHeight();
+                ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)), (int)(sizeCase), Image.SCALE_DEFAULT));
+                JLabel lab = new JLabel(image);
+                lab.setBounds(0, 0,(int)(((width*(sizeCase))/height)), (int)(sizeCase));
+                lab.setVisible(false);
+                panelTour.add(lab);
+                imageTours.put(tour, lab);
+        }
+
+    }
+
     public JButton createButtonInventaireTours(String tour, int x) throws IOException {
         File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+"1.png");
         Image bufferedImage = ImageIO.read(file);
@@ -128,7 +176,7 @@ public class GameView extends JFrame {
         int width = imageIcon.getIconWidth();
         int height = imageIcon.getIconHeight();
         ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*0.5), (int)(sizeCase*0.5), Image.SCALE_DEFAULT));
-        JButton tourButton = new JButton("1",image);
+        JButton tourButton = new JButton(String.valueOf(game.getJoueur().getInventaire().get(tour)),image);
         tourButton.setVerticalTextPosition(SwingConstants.TOP);
         
         tourButton.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -137,6 +185,27 @@ public class GameView extends JFrame {
         return tourButton;
     }
 
+    public void updateButtonInventaireTours(String tour) throws IOException {
+        JButton b = buttonTours.get(tour);
+        String couleur = game.getJoueur().getInventaire().get(tour)==0 ? "N" : "1";
+        File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+couleur+".png");
+        Image bufferedImage = ImageIO.read(file);
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+        int width = imageIcon.getIconWidth();
+        int height = imageIcon.getIconHeight();
+        ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*0.5), (int)(sizeCase*0.5), Image.SCALE_DEFAULT));
+        b.setIcon(image);
+        b.setText(String.valueOf(game.getJoueur().getInventaire().get(tour)));
+        b.setVerticalTextPosition(SwingConstants.TOP);
+        if(game.getJoueur().getInventaire().get(tour)==0){
+            b.setBackground(Color.gray);
+        }
+        b.setHorizontalTextPosition(SwingConstants.CENTER);
+        b.setBounds(buttonTours.get(tour).getX(), sizeCase/8, 3*sizeCase/4, 3*sizeCase/4); 
+
+    }
+
+
 
 
     public void setImage()  {
@@ -144,6 +213,16 @@ public class GameView extends JFrame {
             setImagePerso(game.getToursEnJeu());
         }
 
+
+    public void buttonTourMoins(String s){
+            try{
+                updateButtonInventaireTours(s);
+                inventairePane.repaint();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        
+    }
 
 
     public <T extends Perso> void setImagePerso(ArrayList<T> l){
