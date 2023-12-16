@@ -17,6 +17,7 @@ public class CarapaceTours extends Tours {
         timebetweendegat=100;
         nbimageAnimation=6;
         timeMov=System.currentTimeMillis();
+        scale = 0.5;
     }
 
     public boolean attaque(Ennemis e){
@@ -58,7 +59,7 @@ public class CarapaceTours extends Tours {
             }
         }
         for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
+            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getX()-pos.getX()<=3*Game.sizecase/4){
                  return false;
             }
         }

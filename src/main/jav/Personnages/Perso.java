@@ -1,7 +1,14 @@
 package jav.Personnages;
 
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import jav.App;
 import jav.Game;
 import jav.Maps.RealCoordonnee;
 
@@ -18,6 +25,24 @@ public abstract class Perso {
     protected RealCoordonnee pos;
     protected int timebetweendegat;
     protected long timeAttaque;
+    protected long timeanimationAttaqued;
+    protected double scale;
+    protected boolean attacked;
+    protected boolean alreadyAttacked;
+
+    protected double timeAnim;
+
+    public double getScale(){
+        return scale;
+    }
+
+    public boolean isAttacked(){
+        return attacked;
+    }
+
+    public void setAttacked(boolean b){
+        attacked = b;
+    }
 
 
     public void setPos(RealCoordonnee c){
@@ -26,6 +51,26 @@ public abstract class Perso {
 
     public int getTimebetweenDegat(){
         return timebetweendegat;
+    }
+
+    public void changeImageAttacked(){
+        try{
+            String light = "";
+            if(!alreadyAttacked){ light = "L";
+            attacked = false; 
+            alreadyAttacked = false;}
+            else {alreadyAttacked = true;}
+            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+light+numAnimation+".png");
+            Image bufferedImage = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
+            image.setIcon(imageIcon2);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
     }
     
     public void enleverPv(int degat){
@@ -73,6 +118,7 @@ public abstract class Perso {
         return range;
     }
 
+
     public abstract void update(Game game);
-    public abstract void pouvoir(Game g);
+    public abstract  void pouvoir(Game g);
 }

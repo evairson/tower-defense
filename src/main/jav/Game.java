@@ -93,9 +93,14 @@ public class Game {
                  
                 for(Case[] line : map.getGrid()){
                     for(Case cas : line){
-                        if(cas.getContenu()!=null){
-                            cas.getContenu().update(g);
+                        if(cas.getContenuTours()!=null){
+                            cas.getContenuTours().update(g);
                         }  
+                        if(cas.getContenuEnnemis().size()!= 0){
+                            for(Ennemis e :cas.getContenuEnnemis()){
+                                e.update(g);
+                            }
+                        }
                     }
                 }
 
@@ -132,19 +137,16 @@ public class Game {
         if(System.currentTimeMillis() - timeEnnemi> vitesseApparition){
             vitesseApparition -= 7000/nbEnnemis; //(8 000 - nbennemis * x = 1000)
             int i = (int)(Math.random()*(map.getLongeur()));
-                if(map.getGrid()[i][map.getLargeur()-1].getContenu()==null){
-                    Ennemis e = selecEnnemi();
-                    ennemis.add(e);
-                    e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
-                    map.updateContenu(this);
-
-                }
+                Ennemis e = selecEnnemi();
+                ennemis.add(e);
+                e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
+                map.updateContenu(this);
             timeEnnemi=System.currentTimeMillis();
         }
     }
 
     public  boolean canUsePower(int x,int y){
-        return this.getMap().getCase(x, y).getContenu() instanceof Peach || this.getMap().getCase(x, y).getContenu() instanceof Mario || this.getMap().getCase(x, y).getContenu() instanceof Luigi;
+        return this.getMap().getCase(x, y).getContenuTours() instanceof Peach || this.getMap().getCase(x, y).getContenuTours() instanceof Mario || this.getMap().getCase(x, y).getContenuTours() instanceof Luigi;
     }
 
 
@@ -161,23 +163,25 @@ public class Game {
                     default -> new Mario(new RealCoordonnee(x, y)); 
                 };
                 this.addToursEnJeu(tour); 
-                this.getMap().getCase(x,y).setContenu(tour);
+                this.getMap().getCase(x,y).setContenuTours(tour);
                 this.getJoueur().removeTours(1, toursJouer);
             }
             else{
-                System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                if(view==null){
+                    System.out.println("Vous ne pouvez pas poser "+ toursJouer);
+                }
                 }
         }
         else if (toursJouer.equals("fleur") || toursJouer.equals("etoile")){
-            if (this.getMap().getCase(x, y).getContenu() == null){
+            if (this.getMap().getCase(x, y).getContenuTours() == null){
                 System.out.println("Vous ne pouvez pas utiliser de pouvoirs sur une case où il n'y a rien");
                 }
             else{
                 if (this.getJoueur().getInventaire().get(toursJouer)>= 1 && this.canUsePower(x, y)){
                     if(toursJouer.equals("fleur")) {
-                        ((Tours)(this.getMap().getCase(x, y).getContenu())).toFlower();}
+                        ((Tours)(this.getMap().getCase(x, y).getContenuTours())).toFlower();}
                     else {
-                        ((Tours)(this.getMap().getCase(x, y).getContenu())).toStar();}
+                        ((Tours)(this.getMap().getCase(x, y).getContenuTours())).toStar();}
                     this.getJoueur().removeTours(1, toursJouer);
                 }
                 else{

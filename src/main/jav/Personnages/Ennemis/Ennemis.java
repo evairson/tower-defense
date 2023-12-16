@@ -1,5 +1,6 @@
 package jav.Personnages.Ennemis;
 
+import jav.App;
 import jav.Game;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
@@ -19,7 +20,6 @@ public abstract class Ennemis extends Perso {
 
     protected long timeMov;
 
-    protected double timeAnim;
     public static final int frame = 100;
 
     Ennemis(){
@@ -27,6 +27,7 @@ public abstract class Ennemis extends Perso {
         timeAttaque=System.currentTimeMillis();
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
+        timeanimationAttaqued = System.currentTimeMillis();
     }
 
     public int getValeur(){
@@ -48,36 +49,17 @@ public abstract class Ennemis extends Perso {
 
     public boolean canMove(Game g){
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                return false;
-            }
-        }
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
+            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
                 return false;
             }
         }
         return true;
     }
 
-    public boolean depasser(Game g){
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getClass() != this.getClass() && e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     public void avancer(Game g){
         if(canMove(g)){
             pos.setX(pos.getX()-(Game.sizecase/ frame));
-        }
-        else {
-            if(depasser(g)){ // a regler
-                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/frame));
-            }
         }
     }
 
@@ -87,11 +69,12 @@ public abstract class Ennemis extends Perso {
         }
         else numAnimation =1;
         try{
-            String currentDirectory = System.getProperty("user.dir");
-            File file = new File(currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
+            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
             Image bufferedImage = ImageIO.read(file);
             ImageIcon imageIcon = new ImageIcon(bufferedImage);
-            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance(3*Game.sizecase/4, 3*Game.sizecase/4, Image.SCALE_DEFAULT));
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
             image.setIcon(imageIcon2);
         }
         catch (IOException exception) {
@@ -130,6 +113,13 @@ public abstract class Ennemis extends Perso {
             timeMov =System.currentTimeMillis();
         }
 
+        if(attacked){
+            if(System.currentTimeMillis() - timeanimationAttaqued > 200){
+                changeImageAttacked();
+                timeanimationAttaqued = System.currentTimeMillis();
+            }
+        }
+
 
         if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
             attaquer(game.getToursEnJeu());
@@ -137,6 +127,9 @@ public abstract class Ennemis extends Perso {
         }
 
         if(mort){
+            if(game.getView()!=null){
+                image.setIcon(null);
+            }
             mort(game.getEnnemis());
         }
 

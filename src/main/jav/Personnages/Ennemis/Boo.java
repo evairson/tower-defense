@@ -15,6 +15,7 @@ public class Boo extends Ennemis {
         range=1;
         timebetweendegat=2000;
         nbimageAnimation=1;
+        scale = 0.7;
     }
 
     public boolean nextIsTour(Game g){
