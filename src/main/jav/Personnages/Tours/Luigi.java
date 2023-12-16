@@ -19,15 +19,7 @@ public class Luigi extends Tours implements TourAttaque {
 
         url = "tours/luigi/luigi";
         scale = 1;
-        }
-
-        public boolean attaque(Ennemis e){
-            if(e.getPos().getY()==pos.getY()){
-                if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
-                    e.enleverPv(this.degat);
-                }
-            }
-            return false;
+        nbimageAnimation = 3;
         }
 
         public void toFlower(){

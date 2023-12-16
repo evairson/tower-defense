@@ -20,7 +20,6 @@ public abstract class Ennemis extends Perso {
 
     protected long timeMov;
 
-    protected double timeAnim;
     public static final int frame = 100;
 
     Ennemis(){
@@ -28,6 +27,7 @@ public abstract class Ennemis extends Perso {
         timeAttaque=System.currentTimeMillis();
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
+        timeanimationAttaqued = System.currentTimeMillis();
     }
 
     public int getValeur(){
@@ -111,6 +111,13 @@ public abstract class Ennemis extends Perso {
         if(System.currentTimeMillis() - timeMov > (timebetweenMov / frame)){
             avancer(game);
             timeMov =System.currentTimeMillis();
+        }
+
+        if(attacked){
+            if(System.currentTimeMillis() - timeanimationAttaqued > 200){
+                changeImageAttacked();
+                timeanimationAttaqued = System.currentTimeMillis();
+            }
         }
 
 

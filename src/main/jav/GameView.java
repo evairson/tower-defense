@@ -229,6 +229,7 @@ public class GameView extends JFrame {
         for(Perso p : l){
             if(p.getImage() == null){
                 try {
+                    
                     File file = new File(App.currentDirectory + "/src/main/resources/" + p.getUrl()+"1.png");
                     Image bufferedImage = ImageIO.read(file);
                     ImageIcon imageIcon = new ImageIcon(bufferedImage);

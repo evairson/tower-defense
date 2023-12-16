@@ -6,6 +6,7 @@ import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
 
 public class Mario extends Tours implements Lanceur{
+    private int rangeCara;
 
     public Mario(RealCoordonnee pos){
         super();
@@ -14,18 +15,20 @@ public class Mario extends Tours implements Lanceur{
         pv=40;
         degat = 20;
         prix = 20;
-        range = 6;
-        range= 6;
+        range = 1;
+        rangeCara= 6;
         mort = false;
         this.pos = pos;
         lettre = "MA";
         url = "tours/mario/mario";
         scale = 1;
+        nbimageAnimation = 3;
     }
 
     public boolean lancer(Perso e, Game g){
         if(e.getPos().getY()==pos.getY()){
-            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
+            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= rangeCara && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
+                isAnimed = true;
                 CarapaceTours car = new CarapaceTours();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
