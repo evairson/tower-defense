@@ -5,7 +5,7 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
 
-public class Mario extends Tours implements Lanceur{
+public class Mario extends Tours implements Lanceur, TourAttaque{
     private int rangeCara;
 
     public Mario(RealCoordonnee pos){
@@ -78,8 +78,7 @@ public class Mario extends Tours implements Lanceur{
 
     @Override
     public int GetrangeProj() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetrangeProj'");
+        return rangeCara;
     }
 
     

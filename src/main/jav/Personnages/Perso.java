@@ -57,9 +57,9 @@ public abstract class Perso {
         try{
             String light = "";
             if(!alreadyAttacked){ light = "L";
-            attacked = false; 
-            alreadyAttacked = false;}
-            else {alreadyAttacked = true;}
+            alreadyAttacked = true;}
+            else {alreadyAttacked = false;
+            attacked = false;}
             File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+light+numAnimation+".png");
             Image bufferedImage = ImageIO.read(file);
             ImageIcon imageIcon = new ImageIcon(bufferedImage);
@@ -118,7 +118,27 @@ public abstract class Perso {
         return range;
     }
 
+    public void nextImage(){
+        if(numAnimation<nbimageAnimation){
+            numAnimation++;
+        }
+        else numAnimation =1;
+        try{
+            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
+            Image bufferedImage = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
+            image.setIcon(imageIcon2);
+        }
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
 
     public abstract void update(Game game);
-    public abstract  void pouvoir(Game g);
+    public abstract void pouvoir(Game g);
 }
