@@ -1,6 +1,7 @@
 package jav.Personnages.Ennemis;
 
 import jav.Game;
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
@@ -37,7 +38,11 @@ public class Lakitu extends Ennemis implements Lanceur {
                     Heriss her = new Heriss();
                     her.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()+1));
                     g.getEnnemis().add(her);
-                    g.getMap().updateContenu(g);
+                    try {
+                        g.getMap().updateContenu(g);
+                    } catch(DeuxToursMemeCase exc){
+                        System.out.println("Attention Deux tours sur la même case !!");
+                    }
                     hasProj=false;
                     return true;
                 }

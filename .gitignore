@@ -1,7 +1,4 @@
 *.class
-<<<<<<< HEAD
 .VScode
-=======
 src/.idea/*
 .idea/*
->>>>>>> develop

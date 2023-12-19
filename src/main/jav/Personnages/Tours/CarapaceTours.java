@@ -52,7 +52,7 @@ public class CarapaceTours extends Tours implements TourAttaque {
             }
             else {
                 if(depasserTour(g)){ // a regler
-                    pos.setX(pos.getX()+(Game.sizecase)+(Game.sizecase/Ennemis.frame));
+                    pos.setX(pos.getX()+(2*Game.sizecase)+(Game.sizecase/Ennemis.frame));
                 }
             }
 
@@ -70,19 +70,23 @@ public class CarapaceTours extends Tours implements TourAttaque {
 
     @Override
     public void update(Game g){
-        super.update(g);
 
-        if(image!=null){
-            if(System.currentTimeMillis() - timeAnimCara > 100){
-                nextImage();
-                timeAnimCara =System.currentTimeMillis();
+        super.update(g);
+        if(!mort){
+            if(image!=null){
+                if(System.currentTimeMillis() - timeAnimCara > 100){
+                    nextImage();
+                    timeAnimCara =System.currentTimeMillis();
+                }
+            }
+    
+            if(System.currentTimeMillis() - timeMov > (timebetweenMov / Ennemis.frame)){
+                
+                avancer(g);
+                timeMov =System.currentTimeMillis();
             }
         }
 
-        if(System.currentTimeMillis() - timeMov > (timebetweenMov / Ennemis.frame)){
-            avancer(g);
-            timeMov =System.currentTimeMillis();
-        }
     }
 
 

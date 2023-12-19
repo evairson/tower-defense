@@ -1,5 +1,6 @@
 package jav;
 
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.Case;
 import jav.Maps.Plateau;
 import jav.Maps.RealCoordonnee;
@@ -89,7 +90,11 @@ public class Game {
                 }
 
                 
-                map.updateContenu(g);
+                try {
+                    map.updateContenu(g);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
                  
                 for(Case[] line : map.getGrid()){
                     for(Case cas : line){
@@ -140,7 +145,12 @@ public class Game {
                 Ennemis e = selecEnnemi();
                 ennemis.add(e);
                 e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
-                map.updateContenu(this);
+                try {
+
+                    map.updateContenu(this);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
             timeEnnemi=System.currentTimeMillis();
         }
     }
