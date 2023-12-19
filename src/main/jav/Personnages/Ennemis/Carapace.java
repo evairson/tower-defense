@@ -5,7 +5,7 @@ import jav.Game;
 import jav.Personnages.Tours.TourAttaque;
 import jav.Personnages.Tours.Tours;
 
-public class Carapace extends Ennemis implements TourAttaque {
+public class Carapace extends Ennemis {
 
     public Carapace(){
         super();
@@ -13,29 +13,21 @@ public class Carapace extends Ennemis implements TourAttaque {
         url="ennemis/carapace/carapace";
         pv=100;
         valeur=50;
-        timebetweenMov=500;
+        timebetweenMov=300;
         degat=3;
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
         scale = 0.5;
+        timeBetweenAnim = 100;
     }
 
     @Override
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
+            if(pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
                 t.enleverPv(this.degat);
-                mort = true;
-            }
-        }
-        return false;
-    }
-
-    public boolean attaque(Ennemis e){
-        if(e.getPos().getY()==pos.getY()){
-            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
-                e.enleverPv(this.degat);
+                t.setAttacked(true);
                 mort = true;
             }
         }

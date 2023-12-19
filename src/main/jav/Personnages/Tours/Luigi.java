@@ -9,7 +9,7 @@ public class Luigi extends Tours implements TourAttaque {
     public Luigi(RealCoordonnee pos){
         super();
         pv=100;
-        degat = 40;
+        degat = 10;
         prix = 20;
         range = 1;
         timebetweendegat = 2000;

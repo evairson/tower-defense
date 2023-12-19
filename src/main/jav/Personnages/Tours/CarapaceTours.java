@@ -3,32 +3,38 @@ package jav.Personnages.Tours;
 import jav.Game;
 import jav.Personnages.Ennemis.Ennemis;
 
-public class CarapaceTours extends Tours {
+public class CarapaceTours extends Tours implements TourAttaque {
     private int timebetweenMov;
     private long timeMov;
+    private long timeAnimCara;
     
     public CarapaceTours(){
         lettre="C ";
         url="ennemis/carapace/carapace";
         pv=100;
-        timebetweenMov=500;
+        timebetweenMov=300;
         degat=3;
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;
         timeMov=System.currentTimeMillis();
         scale = 0.5;
+        timeAnimCara = System.currentTimeMillis();
     }
 
+    @Override
     public boolean attaque(Ennemis e){
         if(e.getPos().getY()==pos.getY()){
-            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
+            if(e.getPos().getX()-pos.getX() <= 3*Game.sizecase/4){
+                isAnimed = true;
+                e.setAttacked(true);
                 e.enleverPv(this.degat);
                 mort = true;
             }
         }
         return false;
     }
+
 
     public boolean depasserTour(Game g){
         for(Tours t : g.getToursEnJeu()){
@@ -58,11 +64,6 @@ public class CarapaceTours extends Tours {
                 return false;
             }
         }
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getX()-pos.getX()<=3*Game.sizecase/4){
-                 return false;
-            }
-        }
         return true;
     }
     
@@ -70,6 +71,13 @@ public class CarapaceTours extends Tours {
     @Override
     public void update(Game g){
         super.update(g);
+
+        if(image!=null){
+            if(System.currentTimeMillis() - timeAnimCara > 100){
+                nextImage();
+                timeAnimCara =System.currentTimeMillis();
+            }
+        }
 
         if(System.currentTimeMillis() - timeMov > (timebetweenMov / Ennemis.frame)){
             avancer(g);

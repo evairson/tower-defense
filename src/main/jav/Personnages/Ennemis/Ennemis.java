@@ -17,8 +17,9 @@ public abstract class Ennemis extends Perso {
 
     protected int valeur;
     protected int timebetweenMov;
-
+    protected int timeBetweenAnim;
     protected long timeMov;
+    
 
     public static final int frame = 100;
 
@@ -28,6 +29,7 @@ public abstract class Ennemis extends Perso {
         timeAnim=System.currentTimeMillis();
         numAnimation=1;
         timeanimationAttaqued = System.currentTimeMillis();
+        timeBetweenAnim = 200;
     }
 
     public int getValeur(){
@@ -42,6 +44,7 @@ public abstract class Ennemis extends Perso {
         if(t.getPos().getY()==pos.getY()){
             if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
                 t.enleverPv(this.degat);
+                t.setAttacked(true);
             }
         }
         return false;
@@ -63,26 +66,6 @@ public abstract class Ennemis extends Perso {
         }
     }
 
-    public void nextImage(){
-        if(numAnimation<nbimageAnimation){
-            numAnimation++;
-        }
-        else numAnimation =1;
-        try{
-            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
-            Image bufferedImage = ImageIO.read(file);
-            ImageIcon imageIcon = new ImageIcon(bufferedImage);
-            int width = imageIcon.getIconWidth();
-            int height = imageIcon.getIconHeight();
-            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
-            image.setIcon(imageIcon2);
-        }
-        catch (IOException exception) {
-            exception.printStackTrace();
-        }
-
-    }
-
     public void attaquer(ArrayList<Tours> tours){
         int i=0;
         if(tours.size()!=0){
@@ -101,7 +84,7 @@ public abstract class Ennemis extends Perso {
         this.pouvoir(game);
 
         if(image!=null){
-            if(System.currentTimeMillis() - timeAnim > 200){
+            if(System.currentTimeMillis() - timeAnim > timeBetweenAnim){
                 nextImage();
                 timeAnim =System.currentTimeMillis();
             }
