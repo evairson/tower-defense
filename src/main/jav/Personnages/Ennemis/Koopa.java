@@ -1,6 +1,7 @@
 package jav.Personnages.Ennemis;
 
 import jav.Game;
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
@@ -35,7 +36,11 @@ public class Koopa extends Ennemis implements Lanceur {
                 Carapace car = new Carapace();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()));
                 g.getEnnemis().add(car);
-                g.getMap().updateContenu(g);
+                try {
+                    g.getMap().updateContenu(g);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
                 hasCarapace=false;
                 return true;
             }

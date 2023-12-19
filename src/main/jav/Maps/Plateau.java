@@ -1,6 +1,7 @@
 package jav.Maps;
 
 import jav.Game;
+import jav.Exception.DeuxToursMemeCase;
 import jav.Personnages.Ennemis.Ennemis;
 
 import jav.Personnages.Tours.Tours;
@@ -38,7 +39,7 @@ public class Plateau {
         }
     }
 
-    public void updateContenu(Game g){
+    public void updateContenu(Game g) throws DeuxToursMemeCase{
         for(int i =0; i < longueur; i ++){
             for(int j = 0; j <largeur; j++){
                 grid[i][j].resetContenu();
@@ -51,7 +52,10 @@ public class Plateau {
                 for(int k =0; k<g.getToursEnJeu().size(); k++){
                     Tours t = g.getToursEnJeu().get(k);
                     if(t.getPos().getIntCoordonnee().getX()==j && t.getPos().getIntCoordonnee().getY()==i){
-                        grid[i][j].setContenuTours(t);
+                        if(grid[i][j].getContenuTours()==null){
+                            grid[i][j].setContenuTours(t);
+                        }
+                        else throw new DeuxToursMemeCase();
                     }
                 }
             }

@@ -107,7 +107,6 @@ public abstract class Tours extends Perso{
         }
 
         if(mort){
-            System.out.println("ok");
             if(game.getView()!=null){
                 image.setIcon(null);
             }

@@ -1,6 +1,7 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
@@ -32,7 +33,12 @@ public class Mario extends Tours implements Lanceur, TourAttaque{
                 CarapaceTours car = new CarapaceTours();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
-                g.getMap().updateContenu(g);
+                try {
+
+                    g.getMap().updateContenu(g);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
                 return true;
             }
         }
