@@ -1,6 +1,7 @@
 package jav.Personnages.Tours;
 import jav.Game;
 import jav.Maps.*;
+import jav.Personnages.Ennemis.Ennemis;
 
 public class Tuyau extends Tours{
     
@@ -13,6 +14,7 @@ public class Tuyau extends Tours{
         range = 0;
         mort = false;
         this.pos = pos;
+        url = "tours/Mario_pipe.png";
         lettre = "TT";
     }
     
@@ -21,6 +23,10 @@ public class Tuyau extends Tours{
     @Override
     public void toFlower() {
         System.out.println("vous ne pouvez pas sur cette tour");
+    }
+
+    public void teleporte(Ennemis e,int gridLength){
+        e.setPos(new RealCoordonnee((int)e.getPos().getX(),(gridLength-1)));
     }
 
     @Override

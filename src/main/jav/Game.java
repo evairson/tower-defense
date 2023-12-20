@@ -110,6 +110,7 @@ public class Game {
 
                 if(end){
                     System.out.println("Vous avez perdu");
+                    view.dispose();
                     System.exit(0);
                 }
 

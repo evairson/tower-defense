@@ -4,6 +4,7 @@ import jav.App;
 import jav.Game;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
+import jav.Personnages.Tours.Tuyau;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,7 +41,7 @@ public abstract class Ennemis extends Perso {
 
     public boolean attaque(Tours t){
         if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range && !(t instanceof Tuyau)){
                 t.enleverPv(this.degat);
             }
         }
