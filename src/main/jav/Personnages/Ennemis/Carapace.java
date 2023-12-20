@@ -2,7 +2,6 @@ package jav.Personnages.Ennemis;
 
 
 import jav.Game;
-import jav.Personnages.Tours.TourAttaque;
 import jav.Personnages.Tours.Tours;
 
 public class Carapace extends Ennemis {
@@ -34,42 +33,12 @@ public class Carapace extends Ennemis {
         return false;
     }
 
-    public boolean depasserTour(Game g){
-        for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
-                return true;
-            }
-        }
-        return false;
-    }
-
 
     @Override
     public void avancer(Game g){
-        if(canMove(g)){
+        if(!(pos.getIntCoordonnee().getX()==1)){
             pos.setX(pos.getX()-(Game.sizecase/ frame));
         }
-        else {
-            /*if(depasser(g)){ // a regler
-                pos.setX(pos.getX()-(Game.sizecase)-(Game.sizecase/8));
-            }*/
-        }
-
-    }
-
-    @Override
-    public boolean canMove(Game g){
-        for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                return false;
-            }
-        }
-        for(Ennemis e : g.getEnnemis()){
-            if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && e.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()-1){
-                 return false;
-            }
-        }
-        return true;
     }
     
 

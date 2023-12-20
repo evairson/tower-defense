@@ -47,24 +47,15 @@ public class CarapaceTours extends Tours implements TourAttaque {
 
 
     public void avancer(Game g){
-            if(canMove(g) && !(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1)){
+            if(!depasserTour(g) && !(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1)){
                 pos.setX(pos.getX()+(Game.sizecase/Ennemis.frame));
             }
             else {
-                if(depasserTour(g)){ // a regler
+                if(depasserTour(g)){ 
                     pos.setX(pos.getX()+(2*Game.sizecase)+(Game.sizecase/Ennemis.frame));
                 }
             }
 
-    }
-
-    public boolean canMove(Game g){
-        for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX()==pos.getIntCoordonnee().getX()+1){
-                return false;
-            }
-        }
-        return true;
     }
     
 

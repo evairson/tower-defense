@@ -69,6 +69,9 @@ public abstract class Perso {
             image.setIcon(imageIcon2);
         }
         catch (IOException exception) {
+            System.out.println("Voici l'url : " + App.currentDirectory + "/src/main/resources/" + getUrl()+"L"+numAnimation+".png");
+            System.out.println("Voici l'url 2 : " + App.currentDirectory + "/src/main/resources/" + getUrl()+""+numAnimation+".png");
+            System.out.println("Le perso : " + lettre + " a posé problème"); 
             exception.printStackTrace();
         }
     }
