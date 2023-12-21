@@ -75,8 +75,9 @@ public abstract class Ennemis extends Perso {
         }
     }
 
-    public void mort(ArrayList<Ennemis> ennemis){
+    public void mort(ArrayList<Ennemis> ennemis, Game g){
         ennemis.remove(this);
+        g.getJoueur().gagner(valeur);
     }
 
 
@@ -113,7 +114,7 @@ public abstract class Ennemis extends Perso {
             if(game.getView()!=null){
                 image.setIcon(null);
             }
-            mort(game.getEnnemis());
+            mort(game.getEnnemis(), game);
         }
 
         if(pos.getX()==0){

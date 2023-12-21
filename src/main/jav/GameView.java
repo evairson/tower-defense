@@ -27,6 +27,7 @@ public class GameView extends JFrame {
     private HashMap<String, JButton> buttonTours;
     private HashMap<String, JLabel> imageTours;
     private JPanel panelTour;
+    private JLabel argent;
 
     public JPanel getPanelTour(){
         return panelTour;
@@ -94,16 +95,15 @@ public class GameView extends JFrame {
         plateauGame.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
 
 
-        casesPanel = new JPanel[game.getMap().getLongeur()][game.getMap().getLargeur()];
+        casesPanel = new ImagePane[game.getMap().getLongeur()][game.getMap().getLargeur()];
 
         for(int i =0;i<game.getMap().getLongeur();i++){
             for(int j =0; j<game.getMap().getLargeur();j++){
-                casesPanel[i][j] = new JPanel();
-                if((i+j)%2==0){
-                    casesPanel[i][j].setBackground(new Color(233, 237, 201));
+                if(i==game.getMap().getLongeur()-1){
+                    casesPanel[i][j] = new ImagePane(game, "case-bas.png");
                 }
                 else {
-                    casesPanel[i][j].setBackground(new Color(204, 213, 169));
+                    casesPanel[i][j] = new ImagePane(game, "case-milieu.png");
                 }
                 this.plateauGame.add(casesPanel[i][j]);
             }
@@ -126,11 +126,13 @@ public class GameView extends JFrame {
     }
 
     public JPanel createInventairePane(int largeur){
+
+        
         inventairePane = new JPanel();
         inventairePane.setLayout(null);
         inventairePane.setBounds(0, 0, sizeCase*largeur, sizeCase);
         inventairePane.setBackground(new Color(250, 237, 205));
-        
+
         try{
             JButton mario = createButtonInventaireTours("mario", 0);
             buttonTours.put("mario", mario);
@@ -146,7 +148,13 @@ public class GameView extends JFrame {
             exception.printStackTrace();
         }
 
-
+        argent = new JLabel("Argent : " + String.valueOf(game.getJoueur().getMonnaie()), SwingConstants.CENTER);
+        argent.setBackground(new Color(73,115,196));
+        argent.setFont(new Font("Serif", Font.BOLD, 20));
+        argent.setForeground(Color.white);
+        argent.setBounds((largeur-2) * sizeCase, sizeCase/3, sizeCase , sizeCase/4);
+        inventairePane.add(argent);
+        argent.setOpaque(true);
         return inventairePane;
     }
 
