@@ -25,10 +25,6 @@ public abstract class Ennemis extends Perso {
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
-        timeAttaque=System.currentTimeMillis();
-        timeAnim=System.currentTimeMillis();
-        numAnimation=1;
-        timeanimationAttaqued = System.currentTimeMillis();
         timeBetweenAnim = 200;
     }
 
@@ -78,6 +74,7 @@ public abstract class Ennemis extends Perso {
     public void mort(ArrayList<Ennemis> ennemis, Game g){
         ennemis.remove(this);
         g.getJoueur().gagner(valeur);
+        g.getView().changeArgent();
     }
 
 

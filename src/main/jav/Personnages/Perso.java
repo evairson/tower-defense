@@ -32,6 +32,13 @@ public abstract class Perso {
 
     protected double timeAnim;
 
+    public Perso(){
+        numAnimation =1;
+        timeAttaque=System.currentTimeMillis();
+        timeAnim =System.currentTimeMillis();
+        timeanimationAttaqued = System.currentTimeMillis();
+    }
+
     public double getScale(){
         return scale;
     }

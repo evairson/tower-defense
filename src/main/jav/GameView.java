@@ -102,6 +102,9 @@ public class GameView extends JFrame {
                 if(i==game.getMap().getLongeur()-1){
                     casesPanel[i][j] = new ImagePane(game, "case-bas.png");
                 }
+                else if(i==0){
+                    casesPanel[i][j] = new ImagePane(game, "case-haut.png");
+                }
                 else {
                     casesPanel[i][j] = new ImagePane(game, "case-milieu.png");
                 }
@@ -110,14 +113,14 @@ public class GameView extends JFrame {
         }
 
         plateauSprite = new JPanel();
-        plateauSprite.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*(longeur));
+        plateauSprite.setBounds(0, 0, sizeCase*largeur, sizeCase*(longeur+1));
         plateauSprite.setLayout(null);
         plateauSprite.setOpaque(false);
 
         this.getContentPane().add(panelTour, 0);
-        this.getContentPane().add(inventairePane,1);
-        this.getContentPane().add(plateauSprite,2);
-        this.getContentPane().add(plateauGame,3);
+        this.getContentPane().add(plateauSprite,1);
+        this.getContentPane().add(plateauGame,2);
+        this.getContentPane().add(inventairePane,3);
 
 
         
@@ -131,7 +134,7 @@ public class GameView extends JFrame {
         inventairePane = new JPanel();
         inventairePane.setLayout(null);
         inventairePane.setBounds(0, 0, sizeCase*largeur, sizeCase);
-        inventairePane.setBackground(new Color(250, 237, 205));
+        inventairePane.setBackground(new Color(148, 235, 251));
 
         try{
             JButton mario = createButtonInventaireTours("mario", 0);
@@ -149,7 +152,7 @@ public class GameView extends JFrame {
         }
 
         argent = new JLabel("Argent : " + String.valueOf(game.getJoueur().getMonnaie()), SwingConstants.CENTER);
-        argent.setBackground(new Color(73,115,196));
+        argent.setBackground(new Color(121,203,219));
         argent.setFont(new Font("Serif", Font.BOLD, 20));
         argent.setForeground(Color.white);
         argent.setBounds((largeur-2) * sizeCase, sizeCase/3, sizeCase , sizeCase/4);
@@ -232,6 +235,11 @@ public class GameView extends JFrame {
         
     }
 
+    public void changeArgent(){
+        argent.setText("Argent : " + String.valueOf(game.getJoueur().getMonnaie()));
+        inventairePane.repaint();
+    }
+
 
     public <T extends Perso> void setImagePerso(ArrayList<T> l){
         for(Perso p : l){
@@ -245,7 +253,7 @@ public class GameView extends JFrame {
                     int height = imageIcon.getIconHeight();
                     ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*p.getScale()), (int)(sizeCase*p.getScale()), Image.SCALE_DEFAULT));
                     p.setImage(new JLabel(image));
-                    p.getImage().setBounds((int)p.getPos().getX(), (int)p.getPos().getY(), (int)(sizeCase*p.getScale())+1, (int)(sizeCase*p.getScale())+1);
+                    p.getImage().setBounds((int)p.getPos().getX(), (int)(p.getPos().getY()+sizeCase) -image.getIconHeight(), (int)(sizeCase*p.getScale()), (int)(sizeCase*p.getScale()));
                     plateauSprite.add(p.getImage());
                     plateauSprite.repaint();
     
@@ -257,7 +265,7 @@ public class GameView extends JFrame {
             }
             else {
                 
-                p.getImage().setBounds((int)p.getPos().getX(), (int)p.getPos().getY(), (int)(sizeCase*p.getScale())+1, (int)(sizeCase*p.getScale())+1);
+                p.getImage().setBounds((int)p.getPos().getX(), (int)(p.getPos().getY()+12*sizeCase/7) -p.getImage().getIcon().getIconHeight(), (int)(sizeCase*p.getScale())+1, (int)(sizeCase*p.getScale())+1);
                 plateauSprite.repaint();
             }
 

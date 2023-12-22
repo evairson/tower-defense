@@ -31,7 +31,7 @@ public class GameController {
     public void ajouterTour(String s){
         view.getImageTours(s).setVisible(false);
         RealCoordonnee cordSouris = new RealCoordonnee(xSouris, ySouris);
-        if(RealCoordonnee.getIntCoordonneeXY(xSouris)>=0 && RealCoordonnee.getIntCoordonneeXY(xSouris) <= game.getMap().getLargeur()
+        if(RealCoordonnee.getIntCoordonneeXY(xSouris)>=0 && RealCoordonnee.getIntCoordonneeXY(xSouris) < game.getMap().getLargeur()-1
         && RealCoordonnee.getIntCoordonneeXY(ySouris)>=1 && RealCoordonnee.getIntCoordonneeXY(ySouris)<= game.getMap().getLongeur()){
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
             view.buttonTourMoins(s);
