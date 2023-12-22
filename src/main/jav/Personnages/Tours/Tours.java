@@ -20,9 +20,7 @@ public abstract class Tours extends Perso{
 
 
     public Tours(){
-        timeAttaque=System.currentTimeMillis();
-        timeAnim =System.currentTimeMillis();
-        timeanimationAttaqued = System.currentTimeMillis();
+        super();
     }
 
 

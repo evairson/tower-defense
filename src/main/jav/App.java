@@ -33,7 +33,7 @@ public class App {
     }
 
     public void GameInterface(){
-        view = new GameView(5,10,5);
+        view = new GameView(3,10,5);
         view.setVisible(true);
         view.control = new GameController(view);
         view.getButton("mario").addChangeListener((event) -> {
@@ -43,12 +43,16 @@ public class App {
             }
         });
         view.getButton("luigi").addChangeListener((event) -> {
+            if(view.getGame().getJoueur().getInventaire().get("luigi")!=0){
             view.control.Selectionnercase("luigi");
             mouseMoved("luigi");
+            }
         });
         view.getButton("peach").addChangeListener((event) -> {
+            if(view.getGame().getJoueur().getInventaire().get("peach")!=0){
             view.control.Selectionnercase("peach");
             mouseMoved("peach");
+        }
         });
     }
 
