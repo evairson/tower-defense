@@ -25,7 +25,7 @@ public class Tuyau extends Tours{
         System.out.println("vous ne pouvez pas sur cette tour");
     }
 
-    public void teleporte(Ennemis e,int gridLength){
+    public void attaque(Ennemis e,int gridLength){
         e.setPos(new RealCoordonnee((int)e.getPos().getX(),(gridLength-1)));
     }
 

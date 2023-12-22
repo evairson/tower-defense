@@ -11,6 +11,7 @@ public class App {
     private JeuTexte jeuTexte;
 
     private MenuDepartView viewMenuDepart;
+    private GameOverView gameOverView;
     public static final String currentDirectory = System.getProperty("user.dir");
 
     public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class App {
     public void GameInterface(){
         view = new GameView(5,10,5);
         view.setVisible(true);
-        view.control = new GameController(view);
+        view.control = new GameController(view,this);
         view.getButton("mario").addChangeListener((event) -> {
             if(view.getGame().getJoueur().getInventaire().get("mario")!=0){
                 view.control.Selectionnercase("mario");
@@ -53,10 +54,6 @@ public class App {
             view.control.Selectionnercase("peach");
             mouseMoved("peach");
         });
-        /*view.getButton("tuyau").addChangeListener((event) -> {
-            view.control.Selectionnercase("tuyau");
-            mouseMoved("tuyau");
-        });*/
     }
 
     public void mouseMoved(String s){
@@ -79,12 +76,13 @@ public class App {
     }
     public void afficheMenu(){
         viewMenuDepart = new MenuDepartView(this);
-        //SwingUtilities.invokeLater(() -> new MenuDepartView());
-        //viewMenuDepart.setVisible(true);
-
     }
     public void lanceJeuInterface(){
         viewMenuDepart.dispose();
         GameInterface();
+    }
+    public void afficheGameOver(){
+        view.dispose();
+        gameOverView = new GameOverView();
     }
 }

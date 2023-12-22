@@ -7,6 +7,7 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Tuyau;
 
 import java.awt.*;
 import java.io.File;
@@ -17,7 +18,7 @@ import java.util.Set;
 
 public class GameView extends JFrame {
     public GameController control;
-    private App app;
+
     private JPanel inventairePane;
     private JPanel plateauGame;
     private JPanel plateauSprite;
@@ -67,6 +68,7 @@ public class GameView extends JFrame {
         game.addToursEnJeu(mario);
         Mario mario2 = new Mario(new RealCoordonnee(1, 2));
         game.addToursEnJeu(mario2);
+
 
         this.setTitle("Tower Defense");
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
