@@ -3,6 +3,7 @@ package jav.Personnages.Tours;
 import jav.App;
 import jav.Game;
 import jav.Personnages.Perso;
+import jav.Personnages.Ennemis.Boo;
 import jav.Personnages.Ennemis.Ennemis;
 
 import java.io.File;
@@ -37,11 +38,13 @@ public abstract class Tours extends Perso{
 
 
     public boolean attaque(Ennemis e){
-        if(e.getPos().getY()==pos.getY()){
-            if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
-                isAnimed = true;
-                e.setAttacked(true);
-                e.enleverPv(this.degat);
+        if(!(e instanceof Boo) || ((Boo)e).isGhost()){
+            if(e.getPos().getY()==pos.getY()){
+                if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
+                    isAnimed = true;
+                    e.setAttacked(true);
+                    e.enleverPv(this.degat);
+                }
             }
         }
         return false;
