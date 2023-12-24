@@ -12,10 +12,6 @@ public class Joueur {
         return monnaie;
     }
 
-    public void acheter(int n) {
-        monnaie -= n;
-    }
-
     public void gagner(int n) {
         monnaie += n;
     }
@@ -34,6 +30,7 @@ public class Joueur {
         inventaire.put("tuyau",0);
         inventaire.put("fleur",0);
         inventaire.put("etoile",0);
+
         boutique = new HashMap<>();
         boutique.put("mario",20);
         boutique.put("luigi",20);
@@ -44,9 +41,10 @@ public class Joueur {
         boutique.put("etoile",50);
 
     }
-    public void addTours(int n,String tours){
-        inventaire.put(tours,inventaire.get(tours)+n);
+    public void addTours(String tours){
+        inventaire.put(tours,inventaire.get(tours)+1);
     }
+
     public void removeTours(int n,String tours){
         if (n >= inventaire.get(tours)){
             inventaire.put(tours,0);
@@ -54,6 +52,12 @@ public class Joueur {
             inventaire.put(tours,inventaire.get(tours)-n);
         }
     }
+
+    public void acheter(String tours) {
+        addTours(tours);
+        monnaie -= boutique.get(tours);
+    }
+
     public HashMap<String,Integer> getBoutique(){
         return this.boutique;
     }
