@@ -169,7 +169,7 @@ public class Game {
                     case "luigi"->new Luigi(new RealCoordonnee(x, y)); 
                     case "peach"->new Peach(new RealCoordonnee(x, y)); 
                     case "tank" ->new Tank(new RealCoordonnee(x, y)); 
-                    case "tuyau " -> new Tuyau(new RealCoordonnee(x, y));
+                    case "tuyau" -> new Tuyau(new RealCoordonnee(x, y));
                     default -> new Mario(new RealCoordonnee(x, y)); 
                 };
                 this.addToursEnJeu(tour); 

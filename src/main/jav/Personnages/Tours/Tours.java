@@ -95,7 +95,7 @@ public abstract class Tours extends Perso{
             }
         }
 
-        if(attacked){
+        if(image!=null && attacked){
             if(System.currentTimeMillis() - timeanimationAttaqued > 200){
                 changeImageAttacked();
                 timeanimationAttaqued = System.currentTimeMillis();
