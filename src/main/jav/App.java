@@ -92,7 +92,7 @@ public class App {
                 return true;
             }
             public void actionPerformed(ActionEvent e) {
-                view.control.addTour(s);
+                view.control.addTourInventaire(s);
             }
         };
         return achat;

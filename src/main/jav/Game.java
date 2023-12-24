@@ -102,7 +102,7 @@ public class Game {
                             cas.getContenuTours().update(g);
                         }  
                         if(cas.getContenuEnnemis().size()!= 0){
-                            for(Ennemis e :cas.getContenuEnnemis()){
+                            for(Ennemis e : cas.getContenuEnnemis()){
                                 e.update(g);
                             }
                         }

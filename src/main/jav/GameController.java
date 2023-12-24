@@ -21,7 +21,7 @@ public class GameController {
         view.getPanelTour().repaint();
     }
 
-    public void addTour(String s){
+    public void addTourInventaire(String s){
         if(game.getJoueur().getMonnaie()>= game.getJoueur().getBoutique().get(s)){
             game.getJoueur().acheter(s);
         }
@@ -49,6 +49,9 @@ public class GameController {
         view.getImageTours(s).setVisible(false);
         if(RealCoordonnee.getIntCoordonneeXY(xSouris)>=0 && RealCoordonnee.getIntCoordonneeXY(xSouris) < game.getMap().getLargeur()-1
         && RealCoordonnee.getIntCoordonneeXY(ySouris)>=1 && RealCoordonnee.getIntCoordonneeXY(ySouris)<= game.getMap().getLongeur()){
+            if((game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis() == null ||
+            game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis().size() == 0)
+            &&  game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuTours() == null )
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
             view.buttonTourUpdate(s);
         }
