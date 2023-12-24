@@ -21,6 +21,23 @@ public class GameController {
         view.getPanelTour().repaint();
     }
 
+    public void addTourInventaire(String s){
+        if(game.getJoueur().getMonnaie()>= game.getJoueur().getBoutique().get(s)){
+            game.getJoueur().acheter(s);
+        }
+        view.buttonTourUpdate(s);
+        view.changeArgent();
+    }
+
+    public void changeInterfaceButton(){
+        if(view.getAcheter().getText().equals("Acheter")){
+            view.getAcheter().setText("Utiliser");
+        }
+        else {
+            view.getAcheter().setText("Acheter");
+        }
+    }
+
     public void suivreMouse(MouseEvent e, String s) {
         xSouris = e.getX();
         ySouris = e.getY();
@@ -30,11 +47,13 @@ public class GameController {
 
     public void ajouterTour(String s){
         view.getImageTours(s).setVisible(false);
-        RealCoordonnee cordSouris = new RealCoordonnee(xSouris, ySouris);
         if(RealCoordonnee.getIntCoordonneeXY(xSouris)>=0 && RealCoordonnee.getIntCoordonneeXY(xSouris) < game.getMap().getLargeur()-1
         && RealCoordonnee.getIntCoordonneeXY(ySouris)>=1 && RealCoordonnee.getIntCoordonneeXY(ySouris)<= game.getMap().getLongeur()){
+            if((game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis() == null ||
+            game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis().size() == 0)
+            &&  game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuTours() == null )
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
-            view.buttonTourMoins(s);
+            view.buttonTourUpdate(s);
         }
     }
 

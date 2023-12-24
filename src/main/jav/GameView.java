@@ -28,9 +28,25 @@ public class GameView extends JFrame {
     private HashMap<String, JLabel> imageTours;
     private JPanel panelTour;
     private JLabel argent;
+    private JButton acheter;
+    private boolean achat;
+
+    // | Setter Getter : | ----------------------------------------
 
     public JPanel getPanelTour(){
         return panelTour;
+    }
+
+    public boolean modeAchat(){
+        return achat;
+    }
+
+    public void setModeAchat(boolean b){
+        achat = b;
+    }
+
+    public JButton getAcheter(){
+        return acheter;
     }
 
     public JLabel getImageTours(String s){
@@ -48,6 +64,8 @@ public class GameView extends JFrame {
     public Game getGame(){
         return game;
     }
+
+    // -----------------------------------------------------
 
     GameView(int longeur, int largeur, int ennemis){    
 
@@ -129,8 +147,6 @@ public class GameView extends JFrame {
     }
 
     public JPanel createInventairePane(int largeur){
-
-        
         inventairePane = new JPanel();
         inventairePane.setLayout(null);
         inventairePane.setBounds(0, 0, sizeCase*largeur, sizeCase);
@@ -158,9 +174,14 @@ public class GameView extends JFrame {
         argent.setBounds((largeur-2) * sizeCase, sizeCase/3, sizeCase , sizeCase/4);
         inventairePane.add(argent);
         argent.setOpaque(true);
+
+        acheter = new JButton("Acheter");
+        acheter.setBackground(new Color(121,203,219));
+        acheter.setFont(new Font("Serif", Font.BOLD, 20));
+        acheter.setBounds((largeur-4) * sizeCase, sizeCase/3, sizeCase , sizeCase/4);
+        inventairePane.add(acheter);
         return inventairePane;
     }
-
 
     public void createImageTourPanel() throws IOException{
         String[]  liste = {"mario","luigi","peach"};
@@ -216,30 +237,24 @@ public class GameView extends JFrame {
 
     }
 
-
-
-
     public void setImage()  {
             setImagePerso(game.getEnnemis());
             setImagePerso(game.getToursEnJeu());
         }
 
-
-    public void buttonTourMoins(String s){
+    public void buttonTourUpdate(String s){
             try{
                 updateButtonInventaireTours(s);
                 inventairePane.repaint();
             } catch (IOException exception) {
                 exception.printStackTrace();
-            }
-        
+            }    
     }
 
     public void changeArgent(){
         argent.setText("Argent : " + String.valueOf(game.getJoueur().getMonnaie()));
         inventairePane.repaint();
     }
-
 
     public <T extends Perso> void setImagePerso(ArrayList<T> l){
         for(Perso p : l){
