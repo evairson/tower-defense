@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import javax.print.attribute.standard.RequestingUserName;
 
+import jav.Personnages.Tours.Tours;
+
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
@@ -41,9 +43,10 @@ public class App {
         view.setVisible(true);
         view.control = new GameController(view);
 
-        view.getButton("mario").addActionListener(utiliserTour("mario"));
-        view.getButton("luigi").addActionListener(utiliserTour("luigi"));
-        view.getButton("peach").addActionListener(utiliserTour("peach"));
+        for(String tour : Tours.listTour){
+            view.getButton(tour).addActionListener(utiliserTour(tour));
+        }
+
 
         view.getAcheter().addActionListener(modeAchat());
     }
@@ -51,9 +54,9 @@ public class App {
     public ActionListener modeAchat(){
         ActionListenerTour achat = new ActionListenerTour() {
             public void actionPerformed(ActionEvent e) {
-                changeButton("mario");
-                changeButton("luigi");
-                changeButton("peach");
+                for(String tour : Tours.listTour){
+                changeButton(tour);
+                }
                 view.control.changeInterfaceButton();
             }
         };

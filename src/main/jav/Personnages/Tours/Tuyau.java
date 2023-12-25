@@ -1,4 +1,6 @@
 package jav.Personnages.Tours;
+import javax.swing.plaf.basic.BasicSliderUI.ScrollListener;
+
 import jav.Game;
 import jav.Maps.*;
 import jav.Personnages.Ennemis.Ennemis;
@@ -7,14 +9,12 @@ public class Tuyau extends Tours{
     
     public Tuyau(RealCoordonnee pos){
         super();
-        pv=1;                      //pv symbolique puisque normalement il ne devrait pas être attaqué
-        degat = 0;
         prix = 30;
-        niveau= 0;
-        range = 0;
-        mort = false;
         this.pos = pos;
         lettre = "TT";
+        url = "tours/tuyau/tuyau";
+        nbimageAnimation = 1;
+        scale = 0.5;
     }
 
     @Override

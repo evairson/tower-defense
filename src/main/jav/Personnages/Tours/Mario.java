@@ -18,7 +18,6 @@ public class Mario extends Tours implements Lanceur, TourAttaque{
         prix = 20;
         range = 1;
         rangeCara= 6;
-        mort = false;
         this.pos = pos;
         lettre = "MA";
         url = "tours/mario/mario";

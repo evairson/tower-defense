@@ -7,6 +7,7 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Tours.Mario;
+import jav.Personnages.Tours.Tours;
 
 import java.awt.*;
 import java.io.File;
@@ -67,7 +68,7 @@ public class GameView extends JFrame {
 
     // -----------------------------------------------------
 
-    GameView(int longeur, int largeur, int ennemis){    
+    public GameView(int longeur, int largeur, int ennemis){    
 
         buttonTours = new HashMap<>();
         imageTours = new HashMap<>();
@@ -153,15 +154,15 @@ public class GameView extends JFrame {
         inventairePane.setBackground(new Color(148, 235, 251));
 
         try{
-            JButton mario = createButtonInventaireTours("mario", 0);
-            buttonTours.put("mario", mario);
-            inventairePane.add(mario);
-            JButton luigi = createButtonInventaireTours("luigi", 1);
-            buttonTours.put("luigi", luigi);
-            inventairePane.add(luigi);
-            JButton peach = createButtonInventaireTours("peach", 2);
-            buttonTours.put("peach", peach);
-            inventairePane.add(peach);
+            int i = 0;
+            for(String tour : Tours.listTour ){
+            JButton tourButton = createButtonInventaireTours(tour, i);
+            buttonTours.put(tour, tourButton);
+            inventairePane.add(tourButton);
+            updateButtonInventaireTours(tour);
+            inventairePane.repaint();
+            i++;
+            }
         }
         catch (IOException exception) {
             exception.printStackTrace();
@@ -184,8 +185,7 @@ public class GameView extends JFrame {
     }
 
     public void createImageTourPanel() throws IOException{
-        String[]  liste = {"mario","luigi","peach"};
-        for(String tour : liste ){
+        for(String tour : Tours.listTour){
                 File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+"1.png");
                 Image bufferedImage = ImageIO.read(file);
                 ImageIcon imageIcon = new ImageIcon(bufferedImage);
@@ -260,18 +260,23 @@ public class GameView extends JFrame {
         for(Perso p : l){
             if(p.getImage() == null){
                 try {
-                    
                     File file = new File(App.currentDirectory + "/src/main/resources/" + p.getUrl()+"1.png");
                     Image bufferedImage = ImageIO.read(file);
                     ImageIcon imageIcon = new ImageIcon(bufferedImage);
                     int width = imageIcon.getIconWidth();
                     int height = imageIcon.getIconHeight();
-                    ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*p.getScale()), (int)(sizeCase*p.getScale()), Image.SCALE_DEFAULT));
-                    p.setImage(new JLabel(image));
-                    p.getImage().setBounds((int)p.getPos().getX(), (int)(p.getPos().getY()+sizeCase) -image.getIconHeight(), (int)(sizeCase*p.getScale()), (int)(sizeCase*p.getScale()));
-                    plateauSprite.add(p.getImage());
-                    plateauSprite.repaint();
-    
+                    try {
+                        ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*p.getScale()), (int)(sizeCase*p.getScale()), Image.SCALE_DEFAULT));
+                        // Attention l'image doit être plus grande en hauteur qu'en largeur !! 
+                        p.setImage(new JLabel(image));
+                        p.getImage().setBounds((int)p.getPos().getX(), (int)(p.getPos().getY()+sizeCase) -image.getIconHeight(), (int)(sizeCase*p.getScale()), (int)(sizeCase*p.getScale()));
+                        plateauSprite.add(p.getImage());
+                        plateauSprite.repaint();
+         
+                    } catch (IllegalArgumentException e){
+                        System.out.println("attention (width*(sizeCase))/height)*p.getScale() ou sizeCase*p.getScale() donne une valeur inférieure à 1");
+                    }
+                    
                     } 
     
                 catch (IOException exception) {
