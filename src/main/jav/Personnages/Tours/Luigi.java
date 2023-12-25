@@ -13,7 +13,6 @@ public class Luigi extends Tours implements TourAttaque {
         prix = 20;
         range = 1;
         timebetweendegat = 2000;
-        mort = false;
         this.pos = pos;
         lettre = "LU";
         url = "tours/luigi/luigi";

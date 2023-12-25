@@ -18,12 +18,20 @@ public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
     protected boolean isAnimed;
+    public static final String[] listTour = {"mario","luigi","peach","tuyau"};
 
 
     public Tours(){
         super();
     }
 
+    public boolean isAnimed(){
+        return isAnimed;
+    }
+
+    public void setAnimed(boolean b){
+        isAnimed = b;
+    }
 
     public int getPrix(){
         return this.prix;
@@ -34,29 +42,6 @@ public abstract class Tours extends Perso{
 
     public void mort(ArrayList<Tours> tours){
         tours.remove(this);
-    }
-
-
-    public boolean attaque(Ennemis e){
-        if(!(e instanceof Boo) || ((Boo)e).isGhost()){
-            if(e.getPos().getY()==pos.getY()){
-                if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= range){
-                    isAnimed = true;
-                    e.setAttacked(true);
-                    e.enleverPv(this.degat);
-                }
-            }
-        }
-        return false;
-    }
-
-    public void attaquer(ArrayList<Ennemis> e){
-        int i=0;
-        if(e.size()!=0){
-            while(i<e.size() && !attaque(e.get(i))){
-                i++;
-            }
-        }
     }
 
 
@@ -95,17 +80,20 @@ public abstract class Tours extends Perso{
             }
         }
 
-        if(attacked){
+        if(image!=null && attacked){
             if(System.currentTimeMillis() - timeanimationAttaqued > 200){
                 changeImageAttacked();
                 timeanimationAttaqued = System.currentTimeMillis();
             }
         }
 
-        if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
-            attaquer(game.getEnnemis());
-            timeAttaque =System.currentTimeMillis();
+        if(this instanceof TourAttaque){
+            if(System.currentTimeMillis() - timeAttaque > timebetweendegat){
+                ((TourAttaque)this).attaquer(game.getEnnemis());
+                timeAttaque =System.currentTimeMillis();
+            }
         }
+
 
         if(mort){
             if(game.getView()!=null){

@@ -3,6 +3,7 @@ package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Personnages.Tours.Tours;
+import jav.Personnages.Tours.Tuyau;
 
 public class Carapace extends Ennemis {
 
@@ -23,7 +24,7 @@ public class Carapace extends Ennemis {
 
     @Override
     public boolean attaque(Tours t){
-        if(t.getPos().getY()==pos.getY()){
+        if(t.getPos().getY()==pos.getY() && !(t instanceof Tuyau)){
             if(pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
                 t.enleverPv(this.degat);
                 t.setAttacked(true);
