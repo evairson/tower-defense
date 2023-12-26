@@ -258,6 +258,7 @@ public class GameView extends JFrame {
         inventairePane.repaint();
     }
 
+
     public <T extends Perso> void setImagePerso(ArrayList<T> l){
         for(Perso p : l){
             if(p.getImage() == null){

@@ -54,7 +54,7 @@ public class GameController {
         && RealCoordonnee.getIntCoordonneeXY(ySouris)>=1 && RealCoordonnee.getIntCoordonneeXY(ySouris)<= game.getMap().getLongeur()){
             if((game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis() == null ||
             game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis().size() == 0)
-            &&  game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuTours() == null )
+            &&  (game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuTours() == null || s=="fleur") )
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
             view.buttonTourUpdate(s);
         }

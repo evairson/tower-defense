@@ -39,6 +39,10 @@ public abstract class Perso {
         timeanimationAttaqued = System.currentTimeMillis();
     }
 
+    public void addDegat(int i){
+        degat += i;
+    }
+
     public double getScale(){
         return scale;
     }
@@ -141,6 +145,7 @@ public abstract class Perso {
             int height = imageIcon.getIconHeight();
             ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
             image.setIcon(imageIcon2);
+            image.setBounds((int)getPos().getX(), (int)(getPos().getY()+12*Game.sizecase/7) -getImage().getIcon().getIconHeight(), (int)(Game.sizecase*getScale())+1, (int)(Game.sizecase*getScale())+1); 
         }
         catch (IOException exception) {
             exception.printStackTrace();

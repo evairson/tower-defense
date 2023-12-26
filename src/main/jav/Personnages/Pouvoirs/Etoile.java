@@ -1,8 +1,6 @@
 package jav.Personnages.Pouvoirs;
 
-public class Etoile extends Pouvoirs {
+public interface Etoile {
 
-    Etoile(){
-        
-    }
+   public void ToStar();
 }

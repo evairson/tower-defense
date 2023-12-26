@@ -5,8 +5,9 @@ import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
+import jav.Personnages.Pouvoirs.Fleur;
 
-public class Mario extends Tours implements Lanceur, TourAttaque{
+public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
     private int rangeCara;
 
     public Mario(RealCoordonnee pos){
@@ -45,12 +46,10 @@ public class Mario extends Tours implements Lanceur, TourAttaque{
     }
 
     public void toFlower(){
-        this.url = "";
-        switch(this.niveau){
-            case 0 -> {this.pv = 100; this.degat+=15;this.niveau++;break;}
-            case 2 -> {this.pv = 100;this.degat-=15;this.niveau--;break;}
-            default -> {break;}
-        }
+        Fleur.super.toFlower(this);
+        range +=1;
+        url="tours/mario/marioFleur/mario";
+        nextImage();
     }
 
     public void toStar(){

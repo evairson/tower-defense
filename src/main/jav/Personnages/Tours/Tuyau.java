@@ -18,19 +18,11 @@ public class Tuyau extends Tours{
         scale = 0.5;
     }
 
-    @Override
-    public void toFlower() {
-        System.out.println("vous ne pouvez pas sur cette tour");
-    }
-
     public void attaque(Ennemis e,int gridLength){
         e.setPos(new RealCoordonnee((int)e.getPos().getX(),(gridLength-1)));
     }
 
-    @Override
-    public void toStar() {
-        System.out.println("vous ne pouvez pas sur cette tour");
-    }
+
 
     public boolean warp(Ennemis e, Game g){
         if(e.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()){

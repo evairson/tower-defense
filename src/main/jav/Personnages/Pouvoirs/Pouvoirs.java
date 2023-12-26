@@ -1,14 +1,7 @@
 package jav.Personnages.Pouvoirs;
 
-public abstract class Pouvoirs {
-    protected String url;
-    protected String nom;
+import jav.Personnages.Tours.Tours;
 
-    public String getUrl(){
-        return url;
-    }
+public interface Pouvoirs {
 
-    public String getNom(){
-        return nom;
-    }
 }
