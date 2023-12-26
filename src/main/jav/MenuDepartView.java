@@ -28,8 +28,23 @@ public class MenuDepartView extends JFrame {
               g.drawImage(fond,0,0,getWidth(),getHeight(),null);
           }
         };
-        ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/Play.png");
-        start = new JButton(imageIcon);
+
+        try {
+            File file = new File(App.currentDirectory+"/src/main/resources/Play.png");
+            Image bufferedImage = ImageIO.read(file);
+            ImageIcon imageIcon = new ImageIcon(bufferedImage);
+            int width = imageIcon.getIconWidth();
+            int height = imageIcon.getIconHeight();
+            ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(width*0.3), (int)(height*0.3), Image.SCALE_DEFAULT));
+            start = new JButton(image);
+            start.setOpaque(false);
+            start.setContentAreaFilled(false);
+            start.setBorderPainted(false);
+            } 
+
+        catch (IOException exception) {
+            exception.printStackTrace();
+        }
         start.addActionListener(ActionListener -> app.lanceJeuInterface());
         fondPanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
