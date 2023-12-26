@@ -116,6 +116,7 @@ public class App {
             public void mouseClicked(MouseEvent e) {
                 view.removeMouseMotionListener(mouse);
                 view.control.ajouterTour(s);
+                view.removeMouseListener(this);
             }
         });
     }

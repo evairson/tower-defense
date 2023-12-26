@@ -47,7 +47,7 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
 
     public void toFlower(){
         Fleur.super.toFlower(this);
-        range +=1;
+        rangeCara +=1;
         url="tours/mario/marioFleur/mario";
         nextImage();
     }

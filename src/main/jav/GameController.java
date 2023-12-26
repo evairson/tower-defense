@@ -1,9 +1,13 @@
 package jav;
 
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
+import jav.Maps.Case;
 import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
+import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Pouvoirs.Fleur;
 
 public class GameController {
     private GameView view;
@@ -50,17 +54,31 @@ public class GameController {
 
     public void ajouterTour(String s){
         view.getImageTours(s).setVisible(false);
-        if(RealCoordonnee.getIntCoordonneeXY(xSouris)>=0 && RealCoordonnee.getIntCoordonneeXY(xSouris) < game.getMap().getLargeur()-1
-        && RealCoordonnee.getIntCoordonneeXY(ySouris)>=1 && RealCoordonnee.getIntCoordonneeXY(ySouris)<= game.getMap().getLongeur()){
-            if((game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis() == null ||
-            game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuEnnemis().size() == 0)
-            &&  (game.getMap().getCase(RealCoordonnee.getIntCoordonneeXY(xSouris),  RealCoordonnee.getIntCoordonneeXY(ySouris)-1).getContenuTours() == null || s=="fleur") )
-            game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
+        if(canAddTour(s)){
+            game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris) - 1);
             view.buttonTourUpdate(s);
-        }
+           }
     }
     public void afficheGameOver(){
         app.afficheGameOver();
+    }
+
+    public boolean canAddTour(String s){
+        int cordXSouris = RealCoordonnee.getIntCoordonneeXY(xSouris);
+        int cordYSouris = RealCoordonnee.getIntCoordonneeXY(ySouris);
+        Case caseTour = game.getMap().getCase(cordXSouris,  cordYSouris-1);
+        if (cordXSouris>=0 && cordXSouris < game.getMap().getLargeur()-1 // est bien dans le plateau
+        && cordYSouris >=1 && cordYSouris <= game.getMap().getLongeur()) {
+
+            if((caseTour.getContenuEnnemis() == null || caseTour.getContenuEnnemis().size() == 0)){ //pas d'ennemis dessus
+
+                if(caseTour.getContenuTours() == null || (caseTour.getContenuTours() != null && caseTour.getContenuTours() instanceof Fleur && s=="fleur")){
+
+                    return true;
+                }
+            }
+         }
+        return false;
     }
 
 }
