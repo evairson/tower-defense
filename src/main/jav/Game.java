@@ -22,6 +22,7 @@ import java.util.TimerTask;
 
 public class Game {
     private Plateau map;
+
     private Joueur joueur;
     private ArrayList<Tours> toursEnJeu;
     private ArrayList<Ennemis> ennemis;
@@ -100,7 +101,7 @@ public class Game {
                     for(Case cas : line){
                         if(cas.getContenuTours()!=null){
                             cas.getContenuTours().update(g);
-                        }  
+                        }
                         if(cas.getContenuEnnemis().size()!= 0){
                             for(Ennemis e : cas.getContenuEnnemis()){
                                 e.update(g);
@@ -115,7 +116,8 @@ public class Game {
 
                 if(end){
                     System.out.println("Vous avez perdu");
-                    System.exit(0);
+                    t.cancel();
+                    view.control.afficheGameOver();
                 }
 
                 }},

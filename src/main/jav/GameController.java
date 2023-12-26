@@ -11,7 +11,10 @@ public class GameController {
     private int xSouris;
     private int ySouris;
 
-    public GameController(GameView view){
+    private App app;
+
+    public GameController(GameView view, App app){
+        this.app = app;
         this.view = view;
         this.game = view.getGame();
     }
@@ -55,6 +58,9 @@ public class GameController {
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris)-1);
             view.buttonTourUpdate(s);
         }
+    }
+    public void afficheGameOver(){
+        app.afficheGameOver();
     }
 
 }

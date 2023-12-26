@@ -1,5 +1,9 @@
 package test.jav;
 
+import jav.Exception.choisirToursException;
+import jav.Exception.choixActionException;
+import jav.Game;
+import jav.JeuTexte;
 import org.junit.Test;
 
 import static org.junit.Assert.fail;
@@ -7,11 +11,6 @@ import static org.junit.Assert.fail;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
-
-import jav.Game;
-import jav.JeuTexte;
-import jav.Exception.choisirToursException;
-import jav.Exception.choixActionException;
 
 public class JeuTexteTest {
     

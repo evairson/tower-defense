@@ -2,6 +2,7 @@ package jav;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -14,6 +15,9 @@ import jav.Personnages.Tours.Tours;
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
+
+    private MenuDepartView viewMenuDepart;
+    private GameOverView gameOverView;
     public static final String currentDirectory = System.getProperty("user.dir");
 
     public static void main(String[] args) {
@@ -27,7 +31,7 @@ public class App {
         try {
             int rep = Integer.valueOf(sc.nextLine()); 
             switch(rep){
-                case 1: GameInterface(); break;
+                case 1: afficheMenu(); break;
                 case 2: GameTerminal(); break;
                 default: TypeGame(); break;
             }}
@@ -41,7 +45,7 @@ public class App {
     public void GameInterface(){
         view = new GameView(5,10,5);
         view.setVisible(true);
-        view.control = new GameController(view);
+        view.control = new GameController(view, this);
 
         for(String tour : Tours.listTour){
             view.getButton(tour).addActionListener(utiliserTour(tour));
@@ -118,5 +122,16 @@ public class App {
 
     public void GameTerminal(){
         jeuTexte = new JeuTexte(5, 20, 5);
+    }
+    public void afficheMenu(){
+        viewMenuDepart = new MenuDepartView(this);
+    }
+    public void lanceJeuInterface(){
+        viewMenuDepart.dispose();
+        GameInterface();
+    }
+    public void afficheGameOver(){
+        view.dispose();
+        gameOverView = new GameOverView();
     }
 }

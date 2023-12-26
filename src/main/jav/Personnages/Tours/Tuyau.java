@@ -11,6 +11,7 @@ public class Tuyau extends Tours{
         super();
         prix = 30;
         this.pos = pos;
+        url = "tours/Mario_pipe.png";
         lettre = "TT";
         url = "tours/tuyau/tuyau";
         nbimageAnimation = 1;
@@ -20,6 +21,10 @@ public class Tuyau extends Tours{
     @Override
     public void toFlower() {
         System.out.println("vous ne pouvez pas sur cette tour");
+    }
+
+    public void attaque(Ennemis e,int gridLength){
+        e.setPos(new RealCoordonnee((int)e.getPos().getX(),(gridLength-1)));
     }
 
     @Override
