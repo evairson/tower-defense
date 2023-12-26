@@ -12,7 +12,6 @@ public class Peach extends Tours implements TourAttaque{
         prix = 20;
         range = 6;
         timebetweendegat = 3000;
-        mort = false;
         this.pos = pos;
         lettre="PE";
 

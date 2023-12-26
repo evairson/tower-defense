@@ -1,3 +1,4 @@
 *.class
+.VScode
 src/.idea/*
 .idea/*

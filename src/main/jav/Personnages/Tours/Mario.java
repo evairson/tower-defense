@@ -1,11 +1,12 @@
 package jav.Personnages.Tours;
 
 import jav.Game;
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
 
-public class Mario extends Tours implements Lanceur{
+public class Mario extends Tours implements Lanceur, TourAttaque{
     private int rangeCara;
 
     public Mario(RealCoordonnee pos){
@@ -17,7 +18,6 @@ public class Mario extends Tours implements Lanceur{
         prix = 20;
         range = 1;
         rangeCara= 6;
-        mort = false;
         this.pos = pos;
         lettre = "MA";
         url = "tours/mario/mario";
@@ -32,7 +32,12 @@ public class Mario extends Tours implements Lanceur{
                 CarapaceTours car = new CarapaceTours();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
-                g.getMap().updateContenu(g);
+                try {
+
+                    g.getMap().updateContenu(g);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
                 return true;
             }
         }
@@ -78,8 +83,7 @@ public class Mario extends Tours implements Lanceur{
 
     @Override
     public int GetrangeProj() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetrangeProj'");
+        return rangeCara;
     }
 
     

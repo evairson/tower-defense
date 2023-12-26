@@ -1,5 +1,6 @@
 package jav;
 
+import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.Case;
 import jav.Maps.Plateau;
 import jav.Maps.RealCoordonnee;
@@ -89,16 +90,20 @@ public class Game {
                     view.setImage();
                 }
 
-
-                map.updateContenu(g);
-
+                
+                try {
+                    map.updateContenu(g);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
+                 
                 for(Case[] line : map.getGrid()){
                     for(Case cas : line){
                         if(cas.getContenuTours()!=null){
                             cas.getContenuTours().update(g);
                         }
                         if(cas.getContenuEnnemis().size()!= 0){
-                            for(Ennemis e :cas.getContenuEnnemis()){
+                            for(Ennemis e : cas.getContenuEnnemis()){
                                 e.update(g);
                             }
                         }
@@ -142,7 +147,12 @@ public class Game {
                 Ennemis e = selecEnnemi();
                 ennemis.add(e);
                 e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
-                map.updateContenu(this);
+                try {
+
+                    map.updateContenu(this);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case !!");
+                }
             timeEnnemi=System.currentTimeMillis();
         }
     }
@@ -161,7 +171,7 @@ public class Game {
                     case "luigi"->new Luigi(new RealCoordonnee(x, y)); 
                     case "peach"->new Peach(new RealCoordonnee(x, y)); 
                     case "tank" ->new Tank(new RealCoordonnee(x, y)); 
-                    case "tuyau " -> new Tuyau(new RealCoordonnee(x, y));
+                    case "tuyau" -> new Tuyau(new RealCoordonnee(x, y));
                     default -> new Mario(new RealCoordonnee(x, y)); 
                 };
                 this.addToursEnJeu(tour); 

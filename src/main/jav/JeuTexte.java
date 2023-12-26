@@ -123,8 +123,7 @@ public class JeuTexte {
         if (g.getJoueur().getBoutique().get(tours) > g.getJoueur().getMonnaie()){
             System.out.println("Vous ne pouvez pas acheter cet objet");
         }else{
-            g.getJoueur().addTours(1, tours);
-            g.getJoueur().acheter(g.getJoueur().getBoutique().get(tours));
+            g.getJoueur().acheter(tours);
         }
     }
 

@@ -1,10 +1,16 @@
 package jav;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Scanner;
+
+import javax.print.attribute.standard.RequestingUserName;
+
+import jav.Personnages.Tours.Tours;
 
 public class App {
     private GameView view;
@@ -39,21 +45,64 @@ public class App {
     public void GameInterface(){
         view = new GameView(5,10,5);
         view.setVisible(true);
-        view.control = new GameController(view,this);
-        view.getButton("mario").addChangeListener((event) -> {
-            if(view.getGame().getJoueur().getInventaire().get("mario")!=0){
-                view.control.Selectionnercase("mario");
-                mouseMoved("mario");
+        view.control = new GameController(view, this);
+
+        for(String tour : Tours.listTour){
+            view.getButton(tour).addActionListener(utiliserTour(tour));
+        }
+
+
+        view.getAcheter().addActionListener(modeAchat());
+    }
+
+    public ActionListener modeAchat(){
+        ActionListenerTour achat = new ActionListenerTour() {
+            public void actionPerformed(ActionEvent e) {
+                for(String tour : Tours.listTour){
+                changeButton(tour);
+                }
+                view.control.changeInterfaceButton();
             }
-        });
-        view.getButton("luigi").addChangeListener((event) -> {
-            view.control.Selectionnercase("luigi");
-            mouseMoved("luigi");
-        });
-        view.getButton("peach").addChangeListener((event) -> {
-            view.control.Selectionnercase("peach");
-            mouseMoved("peach");
-        });
+        };
+        return achat;
+    }
+
+    public ActionListenerTour utiliserTour(String s)  {
+        
+        ActionListenerTour utiliser = new ActionListenerTour() {
+
+            public void actionPerformed(ActionEvent e) {
+                if(view.getGame().getJoueur().getInventaire().get(s)!=0){
+                    view.control.Selectionnercase(s);
+                    mouseMoved(s);
+                }
+            }
+        };
+        return utiliser;
+    }
+
+    public void changeButton(String s){
+        if(((ActionListenerTour)view.getButton(s).getActionListeners()[0]).isAchat()){
+            view.getButton(s).removeActionListener(view.getButton(s).getActionListeners()[0]);
+            view.getButton(s).addActionListener(utiliserTour(s));
+        }
+        else {
+            view.getButton(s).removeActionListener(view.getButton(s).getActionListeners()[0]);
+            view.getButton(s).addActionListener(acheterTour(s));
+        }
+    }
+
+    public ActionListenerTour acheterTour(String s)  {
+        ActionListenerTour achat = new ActionListenerTour() {
+            @Override
+            public boolean isAchat() {
+                return true;
+            }
+            public void actionPerformed(ActionEvent e) {
+                view.control.addTourInventaire(s);
+            }
+        };
+        return achat;
     }
 
     public void mouseMoved(String s){

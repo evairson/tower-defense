@@ -8,7 +8,6 @@ public class Tank extends Tours{
         super();
         pv=300;
         prix = 30;
-        mort = false;
         this.pos = pos;
         lettre = "T ";
     }

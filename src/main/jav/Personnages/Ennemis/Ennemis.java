@@ -18,17 +18,15 @@ public abstract class Ennemis extends Perso {
 
     protected int valeur;
     protected int timebetweenMov;
-
+    protected int timeBetweenAnim;
     protected long timeMov;
+    
 
     public static final int frame = 100;
 
     Ennemis(){
         timeMov=System.currentTimeMillis();
-        timeAttaque=System.currentTimeMillis();
-        timeAnim=System.currentTimeMillis();
-        numAnimation=1;
-        timeanimationAttaqued = System.currentTimeMillis();
+        timeBetweenAnim = 200;
     }
 
     public int getValeur(){
@@ -40,9 +38,10 @@ public abstract class Ennemis extends Perso {
 
 
     public boolean attaque(Tours t){
-        if(t.getPos().getY()==pos.getY()){
-            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range && !(t instanceof Tuyau)){
+        if(t.getPos().getY()==pos.getY() && !(t instanceof Tuyau)){
+            if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= range){
                 t.enleverPv(this.degat);
+                t.setAttacked(true);
             }
         }
         return false;
@@ -50,8 +49,10 @@ public abstract class Ennemis extends Perso {
 
     public boolean canMove(Game g){
         for(Tours t : g.getToursEnJeu()){
-            if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
-                return false;
+            if(!(t instanceof Tuyau)){
+                if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && pos.getX()-t.getPos().getX() <= 3*Game.sizecase/4){
+                    return false;
+                }
             }
         }
         return true;
@@ -64,26 +65,6 @@ public abstract class Ennemis extends Perso {
         }
     }
 
-    public void nextImage(){
-        if(numAnimation<nbimageAnimation){
-            numAnimation++;
-        }
-        else numAnimation =1;
-        try{
-            File file = new File(App.currentDirectory + "/src/main/resources/" + getUrl()+numAnimation+".png");
-            Image bufferedImage = ImageIO.read(file);
-            ImageIcon imageIcon = new ImageIcon(bufferedImage);
-            int width = imageIcon.getIconWidth();
-            int height = imageIcon.getIconHeight();
-            ImageIcon imageIcon2 = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*getScale()), (int)(Game.sizecase*getScale()), Image.SCALE_DEFAULT));
-            image.setIcon(imageIcon2);
-        }
-        catch (IOException exception) {
-            exception.printStackTrace();
-        }
-
-    }
-
     public void attaquer(ArrayList<Tours> tours){
         int i=0;
         if(tours.size()!=0){
@@ -93,8 +74,10 @@ public abstract class Ennemis extends Perso {
         }
     }
 
-    public void mort(ArrayList<Ennemis> ennemis){
+    public void mort(ArrayList<Ennemis> ennemis, Game g){
         ennemis.remove(this);
+        g.getJoueur().gagner(valeur);
+        g.getView().changeArgent();
     }
 
 
@@ -102,9 +85,15 @@ public abstract class Ennemis extends Perso {
         this.pouvoir(game);
 
         if(image!=null){
-            if(System.currentTimeMillis() - timeAnim > 200){
+            if(System.currentTimeMillis() - timeAnim > timeBetweenAnim){
                 nextImage();
                 timeAnim =System.currentTimeMillis();
+            }
+            if(attacked){
+                if(System.currentTimeMillis() - timeanimationAttaqued > 200){
+                    changeImageAttacked();
+                    timeanimationAttaqued = System.currentTimeMillis();
+                }
             }
         }
 
@@ -112,13 +101,6 @@ public abstract class Ennemis extends Perso {
         if(System.currentTimeMillis() - timeMov > (timebetweenMov / frame)){
             avancer(game);
             timeMov =System.currentTimeMillis();
-        }
-
-        if(attacked){
-            if(System.currentTimeMillis() - timeanimationAttaqued > 200){
-                changeImageAttacked();
-                timeanimationAttaqued = System.currentTimeMillis();
-            }
         }
 
 
@@ -131,7 +113,7 @@ public abstract class Ennemis extends Perso {
             if(game.getView()!=null){
                 image.setIcon(null);
             }
-            mort(game.getEnnemis());
+            mort(game.getEnnemis(), game);
         }
 
         if(pos.getX()==0){
