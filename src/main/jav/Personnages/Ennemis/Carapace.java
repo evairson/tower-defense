@@ -35,10 +35,14 @@ public class Carapace extends Ennemis {
     }
 
 
+
     @Override
     public void avancer(Game g){
         if(!(pos.getIntCoordonnee().getX()==1)){
             pos.setX(pos.getX()-(Game.sizecase/ frame));
+        }
+        else {
+            mort = true;
         }
     }
     

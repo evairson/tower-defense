@@ -96,6 +96,7 @@ public class Game {
                     map.updateContenu(g);
                 } catch(DeuxToursMemeCase exc){
                     System.out.println("Attention Deux tours sur la même case !!");
+                    exc.changeTour(g);
                 }
                  
                 for(Case[] line : map.getGrid()){
@@ -153,6 +154,7 @@ public class Game {
                     map.updateContenu(this);
                 } catch(DeuxToursMemeCase exc){
                     System.out.println("Attention Deux tours sur la même case !!");
+                    exc.changeTour(this);
                 }
             timeEnnemi=System.currentTimeMillis();
         }

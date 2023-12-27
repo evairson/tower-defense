@@ -6,6 +6,7 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
+import jav.Personnages.Tours.Tuyau;
 
 public class Lakitu extends Ennemis implements Lanceur {
     private int rangeProj;
@@ -32,7 +33,7 @@ public class Lakitu extends Ennemis implements Lanceur {
 
 
     public boolean lancer(Perso t, Game g){
-       if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1){
+       if(pos.getIntCoordonnee().getY()<g.getMap().getLongeur()-1 && !(t instanceof Tuyau)){
             if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY()+1){
                 if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= rangeProj && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()>= 2){
                     Heriss her = new Heriss();

@@ -66,10 +66,10 @@ public class GameController {
     public boolean canAddTour(String s){
         int cordXSouris = RealCoordonnee.getIntCoordonneeXY(xSouris);
         int cordYSouris = RealCoordonnee.getIntCoordonneeXY(ySouris);
-        Case caseTour = game.getMap().getCase(cordXSouris,  cordYSouris-1);
         if (cordXSouris>=0 && cordXSouris < game.getMap().getLargeur()-1 // est bien dans le plateau
         && cordYSouris >=1 && cordYSouris <= game.getMap().getLongeur()) {
 
+            Case caseTour = game.getMap().getCase(cordXSouris,  cordYSouris-1);
             if((caseTour.getContenuEnnemis() == null || caseTour.getContenuEnnemis().size() == 0)){ //pas d'ennemis dessus
 
                 if(caseTour.getContenuTours() == null || (caseTour.getContenuTours() != null && caseTour.getContenuTours() instanceof Fleur && s=="fleur")){

@@ -54,6 +54,9 @@ public class CarapaceTours extends Tours implements TourAttaque {
                 if(depasserTour(g)){ 
                     pos.setX(pos.getX()+(2*Game.sizecase)+(Game.sizecase/Ennemis.frame));
                 }
+                else {
+                    mort = true;
+                }
             }
 
     }
