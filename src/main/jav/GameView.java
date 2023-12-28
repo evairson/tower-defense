@@ -11,6 +11,11 @@ import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tuyau;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +44,19 @@ public class GameView extends JFrame {
         return panelTour;
     }
 
-    public boolean modeAchat(){
+    public GameController getControl(){
+        return control;
+    }
+
+    public JPanel getInventairePane(){
+        return inventairePane;
+    }
+
+    public JLabel getArgent(){
+        return argent;
+    }
+
+    public boolean IsmodeAchat(){
         return achat;
     }
 
@@ -69,12 +86,14 @@ public class GameView extends JFrame {
 
     // -----------------------------------------------------
 
-    public GameView(int longeur, int largeur, int ennemis){    
+    public GameView(int longeur, int largeur, int ennemis){  
+        
 
         buttonTours = new HashMap<>();
         imageTours = new HashMap<>();
 
         game = new Game(longeur, largeur, ennemis, this);
+        this.control = new GameController(this);  
 
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -161,7 +180,7 @@ public class GameView extends JFrame {
             JButton tourButton = createButtonInventaireTours(tour, i);
             buttonTours.put(tour, tourButton);
             inventairePane.add(tourButton);
-            updateButtonInventaireTours(tour);
+            control.updateButtonInventaireTours(tour);
             inventairePane.repaint();
             i++;
             }
@@ -169,6 +188,13 @@ public class GameView extends JFrame {
         catch (IOException exception) {
             exception.printStackTrace();
         }
+
+        for(String tour : Tours.listTour){
+            getButton(tour).addActionListener(utiliserTour(tour));
+        }
+
+
+        
 
         argent = new JLabel("Argent : " + String.valueOf(game.getJoueur().getMonnaie()), SwingConstants.CENTER);
         argent.setBackground(new Color(121,203,219));
@@ -183,6 +209,9 @@ public class GameView extends JFrame {
         acheter.setFont(new Font("Serif", Font.BOLD, 20));
         acheter.setBounds((largeur-4) * sizeCase, sizeCase/3, sizeCase , sizeCase/4);
         inventairePane.add(acheter);
+
+        acheter.addActionListener(modeAchat());
+        
         return inventairePane;
     }
 
@@ -219,44 +248,12 @@ public class GameView extends JFrame {
         return tourButton;
     }
 
-    public void updateButtonInventaireTours(String tour) throws IOException {
-        JButton b = buttonTours.get(tour);
-        String couleur = game.getJoueur().getInventaire().get(tour)==0 ? "N" : "1";
-        File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+couleur+".png");
-        Image bufferedImage = ImageIO.read(file);
-        ImageIcon imageIcon = new ImageIcon(bufferedImage);
-        int width = imageIcon.getIconWidth();
-        int height = imageIcon.getIconHeight();
-        ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*0.5), (int)(sizeCase*0.5), Image.SCALE_DEFAULT));
-        b.setIcon(image);
-        b.setText(String.valueOf(game.getJoueur().getInventaire().get(tour)));
-        b.setVerticalTextPosition(SwingConstants.TOP);
-        if(game.getJoueur().getInventaire().get(tour)==0){
-            b.setBackground(Color.gray);
-        }
-        b.setHorizontalTextPosition(SwingConstants.CENTER);
-        b.setBounds(buttonTours.get(tour).getX(), sizeCase/8, 3*sizeCase/4, 3*sizeCase/4); 
 
-    }
 
     public void setImage()  {
             setImagePerso(game.getEnnemis());
             setImagePerso(game.getToursEnJeu());
         }
-
-    public void buttonTourUpdate(String s){
-            try{
-                updateButtonInventaireTours(s);
-                inventairePane.repaint();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }    
-    }
-
-    public void changeArgent(){
-        argent.setText("Argent : " + String.valueOf(game.getJoueur().getMonnaie()));
-        inventairePane.repaint();
-    }
 
 
     public <T extends Perso> void setImagePerso(ArrayList<T> l){
@@ -293,6 +290,61 @@ public class GameView extends JFrame {
             }
 
     }
+    }
+
+    public void mouseMoved(String s){
+        MouseMotionAdapter mouse = new MouseMotionAdapter() {
+            public void mouseMoved(MouseEvent e) {
+                control.suivreMouse(e, s);
+            }
+        };
+        addMouseMotionListener(mouse);
+        addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                removeMouseMotionListener(mouse);
+                control.ajouterTour(s);
+                removeMouseListener(this);
+            }
+        });
+    }
+
+    public ActionListenerTour acheterTour(String s)  {
+        ActionListenerTour achat = new ActionListenerTour() {
+            @Override
+            public boolean isAchat() {
+                return true;
+            }
+            public void actionPerformed(ActionEvent e) {
+                control.addTourInventaire(s);
+            }
+        };
+        return achat;
+    }
+
+    public ActionListenerTour utiliserTour(String s)  {
+        
+        ActionListenerTour utiliser = new ActionListenerTour() {
+
+            public void actionPerformed(ActionEvent e) {
+                if(game.getJoueur().getInventaire().get(s)!=0){
+                    control.Selectionnercase(s);
+                    mouseMoved(s);
+                }
+            }
+        };
+        return utiliser;
+    }
+
+    public ActionListener modeAchat(){
+        ActionListenerTour achat = new ActionListenerTour() {
+            public void actionPerformed(ActionEvent e) {
+                for(String tour : Tours.listTour){
+                control.changeButton(tour);
+                }
+                control.changeInterfaceButton();
+            }
+        };
+        return achat;
     }
 
 

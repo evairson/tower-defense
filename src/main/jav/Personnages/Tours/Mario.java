@@ -9,6 +9,7 @@ import jav.Personnages.Pouvoirs.Fleur;
 
 public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
     private int rangeCara;
+    private int pouvoir;
 
     public Mario(RealCoordonnee pos){
         super();
@@ -30,7 +31,10 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
         if(e.getPos().getY()==pos.getY()){
             if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= rangeCara && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
                 isAnimed = true;
-                CarapaceTours car = new CarapaceTours();
+                CarapaceTours car = switch(pouvoir) {
+                    case 1 -> new CarapaceTours(1);
+                    case 2 -> new CarapaceTours(2);
+                    default -> new CarapaceTours(0);};
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
                 try {
@@ -50,6 +54,7 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
         rangeCara +=1;
         url="tours/mario/marioFleur/mario";
         nextImage();
+        pouvoir = 1;
     }
 
     public void toStar(){

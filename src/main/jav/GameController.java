@@ -1,7 +1,18 @@
 package jav;
 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.text.View;
 
 import jav.Maps.Case;
 import jav.Maps.Coordonnee;
@@ -15,10 +26,8 @@ public class GameController {
     private int xSouris;
     private int ySouris;
 
-    private App app;
 
-    public GameController(GameView view, App app){
-        this.app = app;
+    public GameController(GameView view){
         this.view = view;
         this.game = view.getGame();
     }
@@ -32,8 +41,8 @@ public class GameController {
         if(game.getJoueur().getMonnaie()>= game.getJoueur().getBoutique().get(s)){
             game.getJoueur().acheter(s);
         }
-        view.buttonTourUpdate(s);
-        view.changeArgent();
+        buttonTourUpdate(s);
+        changeArgent();
     }
 
     public void changeInterfaceButton(){
@@ -56,11 +65,26 @@ public class GameController {
         view.getImageTours(s).setVisible(false);
         if(canAddTour(s)){
             game.createTours(s, RealCoordonnee.getIntCoordonneeXY(xSouris), RealCoordonnee.getIntCoordonneeXY(ySouris) - 1);
-            view.buttonTourUpdate(s);
+            buttonTourUpdate(s);
            }
     }
+
     public void afficheGameOver(){
-        app.afficheGameOver();
+        view.dispose();
+        EventQueue.invokeLater( () -> {
+        GameOverView gameover = new GameOverView();
+        });
+    }
+
+    public void changeButton(String s){
+        if(((ActionListenerTour)view.getButton(s).getActionListeners()[0]).isAchat()){
+            view.getButton(s).removeActionListener(view.getButton(s).getActionListeners()[0]);
+            view.getButton(s).addActionListener(view.utiliserTour(s));
+        }
+        else {
+            view.getButton(s).removeActionListener(view.getButton(s).getActionListeners()[0]);
+            view.getButton(s).addActionListener(view.acheterTour(s));
+        }
     }
 
     public boolean canAddTour(String s){
@@ -79,6 +103,40 @@ public class GameController {
             }
          }
         return false;
+    }
+
+    public void updateButtonInventaireTours(String tour) throws IOException {
+        JButton b = view.getButton(tour);
+        String couleur = game.getJoueur().getInventaire().get(tour)==0 ? "N" : "1";
+        File file = new File(App.currentDirectory + "/src/main/resources/tours/"+tour+"/"+tour+couleur+".png");
+        Image bufferedImage = ImageIO.read(file);
+        ImageIcon imageIcon = new ImageIcon(bufferedImage);
+        int width = imageIcon.getIconWidth();
+        int height = imageIcon.getIconHeight();
+        ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*0.5), (int)(Game.sizecase*0.5), Image.SCALE_DEFAULT));
+        b.setIcon(image);
+        b.setText(String.valueOf(game.getJoueur().getInventaire().get(tour)));
+        b.setVerticalTextPosition(SwingConstants.TOP);
+        if(game.getJoueur().getInventaire().get(tour)==0){
+            b.setBackground(Color.gray);
+        }
+        b.setHorizontalTextPosition(SwingConstants.CENTER);
+        b.setBounds(view.getButton(tour).getX(), Game.sizecase/8, 3*Game.sizecase/4, 3*Game.sizecase/4); 
+
+    }
+
+    public void buttonTourUpdate(String s){
+        try{
+            updateButtonInventaireTours(s);
+            view.getInventairePane().repaint();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }    
+    }  
+
+    public void changeArgent(){
+        view.getArgent().setText("Argent : " + String.valueOf(game.getJoueur().getMonnaie()));
+        view.getInventairePane().repaint();
     }
 
 }
