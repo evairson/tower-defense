@@ -9,6 +9,7 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
+import jav.Personnages.Pouvoirs.Etoile;
 import jav.Personnages.Pouvoirs.Fleur;
 import jav.Personnages.Tours.Luigi;
 import jav.Personnages.Tours.Mario;
@@ -16,6 +17,7 @@ import jav.Personnages.Tours.Peach;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tank;
 import jav.Personnages.Tours.Tuyau;
+import jav.gui.*;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -196,7 +198,7 @@ public class Game {
                     if(toursJouer.equals("fleur")) {
                         ((Fleur)(this.getMap().getCase(x, y).getContenuTours())).toFlower();}
                     else {
-                       // ((Tours)(this.getMap().getCase(x, y).getContenuTours())).toStar();
+                        ((Etoile)(this.getMap().getCase(x, y).getContenuTours())).toStar();
                     }
                     this.getJoueur().removeTours(1, toursJouer);
                 }

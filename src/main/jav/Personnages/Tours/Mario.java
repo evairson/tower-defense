@@ -5,9 +5,10 @@ import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
+import jav.Personnages.Pouvoirs.Etoile;
 import jav.Personnages.Pouvoirs.Fleur;
 
-public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
+public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
     private int rangeCara;
     private int pouvoir;
 
@@ -58,12 +59,11 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur{
     }
 
     public void toStar(){
-        this.url = "";
-        switch(this.niveau){
-            case 0 -> {this.pv = 150;this.degat+=35;this.niveau+=2;break;}
-            case 1 -> {this.pv = 150;this.degat+=15;this.niveau++;break;}
-            default -> {break;}
-        }
+        Etoile.super.toStar(this);
+        rangeCara +=2;
+        url="tours/mario/marioEtoile/mario";
+        nextImage();
+        pouvoir = 2;
     }
 
     public void pouvoir(Game g){

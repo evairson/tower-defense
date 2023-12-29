@@ -1,4 +1,4 @@
-package jav;
+package jav.gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -13,11 +13,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.text.View;
+import jav.*;
 
 import jav.Maps.Case;
 import jav.Maps.Coordonnee;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Pouvoirs.Etoile;
 import jav.Personnages.Pouvoirs.Fleur;
 
 public class GameController {
@@ -96,8 +98,8 @@ public class GameController {
             Case caseTour = game.getMap().getCase(cordXSouris,  cordYSouris-1);
             if((caseTour.getContenuEnnemis() == null || caseTour.getContenuEnnemis().size() == 0)){ //pas d'ennemis dessus
 
-                if(caseTour.getContenuTours() == null || (caseTour.getContenuTours() != null && caseTour.getContenuTours() instanceof Fleur && s=="fleur")){
-
+                if(caseTour.getContenuTours() == null || (caseTour.getContenuTours() != null && (caseTour.getContenuTours() instanceof Fleur && s=="fleur" 
+                || caseTour.getContenuTours() instanceof Etoile && s=="etoile"))){
                     return true;
                 }
             }

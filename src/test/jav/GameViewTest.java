@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 import jav.App;
 import jav.Game;
-import jav.GameView;
+import jav.gui.*;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Tours.Luigi;
 import jav.Personnages.Tours.Mario;

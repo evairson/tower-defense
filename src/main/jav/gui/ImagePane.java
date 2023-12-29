@@ -1,4 +1,4 @@
-package jav;
+package jav.gui;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import jav.*;
 
 public class ImagePane extends JPanel{
     private Game game;

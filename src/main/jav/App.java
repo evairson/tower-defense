@@ -1,5 +1,8 @@
 package jav;
 
+import jav.Personnages.Tours.Tours;
+import jav.gui.*;
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +15,7 @@ import java.util.Scanner;
 
 import javax.print.attribute.standard.RequestingUserName;
 
-import jav.Personnages.Tours.Tours;
+
 
 public class App {
     private GameView view;

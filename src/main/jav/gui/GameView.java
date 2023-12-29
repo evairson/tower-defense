@@ -1,4 +1,4 @@
-package jav;
+package jav.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -9,6 +9,7 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Tours.Mario;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tuyau;
+import jav.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

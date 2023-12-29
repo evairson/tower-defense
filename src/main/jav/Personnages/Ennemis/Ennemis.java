@@ -1,7 +1,7 @@
 package jav.Personnages.Ennemis;
 
-import jav.App;
-import jav.Game;
+import jav.*;
+import jav.gui.*;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tuyau;

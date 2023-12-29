@@ -40,6 +40,12 @@ public abstract class Perso {
         timeanimationAttaqued = System.currentTimeMillis();
     }
 
+    public void lessTimeBetweenDegat(int i){
+        if(timebetweendegat - i > 0){
+            timebetweendegat -= i;
+        }
+    }
+
     public void addDegat(int i){
         degat += i;
     }

@@ -1,6 +1,14 @@
 package jav.Personnages.Pouvoirs;
 
-public interface Etoile {
+import jav.Personnages.Tours.Tours;
 
-   public void ToStar();
+public interface Etoile extends Pouvoirs {
+
+   
+   public void toStar();
+    
+   default void toStar(Tours t){
+       t.addDegat(10);  
+       t.lessTimeBetweenDegat(1000);
+   }
 }

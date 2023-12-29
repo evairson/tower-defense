@@ -1,7 +1,7 @@
 package jav.Personnages.Tours;
 
-import jav.App;
-import jav.Game;
+import jav.*;
+import jav.gui.*;
 import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Boo;
 import jav.Personnages.Ennemis.Ennemis;
@@ -18,7 +18,7 @@ public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
     protected boolean isAnimed;
-    public static final String[] listTour = {"mario","luigi","peach","tuyau","fleur"};
+    public static final String[] listTour = {"mario","luigi","peach","tuyau","fleur","etoile"};
 
 
     public Tours(){
