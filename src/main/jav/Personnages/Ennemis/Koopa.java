@@ -5,6 +5,7 @@ import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
+import jav.Personnages.Tours.Tuyau;
 
 public class Koopa extends Ennemis implements Lanceur {
     private int rangeCara;
@@ -31,7 +32,7 @@ public class Koopa extends Ennemis implements Lanceur {
 
     
     public boolean lancer(Perso t, Game g){
-        if(t.getPos().getY()==pos.getY()){
+        if(t.getPos().getY()==pos.getY() && !(t instanceof Tuyau)){
             if(this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= rangeCara && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()>= 2){
                 Carapace car = new Carapace();
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()-1, pos.getIntCoordonnee().getY()));

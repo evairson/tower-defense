@@ -1,7 +1,7 @@
 package jav.Personnages.Ennemis;
 
-import jav.App;
-import jav.Game;
+import jav.*;
+import jav.gui.*;
 import jav.Personnages.Perso;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tuyau;
@@ -77,7 +77,7 @@ public abstract class Ennemis extends Perso {
     public void mort(ArrayList<Ennemis> ennemis, Game g){
         ennemis.remove(this);
         g.getJoueur().gagner(valeur);
-        g.getView().changeArgent();
+        g.getView().getControl().changeArgent();
     }
 
 

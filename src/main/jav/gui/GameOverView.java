@@ -1,7 +1,8 @@
-package jav;
+package jav.gui;
 
 import javax.swing.*;
 import java.awt.*;
+import jav.*;
 
 public class GameOverView extends JFrame {
     public GameOverView(){

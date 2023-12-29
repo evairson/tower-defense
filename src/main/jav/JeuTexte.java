@@ -1,7 +1,7 @@
 
 package jav;
 
-
+import jav.gui.*;
 import jav.Exception.choisirToursException;
 import jav.Exception.choixActionException;
 import jav.Maps.Plateau;

@@ -5,9 +5,12 @@ import jav.Exception.DeuxToursMemeCase;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Lanceur;
 import jav.Personnages.Perso;
+import jav.Personnages.Pouvoirs.Etoile;
+import jav.Personnages.Pouvoirs.Fleur;
 
-public class Mario extends Tours implements Lanceur, TourAttaque{
+public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
     private int rangeCara;
+    private int pouvoir;
 
     public Mario(RealCoordonnee pos){
         super();
@@ -29,7 +32,10 @@ public class Mario extends Tours implements Lanceur, TourAttaque{
         if(e.getPos().getY()==pos.getY()){
             if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= rangeCara && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
                 isAnimed = true;
-                CarapaceTours car = new CarapaceTours();
+                CarapaceTours car = switch(pouvoir) {
+                    case 1 -> new CarapaceTours(1);
+                    case 2 -> new CarapaceTours(2);
+                    default -> new CarapaceTours(0);};
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
                 try {
@@ -45,21 +51,19 @@ public class Mario extends Tours implements Lanceur, TourAttaque{
     }
 
     public void toFlower(){
-        this.url = "";
-        switch(this.niveau){
-            case 0 -> {this.pv = 100; this.degat+=15;this.niveau++;break;}
-            case 2 -> {this.pv = 100;this.degat-=15;this.niveau--;break;}
-            default -> {break;}
-        }
+        Fleur.super.toFlower(this);
+        rangeCara +=1;
+        url="tours/mario/marioFleur/mario";
+        nextImage();
+        pouvoir = 1;
     }
 
     public void toStar(){
-        this.url = "";
-        switch(this.niveau){
-            case 0 -> {this.pv = 150;this.degat+=35;this.niveau+=2;break;}
-            case 1 -> {this.pv = 150;this.degat+=15;this.niveau++;break;}
-            default -> {break;}
-        }
+        Etoile.super.toStar(this);
+        rangeCara +=2;
+        url="tours/mario/marioEtoile/mario";
+        nextImage();
+        pouvoir = 2;
     }
 
     public void pouvoir(Game g){

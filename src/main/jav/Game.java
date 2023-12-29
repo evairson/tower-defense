@@ -9,12 +9,15 @@ import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Ennemis.Goomba;
 import jav.Personnages.Ennemis.Koopa;
 import jav.Personnages.Ennemis.Lakitu;
+import jav.Personnages.Pouvoirs.Etoile;
+import jav.Personnages.Pouvoirs.Fleur;
 import jav.Personnages.Tours.Luigi;
 import jav.Personnages.Tours.Mario;
 import jav.Personnages.Tours.Peach;
 import jav.Personnages.Tours.Tours;
 import jav.Personnages.Tours.Tank;
 import jav.Personnages.Tours.Tuyau;
+import jav.gui.*;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -95,6 +98,7 @@ public class Game {
                     map.updateContenu(g);
                 } catch(DeuxToursMemeCase exc){
                     System.out.println("Attention Deux tours sur la même case !!");
+                    exc.changeTour(g);
                 }
                  
                 for(Case[] line : map.getGrid()){
@@ -152,6 +156,7 @@ public class Game {
                     map.updateContenu(this);
                 } catch(DeuxToursMemeCase exc){
                     System.out.println("Attention Deux tours sur la même case !!");
+                    exc.changeTour(this);
                 }
             timeEnnemi=System.currentTimeMillis();
         }
@@ -191,9 +196,10 @@ public class Game {
             else{
                 if (this.getJoueur().getInventaire().get(toursJouer)>= 1 && this.canUsePower(x, y)){
                     if(toursJouer.equals("fleur")) {
-                        ((Tours)(this.getMap().getCase(x, y).getContenuTours())).toFlower();}
+                        ((Fleur)(this.getMap().getCase(x, y).getContenuTours())).toFlower();}
                     else {
-                        ((Tours)(this.getMap().getCase(x, y).getContenuTours())).toStar();}
+                        ((Etoile)(this.getMap().getCase(x, y).getContenuTours())).toStar();
+                    }
                     this.getJoueur().removeTours(1, toursJouer);
                 }
                 else{

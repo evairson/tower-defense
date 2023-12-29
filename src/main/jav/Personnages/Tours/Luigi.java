@@ -3,8 +3,11 @@ package jav.Personnages.Tours;
 import jav.Game;
 import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Ennemis;
+import jav.Personnages.Pouvoirs.Etoile;
+import jav.Personnages.Pouvoirs.Fleur;
+import jav.Personnages.Pouvoirs.Pouvoirs;
 
-public class Luigi extends Tours implements TourAttaque {
+public class Luigi extends Tours implements TourAttaque, Fleur, Etoile{
 
     public Luigi(RealCoordonnee pos){
         super();
@@ -21,21 +24,15 @@ public class Luigi extends Tours implements TourAttaque {
         }
 
         public void toFlower(){
-            this.url = "";
-            switch(this.niveau){
-                case 0 -> {this.pv = 150; this.degat+=30;this.niveau++;return;}
-                case 2 -> {this.pv = 150;this.degat-=30;this.niveau--;return;}
-                default -> {return;}
-            }
+            Fleur.super.toFlower(this);
+            this.url = "tours/luigi/luigiFleur/luigi";
+            nextImage();
         }
     
         public void toStar(){
-            this.url = "";
-            switch(this.niveau){
-                case 0 -> {this.pv = 200;this.degat+=60;this.niveau+=2;return;}
-                case 1 -> {this.pv = 200;this.degat+=30;this.niveau++;return;}
-                default -> {return;}
-            }
+            Etoile.super.toStar(this);
+            url="tours/luigi/luigiEtoile/luigi";
+            nextImage();
         }
 
         public void pouvoir(Game g){

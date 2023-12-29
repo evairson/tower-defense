@@ -8,15 +8,25 @@ public class CarapaceTours extends Tours implements TourAttaque {
     private long timeMov;
     private long timeAnimCara;
     
-    public CarapaceTours(){
-        lettre="C ";
-        url="ennemis/carapace/carapace";
+    public CarapaceTours(int pouvoir){     
+        
+        if (pouvoir ==1){
+            lettre="F ";
+            url="tours/bouleFeu/feu";
+            timebetweenMov=500;
+            nbimageAnimation=5;
+        }
+        else{
+            lettre="C ";
+            url="ennemis/carapace/carapace";
+            timebetweenMov=1000;
+            nbimageAnimation=6;
+        }
+
         pv=100;
-        timebetweenMov=300;
         degat=3;
         range=1;
         timebetweendegat=100;
-        nbimageAnimation=6;
         timeMov=System.currentTimeMillis();
         scale = 0.5;
         timeAnimCara = System.currentTimeMillis();
@@ -48,11 +58,14 @@ public class CarapaceTours extends Tours implements TourAttaque {
 
     public void avancer(Game g){
             if(!depasserTour(g) && !(pos.getIntCoordonnee().getX()==g.getMap().getLargeur()-1)){
-                pos.setX(pos.getX()+(Game.sizecase/Ennemis.frame));
+                pos.setX(pos.getX()+3*(Game.sizecase/Ennemis.frame));
             }
             else {
                 if(depasserTour(g)){ 
                     pos.setX(pos.getX()+(2*Game.sizecase)+(Game.sizecase/Ennemis.frame));
+                }
+                else {
+                    mort = true;
                 }
             }
 

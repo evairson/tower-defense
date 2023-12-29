@@ -1,4 +1,4 @@
-package jav;
+package jav.gui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import jav.*;
 
 public class MenuDepartView extends JFrame {
     JButton start;

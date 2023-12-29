@@ -1,8 +1,13 @@
 package jav.Personnages.Pouvoirs;
 
-public class Fleur extends Pouvoirs{
+import jav.Game;
+import jav.Personnages.Tours.Tours;
 
-    Fleur(){
-        
+public interface Fleur extends Pouvoirs{
+
+    public void toFlower();
+    
+    default void toFlower(Tours t){
+        t.addDegat(20);  
     }
 }

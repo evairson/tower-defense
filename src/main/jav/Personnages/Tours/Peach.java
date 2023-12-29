@@ -2,8 +2,10 @@ package jav.Personnages.Tours;
 
 import jav.Game;
 import jav.Maps.RealCoordonnee;
+import jav.Personnages.Pouvoirs.Etoile;
+import jav.Personnages.Pouvoirs.Fleur;
 
-public class Peach extends Tours implements TourAttaque{
+public class Peach extends Tours implements TourAttaque, Fleur, Etoile{
 
     public Peach(RealCoordonnee pos){
         super();
@@ -21,21 +23,17 @@ public class Peach extends Tours implements TourAttaque{
         }
 
         public void toFlower(){
-            this.url = "";
-            switch(this.niveau){
-                case 0 -> {this.pv = 130; this.degat+=15;this.niveau++;return;}
-                case 2 -> {this.pv = 130;this.degat-=15;this.niveau--;return;}
-                default -> {return;}
-            }
+            Fleur.super.toFlower(this);
+            range += 1;
+            this.url = "tours/peach/peachFleur/peach";
+            nextImage();
         }
     
         public void toStar(){
-            this.url = "";
-            switch(this.niveau){
-                case 0 -> {this.pv = 180;this.degat+=30;this.niveau+=2;return;}
-                case 1 -> {this.pv = 180;this.degat+=15;this.niveau++;return;}
-                default -> {return;}
-            }
+            Etoile.super.toStar(this);
+            range +=2;
+            url="tours/peach/peachEtoile/peach";
+            nextImage();
         }
 
         public void pouvoir(Game g){

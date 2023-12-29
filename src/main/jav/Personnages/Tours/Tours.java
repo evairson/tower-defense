@@ -1,7 +1,7 @@
 package jav.Personnages.Tours;
 
-import jav.App;
-import jav.Game;
+import jav.*;
+import jav.gui.*;
 import jav.Personnages.Perso;
 import jav.Personnages.Ennemis.Boo;
 import jav.Personnages.Ennemis.Ennemis;
@@ -18,7 +18,7 @@ public abstract class Tours extends Perso{
     protected int prix;
     protected int niveau;
     protected boolean isAnimed;
-    public static final String[] listTour = {"mario","luigi","peach","tuyau"};
+    public static final String[] listTour = {"mario","luigi","peach","tuyau","fleur","etoile"};
 
 
     public Tours(){
@@ -44,8 +44,7 @@ public abstract class Tours extends Perso{
         tours.remove(this);
     }
 
-
-
+    @Override
     public void nextImage(){
         if(numAnimation<nbimageAnimation){
             numAnimation++;
@@ -68,8 +67,7 @@ public abstract class Tours extends Perso{
         }
 
     }
-
-
+    
     public void update(Game game){
         this.pouvoir(game);
 
@@ -102,9 +100,5 @@ public abstract class Tours extends Perso{
             mort(game.getToursEnJeu());    
         }
     }
-    
-    public abstract void toFlower();
-
-    public abstract void toStar();
 
 }
