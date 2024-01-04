@@ -1,4 +1,4 @@
-package jav.gui;
+package jav;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -21,15 +21,19 @@ import jav.Maps.RealCoordonnee;
 import jav.Personnages.Ennemis.Ennemis;
 import jav.Personnages.Pouvoirs.Etoile;
 import jav.Personnages.Pouvoirs.Fleur;
+import jav.gui.GameOverView;
+import jav.gui.GameView;
 
 public class GameController {
     private GameView view;
     private Game game;
+    private App app;
     private int xSouris;
     private int ySouris;
 
 
-    public GameController(GameView view){
+    public GameController(GameView view, App app){
+        this.app = app;
         this.view = view;
         this.game = view.getGame();
     }
@@ -74,7 +78,7 @@ public class GameController {
     public void afficheGameOver(){
         view.dispose();
         EventQueue.invokeLater( () -> {
-        GameOverView gameover = new GameOverView();
+        GameOverView gameover = new GameOverView(app);
         });
     }
 

@@ -61,6 +61,7 @@ public class Joueur {
     public HashMap<String,Integer> getBoutique(){
         return this.boutique;
     }
+    
     public void afficheInventaire(){
         System.out.println();
         System.out.println("| Inventaire |");
@@ -69,6 +70,7 @@ public class Joueur {
         }
         System.out.println();
     }
+
     public void afficheBoutique(){
         System.out.println();
         System.out.println("Vous disposez de "+this.monnaie +" pièces d'or en banque, que souhaitez vous acheter ?");

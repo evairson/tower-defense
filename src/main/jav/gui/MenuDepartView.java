@@ -24,7 +24,7 @@ public class MenuDepartView extends JFrame {
         JPanel fondPanel = new JPanel(){
           protected void paintComponent(Graphics g) {
               super.paintComponent(g);
-              ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/FondMenuDepart.jpg");
+              ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/FondMenuDepart.png");
               Image fond = imageIcon.getImage();
               g.drawImage(fond,0,0,getWidth(),getHeight(),null);
           }
@@ -41,6 +41,7 @@ public class MenuDepartView extends JFrame {
             start.setOpaque(false);
             start.setContentAreaFilled(false);
             start.setBorderPainted(false);
+            start.setFocusPainted(false);
             } 
 
         catch (IOException exception) {

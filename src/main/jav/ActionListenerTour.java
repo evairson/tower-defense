@@ -1,4 +1,4 @@
-package jav.gui;
+package jav;
 import java.awt.event.ActionListener;
 
 public abstract class ActionListenerTour implements ActionListener {
