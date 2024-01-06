@@ -49,8 +49,8 @@ public class App {
     public void GameInterface(){
             EventQueue.invokeLater( () -> {
            
-        view = new GameView(5,10,5, this);
-        view.setVisible(true);}
+            view = new GameView(3,10,5, this);
+            view.setVisible(true);}
             
             );
 

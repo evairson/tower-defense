@@ -105,12 +105,6 @@ public class GameView extends JFrame {
         sizeCase = (int)Math.min(width/largeur, height/(longeur+1));
         Game.sizecase = sizeCase;
 
-        Mario mario = new Mario(new RealCoordonnee(1, 3));
-        game.addToursEnJeu(mario);
-        Mario mario2 = new Mario(new RealCoordonnee(1, 2));
-        game.addToursEnJeu(mario2);
-
-
         this.setTitle("Tower Defense");
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
         this.setResizable(false); 

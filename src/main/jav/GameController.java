@@ -75,6 +75,14 @@ public class GameController {
            }
     }
 
+    public void levelSuivant(){
+        view.dispose();
+        EventQueue.invokeLater( () -> {
+            view = new GameView(5,10,5, app);
+            view.setVisible(true);
+        });
+    }
+
     public void afficheGameOver(){
         view.dispose();
         EventQueue.invokeLater( () -> {

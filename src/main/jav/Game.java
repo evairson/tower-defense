@@ -22,6 +22,7 @@ import jav.gui.*;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.ResourceBundle.Control;
 
 public class Game {
     private Plateau map;
@@ -34,6 +35,7 @@ public class Game {
     private int vitesseApparition;
     private int typeEnnemi; // un entier qui augmente petit à petit pour ajouter des ennemis plus dur
     private int nbEnnemis; // nombre d'ennemis qui apparaissent dans une partie (doit être un diviseur de 100)
+    private int nbEnnemisNow;
     private GameView view;
     public static int sizecase;
 
@@ -89,6 +91,12 @@ public class Game {
          {
             
             public void run() {
+
+                if(nbEnnemisNow == nbEnnemis +1 && ennemis.isEmpty()){
+                    gagner();
+                    t.cancel();
+                }
+
                 if(view!=null){
                     view.setImage();
                 }
@@ -150,9 +158,9 @@ public class Game {
             int i = (int)(Math.random()*(map.getLongeur()));
                 Ennemis e = selecEnnemi();
                 ennemis.add(e);
+                nbEnnemisNow ++;
                 e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
                 try {
-
                     map.updateContenu(this);
                 } catch(DeuxToursMemeCase exc){
                     System.out.println("Attention Deux tours sur la même case !!");
@@ -208,6 +216,11 @@ public class Game {
                 }
             }
         }
+    }
+
+    public void gagner(){
+        System.out.println("Bravo c'est gagné");
+        view.control.levelSuivant();
     }
     
 }
