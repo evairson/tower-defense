@@ -91,6 +91,7 @@ public class GameController {
             view.getButton(s).removeActionListener(view.getButton(s).getActionListeners()[0]);
             view.getButton(s).addActionListener(view.acheterTour(s));
         }
+        buttonTourUpdate(s);
     }
 
     public boolean canAddTour(String s){
@@ -121,7 +122,13 @@ public class GameController {
         int height = imageIcon.getIconHeight();
         ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(Game.sizecase))/height)*0.5), (int)(Game.sizecase*0.5), Image.SCALE_DEFAULT));
         b.setIcon(image);
-        b.setText(String.valueOf(game.getJoueur().getInventaire().get(tour)));
+        if(view.getButton(tour).getActionListeners().length != 0 && ((ActionListenerTour)view.getButton(tour).getActionListeners()[0]).isAchat()){
+            b.setText(String.valueOf(game.getJoueur().getBoutique().get(tour)) + "$");
+        }
+        else {
+            b.setText(String.valueOf(game.getJoueur().getInventaire().get(tour)));
+        }
+
         b.setVerticalTextPosition(SwingConstants.TOP);
         if(game.getJoueur().getInventaire().get(tour)==0){
             b.setBackground(Color.gray);
