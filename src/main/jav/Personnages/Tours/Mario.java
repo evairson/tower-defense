@@ -32,10 +32,12 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
         if(e.getPos().getY()==pos.getY()){
             if(e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() <= rangeCara && e.getPos().getIntCoordonnee().getX() - this.pos.getIntCoordonnee().getX() >= 2){
                 isAnimed = true;
-                CarapaceTours car = switch(pouvoir) {
-                    case 1 -> new CarapaceTours(1);
-                    case 2 -> new CarapaceTours(2);
-                    default -> new CarapaceTours(0);};
+                CarapaceTours car;
+                switch(pouvoir) {
+                    case 1 : car =  new CarapaceTours(1); break;
+                    case 2 : car = new CarapaceTours(2); break;
+                    default : car = new CarapaceTours(0); break;
+                }
                 car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
                 try {

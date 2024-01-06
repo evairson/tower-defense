@@ -171,13 +171,14 @@ public class Game {
     public void createTours(String toursJouer,int x,int y){
         if(toursJouer.equals("mario") || toursJouer.equals("luigi") || toursJouer.equals("peach") || toursJouer.equals("tank") || toursJouer.equals("tuyau")){
             if (this.getJoueur().getInventaire().get(toursJouer) >= 1){
-                Tours tour = switch (toursJouer) {
-                    case "mario"->new Mario(new RealCoordonnee(x, y)); 
-                    case "luigi"->new Luigi(new RealCoordonnee(x, y)); 
-                    case "peach"->new Peach(new RealCoordonnee(x, y)); 
-                    case "tank" ->new Tank(new RealCoordonnee(x, y)); 
-                    case "tuyau" -> new Tuyau(new RealCoordonnee(x, y));
-                    default -> new Mario(new RealCoordonnee(x, y)); 
+                Tours tour;
+                switch (toursJouer) {
+                    case "mario" : tour = new Mario(new RealCoordonnee(x, y)); break;
+                    case "luigi" : tour = new Luigi(new RealCoordonnee(x, y)); break;
+                    case "peach" : tour = new Peach(new RealCoordonnee(x, y)); break;
+                    case "tank" : tour = new Tank(new RealCoordonnee(x, y)); break;
+                    case "tuyau" : tour = new Tuyau(new RealCoordonnee(x, y)); break;
+                    default : tour = new Mario(new RealCoordonnee(x, y)); break;
                 };
                 this.addToursEnJeu(tour); 
                 this.getMap().getCase(x,y).setContenuTours(tour);
