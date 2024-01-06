@@ -48,14 +48,11 @@ public class App {
 
     public void GameInterface(){
             EventQueue.invokeLater( () -> {
-
            
-        view = new GameView(5,10,5);
+        view = new GameView(5,10,5, this);
         view.setVisible(true);}
             
             );
-
-
 
     }
 
@@ -69,8 +66,10 @@ public class App {
         EventQueue.invokeLater( () -> {
 
         viewMenuDepart = new MenuDepartView(this);});
+    }
 
-    
+    public void relance(){
+        afficheMenu();
     }
 
     public void lanceJeuInterface(){

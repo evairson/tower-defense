@@ -25,6 +25,7 @@ import java.util.Set;
 
 public class GameView extends JFrame {
     public GameController control;
+    private App app;
 
     private JPanel inventairePane;
     private JPanel plateauGame;
@@ -87,14 +88,14 @@ public class GameView extends JFrame {
 
     // -----------------------------------------------------
 
-    public GameView(int longeur, int largeur, int ennemis){  
-        
+    public GameView(int longeur, int largeur, int ennemis, App app){  
+        this.app = app;
 
         buttonTours = new HashMap<>();
         imageTours = new HashMap<>();
 
         game = new Game(longeur, largeur, ennemis, this);
-        this.control = new GameController(this);  
+        this.control = new GameController(this, app);  
 
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -242,7 +243,6 @@ public class GameView extends JFrame {
         ImageIcon image = new ImageIcon(imageIcon.getImage().getScaledInstance((int)(((width*(sizeCase))/height)*0.5), (int)(sizeCase*0.5), Image.SCALE_DEFAULT));
         JButton tourButton = new JButton(String.valueOf(game.getJoueur().getInventaire().get(tour)),image);
         tourButton.setVerticalTextPosition(SwingConstants.TOP);
-        
         tourButton.setHorizontalTextPosition(SwingConstants.CENTER);
         tourButton.setBounds(x*sizeCase + sizeCase/8, sizeCase/8, 3*sizeCase/4, 3*sizeCase/4);  // sizeCase/8 * 2 + 3*sizeCase/4 = sizeCase
 
