@@ -10,7 +10,7 @@ public class Boo extends Ennemis {
         lettre=". ";
         url="ennemis/booinvisible/boo";
         pv=40;
-        valeur=50;
+        valeur=10;
         timebetweenMov=1000;
         degat=10;
         range=1;
@@ -23,7 +23,7 @@ public class Boo extends Ennemis {
     public boolean nextIsTour(Game g){
         if(g.getToursEnJeu().size()!=0){
             for(Tours t : g.getToursEnJeu()){
-                if(t.getPos().getIntCoordonnee().getY()==pos.getY() && t.getPos().getIntCoordonnee().getX()==pos.getY()-1){
+                if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && t.getPos().getIntCoordonnee().getX() == pos.getIntCoordonnee().getY()-1){
                     return true;
                 }
             }

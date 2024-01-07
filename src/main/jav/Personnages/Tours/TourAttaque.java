@@ -15,7 +15,7 @@ public interface TourAttaque {
     public int getDegat();
 
     public default boolean attaque(Ennemis e){
-            if(!(e instanceof Boo) || ((Boo)e).isGhost()){
+            if(!(e instanceof Boo) || !((Boo)e).isGhost()){
                 if(e.getPos().getY()==this.getPos().getY()){
                     if(e.getPos().getIntCoordonnee().getX() - this.getPos().getIntCoordonnee().getX() <= getRange()){
                         setAnimed(true);

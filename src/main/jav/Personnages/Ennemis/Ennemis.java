@@ -77,7 +77,9 @@ public abstract class Ennemis extends Perso {
     public void mort(ArrayList<Ennemis> ennemis, Game g){
         ennemis.remove(this);
         g.getJoueur().gagner(valeur);
-        g.getView().getControl().changeArgent();
+        if(g.getView() != null){
+            g.getView().getControl().changeArgent();
+        }
     }
 
 

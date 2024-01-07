@@ -5,10 +5,9 @@ import jav.Game;
 public class RealCoordonnee {
     private double x;
     private double y;
-    private static int sizeCase;
 
     public RealCoordonnee(int intx, int inty){
-        sizeCase = Game.sizecase;
+        int sizeCase = Game.sizecase;
         x = intx*sizeCase;
         y = inty*sizeCase;
     }
@@ -30,11 +29,11 @@ public class RealCoordonnee {
     }
 
     public static int getIntCoordonneeXY(int x){
-        return (int)(x/sizeCase);
+        return (int)(x/ Game.sizecase );
     }
 
     public Coordonnee getIntCoordonnee(){
-        return new Coordonnee((int)(x/sizeCase), (int)(y/sizeCase));
+        return new Coordonnee((int)(x/Game.sizecase), (int)(y/Game.sizecase));
     }
 
 }
