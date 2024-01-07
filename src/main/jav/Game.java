@@ -15,7 +15,6 @@ import jav.Personnages.Tours.Luigi;
 import jav.Personnages.Tours.Mario;
 import jav.Personnages.Tours.Peach;
 import jav.Personnages.Tours.Tours;
-import jav.Personnages.Tours.Tank;
 import jav.Personnages.Tours.Tuyau;
 import jav.gui.*;
 
@@ -184,7 +183,6 @@ public class Game {
                     case "mario" : tour = new Mario(new RealCoordonnee(x, y)); break;
                     case "luigi" : tour = new Luigi(new RealCoordonnee(x, y)); break;
                     case "peach" : tour = new Peach(new RealCoordonnee(x, y)); break;
-                    case "tank" : tour = new Tank(new RealCoordonnee(x, y)); break;
                     case "tuyau" : tour = new Tuyau(new RealCoordonnee(x, y)); break;
                     default : tour = new Mario(new RealCoordonnee(x, y)); break;
                 };

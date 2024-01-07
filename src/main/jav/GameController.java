@@ -109,7 +109,8 @@ public class GameController {
         && cordYSouris >=1 && cordYSouris <= game.getMap().getLongeur()) {
 
             Case caseTour = game.getMap().getCase(cordXSouris,  cordYSouris-1);
-            if((caseTour.getContenuEnnemis() == null || caseTour.getContenuEnnemis().size() == 0)){ //pas d'ennemis dessus
+            if((caseTour.getContenuEnnemis() == null || caseTour.getContenuEnnemis().size() == 0) || (caseTour.getContenuTours() instanceof Fleur && s=="fleur" 
+            || caseTour.getContenuTours() instanceof Etoile && s=="etoile")){ //pas d'ennemis dessus ou pouvoir
 
                 if(caseTour.getContenuTours() == null || (caseTour.getContenuTours() != null && (caseTour.getContenuTours() instanceof Fleur && s=="fleur" 
                 || caseTour.getContenuTours() instanceof Etoile && s=="etoile"))){
