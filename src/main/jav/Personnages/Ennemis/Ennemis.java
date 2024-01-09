@@ -29,6 +29,13 @@ public abstract class Ennemis extends Perso {
         timeBetweenAnim = 200;
     }
 
+    public void setLevelDificulty(){
+        switch(Game.getLevelDificulty()){
+            case 2 : pv += 5; degat +=5; break;
+            case 3 : pv += 10; degat +=10; break;
+        }
+    }
+
     public int getValeur(){
         return this.valeur;
     }

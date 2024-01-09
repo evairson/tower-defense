@@ -80,9 +80,9 @@ public class GameController {
         System.out.println(Game.getLvl());
         EventQueue.invokeLater( () -> {
             switch(Game.getLvl()){
-                case 1 : Game.setNextLvl(); view = new GameView(3,10,10, app);  break;
-                case 2 : Game.setNextLvl(); view = new GameView(4,10,20, app);  break;
-                case 3 : Game.setNextLvl();  view = new GameView(5,10,50, app); break;
+                case 1 : Game.setNextLvl(); view = new GameView(3,10,10, app, app.getLevelDificulty());  break;
+                case 2 : Game.setNextLvl(); view = new GameView(4,10,20, app, app.getLevelDificulty());  break;
+                case 3 : Game.setNextLvl();  view = new GameView(5,10,50, app, app.getLevelDificulty()); break;
                 case 4 : new GameOverView(app, "ecranWin"); break;
             }
             

@@ -88,15 +88,14 @@ public class GameView extends JFrame {
 
     // -----------------------------------------------------
 
-    public GameView(int longeur, int largeur, int ennemis, App app){  
+    public GameView(int longeur, int largeur, int ennemis, App app, int levelDificulty){  
         this.app = app;
 
         buttonTours = new HashMap<>();
         imageTours = new HashMap<>();
 
-        game = new Game(longeur, largeur, ennemis, this);
+        game = new Game(longeur, largeur, ennemis, this, 1);
         this.control = new GameController(this, app);  
-
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();

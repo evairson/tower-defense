@@ -20,6 +20,7 @@ public class Carapace extends Ennemis {
         nbimageAnimation=6;
         scale = 0.5;
         timeBetweenAnim = 100;
+        setLevelDificulty();
     }
 
     @Override

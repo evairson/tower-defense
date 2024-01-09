@@ -26,7 +26,7 @@ public class Joueur {
         inventaire.put("mario",1);
         inventaire.put("luigi",1);
         inventaire.put("peach",1);
-        inventaire.put("tuyau",0);
+        inventaire.put("tuyau",1);
         inventaire.put("fleur",0);
         inventaire.put("etoile",0);
 

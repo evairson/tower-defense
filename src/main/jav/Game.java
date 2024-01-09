@@ -26,7 +26,6 @@ import java.util.ResourceBundle.Control;
 
 public class Game {
     private Plateau map;
-
     private Joueur joueur;
     private ArrayList<Tours> toursEnJeu;
     private ArrayList<Ennemis> ennemis;
@@ -38,7 +37,9 @@ public class Game {
     private int nbEnnemisNow;
     private GameView view;
     public static int sizecase;
+
     private static int lvl = 1;
+    private static int levelDificulty;
 
     public static int getLvl(){
         return lvl;
@@ -46,6 +47,10 @@ public class Game {
 
     public static void setNextLvl(){
         lvl++;
+    }
+
+    public static int getLevelDificulty(){
+        return levelDificulty;
     }
 
     public ArrayList<Ennemis> getEnnemis() {
@@ -59,6 +64,7 @@ public class Game {
     public ArrayList<Tours> getToursEnJeu() {
         return toursEnJeu;
     }
+
     public void addToursEnJeu(Tours t){
         toursEnJeu.add(t);
     }
@@ -75,8 +81,8 @@ public class Game {
     }
     
 
-    public Game(int longeur, int largeur, int nbEnnemis, GameView view){
-        
+    public Game(int longeur, int largeur, int nbEnnemis, GameView view, int levelDificulty){
+        this.levelDificulty = levelDificulty;
         this.view = view;
         end = false;
         timeEnnemi = System.currentTimeMillis();
@@ -142,7 +148,10 @@ public class Game {
                 }
 
                 if(end){
-                    System.out.println("Vous avez perdu");
+                    if(view == null){
+                        System.out.println("Vous avez perdu");
+                        System.exit(0);
+                    }
                     t.cancel();
                     view.control.afficheGameOver();
                 }

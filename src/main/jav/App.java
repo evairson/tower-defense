@@ -20,10 +20,18 @@ import javax.print.attribute.standard.RequestingUserName;
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
+    private int levelDificulty = 1;
 
     private MenuDepartView viewMenuDepart;
     public static final String currentDirectory = System.getProperty("user.dir");
 
+    public void setDificulty(int i){
+        levelDificulty = i;
+    }
+
+    public int getLevelDificulty(){
+        return levelDificulty;
+    }
     public static void main(String[] args) {
         App app = new App();
         app.TypeGame();
@@ -36,35 +44,40 @@ public class App {
             int rep = Integer.valueOf(sc.nextLine()); 
             switch(rep){
                 case 1: afficheMenu(); break;
-                case 2: GameTerminal(); break;
+                case 2: GameTerminal(sc); break;
                 default: TypeGame(); break;
             }}
         catch(NumberFormatException e){
             System.out.println("Rééssaayer");
             TypeGame();return;
         }
-
     }
 
     public void GameInterface(){
             EventQueue.invokeLater( () -> {
-           
-            view = new GameView(2,10,5, this);
+            view = new GameView(2,10,5, this, levelDificulty);
             view.setVisible(true);}
-            
             );
-
     }
 
-
-
-    public void GameTerminal(){
-        jeuTexte = new JeuTexte(5, 20, 5);
+    public void GameTerminal(Scanner sc){
+        System.out.println("choisissez votre niveau de difficulté : | 1 - facile |  | 2 - Moyen |  | 3 - Difficile |");
+        int rep = Integer.valueOf(sc.nextLine()); 
+        try{
+            switch(rep){
+                case 1: levelDificulty = 1; break;
+                case 2: levelDificulty = 2; break;
+                case 3: levelDificulty = 3; break;
+                default: GameTerminal(sc); break;
+            }
+        } catch (NumberFormatException e){
+        System.out.println("Réessayer");
+        GameTerminal(sc);}
+        jeuTexte = new JeuTexte(5, 20, 5, levelDificulty);
     }
 
     public void afficheMenu(){
         EventQueue.invokeLater( () -> {
-
         viewMenuDepart = new MenuDepartView(this);});
     }
 

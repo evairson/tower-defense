@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class JeuTexte {
 
-    public JeuTexte(int longeur, int largeur, int nbEnnemis){
+    public JeuTexte(int longeur, int largeur, int nbEnnemis, int levelDificulty){
         Game.sizecase = 100;
-        Game g = new Game(longeur, largeur,nbEnnemis, null);
+        Game g = new Game(longeur, largeur,nbEnnemis, null, levelDificulty);
         g.update();
         tryUpdateUtilisateur(g);
 
@@ -128,5 +128,4 @@ public class JeuTexte {
             tryUpdateUtilisateur(g);
         }
     }
-
 }

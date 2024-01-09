@@ -24,6 +24,7 @@ public class Koopa extends Ennemis implements Lanceur {
         url = "ennemis/koopa/koopa";
         nbimageAnimation = 8;
         scale = 0.7;
+        setLevelDificulty();
     }
 
     public int GetrangeProj(){

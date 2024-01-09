@@ -18,6 +18,7 @@ public class Boo extends Ennemis {
         nbimageAnimation=1;
         scale = 0.7;
         ghost = true;
+        setLevelDificulty();
     }
 
     public boolean nextIsTour(Game g){

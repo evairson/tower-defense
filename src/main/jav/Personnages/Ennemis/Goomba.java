@@ -24,6 +24,7 @@ public class Goomba extends Ennemis {
         url = "ennemis/goomba/goomba";
         nbimageAnimation = 5;
         scale = 0.7;
+        setLevelDificulty();
     }
 
     public boolean RangeIsTour(Game g){

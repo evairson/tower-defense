@@ -16,7 +16,7 @@ public class Heriss extends Ennemis {
         timebetweendegat=1000;
         scale = 0.5;
         nbimageAnimation = 4;
-
+        setLevelDificulty();
     }
 
     public void pouvoir(Game g){

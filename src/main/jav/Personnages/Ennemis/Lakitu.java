@@ -25,6 +25,7 @@ public class Lakitu extends Ennemis implements Lanceur {
         url = "ennemis/lakitu/lakitu";
         nbimageAnimation=3;
         scale = 0.7;
+        setLevelDificulty();
     }
 
     public int GetrangeProj(){
