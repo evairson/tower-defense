@@ -15,7 +15,7 @@ public class Lakitu extends Ennemis implements Lanceur {
         super();
         lettre="L ";
         pv=50;
-        valeur=25;
+        valeur=20;
         timebetweenMov=3000;
         degat=5;
         range=1;
@@ -42,7 +42,7 @@ public class Lakitu extends Ennemis implements Lanceur {
                     try {
                         g.getMap().updateContenu(g);
                     } catch(DeuxToursMemeCase exc){
-                        System.out.println("Attention Deux tours sur la même case !!");
+                        System.out.println("Attention Deux tours sur la même case !! C'est un problème de Lakitu");
                     }
                     hasProj=false;
                     return true;

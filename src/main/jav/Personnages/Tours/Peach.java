@@ -10,9 +10,9 @@ public class Peach extends Tours implements TourAttaque, Fleur, Etoile{
     public Peach(RealCoordonnee pos){
         super();
         pv=80;
-        degat = 10;
+        degat = 15;
         prix = 20;
-        range = 6;
+        range = 4;
         timebetweendegat = 3000;
         this.pos = pos;
         lettre="PE";

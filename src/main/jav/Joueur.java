@@ -31,9 +31,9 @@ public class Joueur {
         inventaire.put("etoile",0);
 
         boutique = new HashMap<>();
-        boutique.put("mario",20);
-        boutique.put("luigi",20);
-        boutique.put("peach",20);
+        boutique.put("mario",40);
+        boutique.put("luigi",40);
+        boutique.put("peach",50);
         boutique.put("tuyau",30);
         boutique.put("fleur",25);
         boutique.put("etoile",50);

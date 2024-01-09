@@ -12,9 +12,9 @@ public class Carapace extends Ennemis {
         lettre="C ";
         url="ennemis/carapace/carapace";
         pv=100;
-        valeur=50;
+        valeur=0;
         timebetweenMov=300;
-        degat=3;
+        degat=50;
         range=1;
         timebetweendegat=100;
         nbimageAnimation=6;

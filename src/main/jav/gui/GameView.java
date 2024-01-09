@@ -105,7 +105,7 @@ public class GameView extends JFrame {
         sizeCase = (int)Math.min(width/largeur, height/(longeur+1));
         Game.sizecase = sizeCase;
 
-        this.setTitle("Tower Defense");
+        this.setTitle("LEVEL " + Game.getLvl());
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
         this.setResizable(false); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);

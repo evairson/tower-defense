@@ -19,6 +19,7 @@ import jav.Personnages.Tours.Tuyau;
 import jav.gui.*;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.ResourceBundle.Control;
@@ -37,6 +38,15 @@ public class Game {
     private int nbEnnemisNow;
     private GameView view;
     public static int sizecase;
+    private static int lvl = 1;
+
+    public static int getLvl(){
+        return lvl;
+    }
+
+    public static void setNextLvl(){
+        lvl++;
+    }
 
     public ArrayList<Ennemis> getEnnemis() {
         return ennemis;
@@ -66,6 +76,7 @@ public class Game {
     
 
     public Game(int longeur, int largeur, int nbEnnemis, GameView view){
+        
         this.view = view;
         end = false;
         timeEnnemi = System.currentTimeMillis();
@@ -104,7 +115,7 @@ public class Game {
                 try {
                     map.updateContenu(g);
                 } catch(DeuxToursMemeCase exc){
-                    System.out.println("Attention Deux tours sur la même case !!");
+                    System.out.println("Attention Deux tours sur la même case !! en faisant l'update du jeu");
                     exc.changeTour(g);
                 }
                  
@@ -115,7 +126,12 @@ public class Game {
                         }
                         if(cas.getContenuEnnemis().size()!= 0){
                             for(Ennemis e : cas.getContenuEnnemis()){
-                                e.update(g);
+                                try{
+                                    e.update(g);
+                                } catch (ConcurrentModificationException ex){
+                                    System.out.println("l'ennemi" + e.getLettre() + " a donné l'erreur ConcurrentModificationException");
+                                }
+
                             }
                         }
                     }
@@ -162,7 +178,7 @@ public class Game {
                 try {
                     map.updateContenu(this);
                 } catch(DeuxToursMemeCase exc){
-                    System.out.println("Attention Deux tours sur la même case !!");
+                    System.out.println("Attention Deux tours sur la même case en ajoutant ennemis!!");
                     exc.changeTour(this);
                 }
             timeEnnemi=System.currentTimeMillis();

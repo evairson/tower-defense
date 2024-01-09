@@ -14,7 +14,7 @@ public class Koopa extends Ennemis implements Lanceur {
         super();
         lettre="K ";
         pv=40;
-        valeur=20;
+        valeur=18;
         timebetweenMov=3000;
         degat=2;
         range=1;
@@ -40,7 +40,7 @@ public class Koopa extends Ennemis implements Lanceur {
                 try {
                     g.getMap().updateContenu(g);
                 } catch(DeuxToursMemeCase exc){
-                    System.out.println("Attention Deux tours sur la même case !!");
+                    System.out.println("Attention Deux tours sur la même case c'est un problème de Koopa!!");
                 }
                 hasCarapace=false;
                 return true;

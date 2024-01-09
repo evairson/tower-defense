@@ -15,12 +15,12 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
     public Mario(RealCoordonnee pos){
         super();
         timeAttaque = System.currentTimeMillis();
-        timebetweendegat = 4000;
+        timebetweendegat = 2000;
         pv=40;
-        degat = 20;
+        degat = 5;
         prix = 20;
         range = 1;
-        rangeCara= 6;
+        rangeCara= 4;
         this.pos = pos;
         lettre = "MA";
         url = "tours/mario/mario";
@@ -38,13 +38,16 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
                     case 2 : car = new CarapaceTours(2); break;
                     default : car = new CarapaceTours(0); break;
                 }
-                car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+1, pos.getIntCoordonnee().getY()));
+                int i = 1;
+                while(dejaUneTour(g, new RealCoordonnee(pos.getIntCoordonnee().getX()+i, pos.getIntCoordonnee().getY()))){
+                    i ++;
+                }
+                car.setPos(new RealCoordonnee(pos.getIntCoordonnee().getX()+i, pos.getIntCoordonnee().getY()));
                 g.getToursEnJeu().add(car);
                 try {
-
                     g.getMap().updateContenu(g);
                 } catch(DeuxToursMemeCase exc){
-                    System.out.println("Attention Deux tours sur la même case !!");
+                    System.out.println("Attention Deux tours sur la même case !! c'est un problème de Mario");
                 }
                 return true;
             }
@@ -58,6 +61,16 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
         url="tours/mario/marioFleur/mario";
         nextImage();
         pouvoir = 1;
+    }
+
+    public boolean dejaUneTour(Game g, RealCoordonnee r){
+        for(Tours t : g.getToursEnJeu()){
+            if(r.getIntCoordonnee().getX() == t.getPos().getIntCoordonnee().getX() 
+            && r.getIntCoordonnee().getY() == t.getPos().getIntCoordonnee().getY()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void toStar(){

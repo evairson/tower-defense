@@ -13,10 +13,10 @@ public class Goomba extends Ennemis {
         super();
         lettre="G ";
         pv=20;
-        valeur=2;
+        valeur=5;
         timebetweenMovBasique =2000;
         timebetweenMov = timebetweenMovBasique;
-        degat=4;
+        degat=5;
         range=1;
         timebetweendegat=2000;
         sprintRange = 4;

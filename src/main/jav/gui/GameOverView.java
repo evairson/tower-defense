@@ -13,7 +13,7 @@ public class GameOverView extends JFrame {
     private JButton replay;
     private App app;
 
-    public GameOverView(App app){
+    public GameOverView(App app, String s){
         this.app = app;
     
         setTitle("GameOver");
@@ -23,7 +23,7 @@ public class GameOverView extends JFrame {
         JPanel fond = new JPanel(){
             protected void paintComponent(Graphics g){
                 super.paintComponent(g);
-                ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/GameOver.png");
+                ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/"+s+".png");
                 Image fond = imageIcon.getImage();
                 g.drawImage(fond,0,0,getWidth(),getHeight(),null);
             }

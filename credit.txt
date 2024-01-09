@@ -17,6 +17,6 @@ Mariouniverse.com :
 spriters-resource.com : 
     - peach : A.J. Nitro
     - koopa :  MarioLuigiBilly1257
-    - carapce : MarioLuigiBilly1257
+    - carapace : MarioLuigiBilly1257
 
-- Fond debut et fin : created with Dall.E-3
+- Fond debut et fin et étoile : created with Dall.E-3

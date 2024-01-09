@@ -12,10 +12,10 @@ public class Luigi extends Tours implements TourAttaque, Fleur, Etoile{
     public Luigi(RealCoordonnee pos){
         super();
         pv=100;
-        degat = 10;
+        degat = 20;
         prix = 20;
         range = 1;
-        timebetweendegat = 2000;
+        timebetweendegat = 3000;
         this.pos = pos;
         lettre = "LU";
         url = "tours/luigi/luigi";
@@ -25,12 +25,14 @@ public class Luigi extends Tours implements TourAttaque, Fleur, Etoile{
 
         public void toFlower(){
             Fleur.super.toFlower(this);
+            timebetweendegat -= 1000;
             this.url = "tours/luigi/luigiFleur/luigi";
             nextImage();
         }
     
         public void toStar(){
             Etoile.super.toStar(this);
+            timebetweendegat -= 1000;
             url="tours/luigi/luigiEtoile/luigi";
             nextImage();
         }

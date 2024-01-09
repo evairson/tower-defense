@@ -64,14 +64,13 @@ public class JeuTexte {
             System.out.println("vous n'avez pas écris les bonnes coordonnées. Recommencez :");
             placerTour(g);
         }  
-        
     }
 
     public static String choisirTour(Scanner sc) throws choisirToursException{
         System.out.println("Choissez la tour à jouer");
         String toursJouer =sc.nextLine();
         if(!(toursJouer.equals("mario") ||toursJouer.equals("luigi") || toursJouer.equals("peach") ||toursJouer.equals("tank") 
-        ||toursJouer.equals("tuyau") ||toursJouer.equals("etoile") ||toursJouer.equals("fleur"))){
+        || toursJouer.equals("tuyau") ||toursJouer.equals("etoile") || toursJouer.equals("fleur"))){
             throw new choisirToursException();
         }
         return toursJouer;
@@ -111,19 +110,22 @@ public class JeuTexte {
         if(y > g.getMap().getLongeur()){
             throw new choisirToursException();
         }
-        g.createTours(toursJouer, x-1, y);
-        
+        g.createTours(toursJouer, x-1, y); 
     }
-
 
     public static void acheterTour(Game g){
         Scanner sc = new Scanner(System.in);
         g.getJoueur().afficheBoutique();
         String tours = sc.nextLine();
-        if (g.getJoueur().getBoutique().get(tours) > g.getJoueur().getMonnaie()){
-            System.out.println("Vous ne pouvez pas acheter cet objet");
-        }else{
-            g.getJoueur().acheter(tours);
+        if(g.getJoueur().getBoutique().get(tours) != null){
+            if (g.getJoueur().getBoutique().get(tours) > g.getJoueur().getMonnaie()){
+                System.out.println("Vous ne pouvez pas acheter cet objet");
+            }else{
+                g.getJoueur().acheter(tours);
+            }
+        }
+        else {
+            tryUpdateUtilisateur(g);
         }
     }
 

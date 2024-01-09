@@ -9,9 +9,9 @@ public class Heriss extends Ennemis {
         lettre="H ";
         url="ennemis/heriss/heriss";
         pv=20;
-        valeur=10;
+        valeur=5;
         timebetweenMov=3000;
-        degat=4;
+        degat=10;
         range=1;
         timebetweendegat=1000;
         scale = 0.5;

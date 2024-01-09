@@ -8,7 +8,7 @@ public interface Etoile extends Pouvoirs {
    public void toStar();
     
    default void toStar(Tours t){
-       t.addDegat(10);  
+       t.addDegat(30);  
        t.lessTimeBetweenDegat(1000);
    }
 }

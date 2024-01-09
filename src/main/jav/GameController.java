@@ -77,8 +77,15 @@ public class GameController {
 
     public void levelSuivant(){
         view.dispose();
+        System.out.println(Game.getLvl());
         EventQueue.invokeLater( () -> {
-            view = new GameView(5,10,5, app);
+            switch(Game.getLvl()){
+                case 1 : Game.setNextLvl(); view = new GameView(3,10,10, app);  break;
+                case 2 : Game.setNextLvl(); view = new GameView(4,10,20, app);  break;
+                case 3 : Game.setNextLvl();  view = new GameView(5,10,50, app); break;
+                case 4 : new GameOverView(app, "ecranWin"); break;
+            }
+            
             view.setVisible(true);
         });
     }
@@ -86,7 +93,7 @@ public class GameController {
     public void afficheGameOver(){
         view.dispose();
         EventQueue.invokeLater( () -> {
-        GameOverView gameover = new GameOverView(app);
+            new GameOverView(app, "gameOver");
         });
     }
 

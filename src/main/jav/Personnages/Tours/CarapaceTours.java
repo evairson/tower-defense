@@ -15,16 +15,25 @@ public class CarapaceTours extends Tours implements TourAttaque {
             url="tours/bouleFeu/feu";
             timebetweenMov=500;
             nbimageAnimation=5;
+            degat=10;
+        }
+        else if (pouvoir == 2){
+            lettre="E ";
+            url="tours/bouleStar/etoile";
+            timebetweenMov=500;
+            nbimageAnimation=4; 
+            degat=25;
         }
         else{
             lettre="C ";
             url="ennemis/carapace/carapace";
             timebetweenMov=1000;
             nbimageAnimation=6;
+            degat=5;
         }
 
         pv=100;
-        degat=3;
+        
         range=1;
         timebetweendegat=100;
         timeMov=System.currentTimeMillis();
@@ -97,14 +106,6 @@ public class CarapaceTours extends Tours implements TourAttaque {
 
     public void pouvoir(Game g){
         // pas besoin
-    }
-
-    public void toFlower(){
-
-    }
-
-    public void toStar(){
-
     }
 }
 

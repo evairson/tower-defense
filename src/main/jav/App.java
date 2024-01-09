@@ -49,7 +49,7 @@ public class App {
     public void GameInterface(){
             EventQueue.invokeLater( () -> {
            
-            view = new GameView(3,10,5, this);
+            view = new GameView(2,10,5, this);
             view.setVisible(true);}
             
             );
