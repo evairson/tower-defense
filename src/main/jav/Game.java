@@ -38,16 +38,8 @@ public class Game {
     private GameView view;
     public static int sizecase;
 
-    private static int lvl = 1;
     private static int levelDificulty;
-
-    public static int getLvl(){
-        return lvl;
-    }
-
-    public static void setNextLvl(){
-        lvl++;
-    }
+    private int mode;
 
     public static int getLevelDificulty(){
         return levelDificulty;
@@ -81,8 +73,9 @@ public class Game {
     }
     
 
-    public Game(int longeur, int largeur, int nbEnnemis, GameView view, int levelDificulty){
-        this.levelDificulty = levelDificulty;
+    public Game(int longeur, int largeur, int nbEnnemis, GameView view, int levelDificulty, int mode){
+        this.mode = mode;
+        Game.levelDificulty = levelDificulty;
         this.view = view;
         end = false;
         timeEnnemi = System.currentTimeMillis();
@@ -107,11 +100,6 @@ public class Game {
          {
             
             public void run() {
-
-                if(nbEnnemisNow == nbEnnemis +1 && ennemis.isEmpty()){
-                    gagner();
-                    t.cancel();
-                }
 
                 if(view!=null){
                     view.setImage();
@@ -143,8 +131,17 @@ public class Game {
                     }
                 }
 
-                if(typeEnnemi<=100){
-                ajouterEnnemi();
+                if(mode==1){
+                    if(nbEnnemisNow == nbEnnemis +1 && ennemis.isEmpty()){
+                        gagner();
+                        t.cancel();
+                    }
+                    if(typeEnnemi<=100){
+                        ajouterEnnemi();
+                    }
+                }
+                else {
+                    ajouterEnnemiMarathon();
                 }
 
                 if(end){
@@ -174,9 +171,17 @@ public class Game {
 
     }
 
+    public Ennemis selecEnnemisMarathon(){
+        int i = (int)(Math.random()*(100));
+        if(i<25) return new Goomba();
+        if(i<50) return new Koopa();
+        if(i<75) return new Boo();
+        if(i<=100) return new Lakitu();
+        return null;
+    }
+
 
     public void ajouterEnnemi(){
-        
         if(System.currentTimeMillis() - timeEnnemi> vitesseApparition){
             vitesseApparition -= 7000/nbEnnemis; //(8 000 - nbennemis * x = 1000)
             int i = (int)(Math.random()*(map.getLongeur()));
@@ -184,6 +189,23 @@ public class Game {
                 ennemis.add(e);
                 nbEnnemisNow ++;
                 e.setPos(new RealCoordonnee(map.getLargeur()-1, i));
+                try {
+                    map.updateContenu(this);
+                } catch(DeuxToursMemeCase exc){
+                    System.out.println("Attention Deux tours sur la même case en ajoutant ennemis!!");
+                    exc.changeTour(this);
+                }
+            timeEnnemi=System.currentTimeMillis();
+        }
+    }
+
+    public void ajouterEnnemiMarathon(){
+        if(System.currentTimeMillis() - timeEnnemi > vitesseApparition){
+            vitesseApparition = 1000 + (int)(Math.random()*(8000));
+            int j = (int)(Math.random()*(map.getLongeur()));
+                Ennemis e = selecEnnemisMarathon();
+                ennemis.add(e);
+                e.setPos(new RealCoordonnee(map.getLargeur()-1, j));
                 try {
                     map.updateContenu(this);
                 } catch(DeuxToursMemeCase exc){
@@ -243,7 +265,7 @@ public class Game {
 
     public void gagner(){
         System.out.println("Bravo c'est gagné");
-        view.control.levelSuivant();
+        view.control.levelSuivant(view.getApp().getLvl());
     }
     
 }

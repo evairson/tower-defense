@@ -11,7 +11,7 @@ public class JeuTexte {
 
     public JeuTexte(int longeur, int largeur, int nbEnnemis, int levelDificulty){
         Game.sizecase = 100;
-        Game g = new Game(longeur, largeur,nbEnnemis, null, levelDificulty);
+        Game g = new Game(longeur, largeur,nbEnnemis, null, levelDificulty, 1);
         g.update();
         tryUpdateUtilisateur(g);
 

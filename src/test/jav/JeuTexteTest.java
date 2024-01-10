@@ -46,7 +46,7 @@ public class JeuTexteTest {
     @Test 
     public void choisirCorTest() throws choisirToursException, StringIndexOutOfBoundsException {
         String toursJouer = "mario";
-        Game g = new Game(5, 20, 10, null, 1);
+        Game g = new Game(5, 20, 10, null, 1, 1);
 
         String input= "A3"; //Test avec un chiffre 
         InputStream inputStream = new ByteArrayInputStream(input.getBytes());
@@ -73,7 +73,7 @@ public class JeuTexteTest {
     @Test 
     public void choisirMauvaiseCorTest() throws choisirToursException, StringIndexOutOfBoundsException {
         String toursJouer = "mario";
-        Game g = new Game(5, 20, 10, null, 1);
+        Game g = new Game(5, 20, 10, null, 1, 1);
 
         String[] actionImpossible = {"23","BD","A","M3","A21"};
         for(String input : actionImpossible){
@@ -94,7 +94,7 @@ public class JeuTexteTest {
 
     @Test
     public void updateUtilisateurTest() throws choixActionException {
-        Game g = new Game(5, 20, 10, null, 1);
+        Game g = new Game(5, 20, 10, null, 1, 1);
 
         String[] actionImpossible = {"5","20","b","3b"};
         for(String input : actionImpossible){

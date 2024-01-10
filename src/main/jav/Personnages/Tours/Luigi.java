@@ -11,7 +11,7 @@ public class Luigi extends Tours implements TourAttaque, Fleur, Etoile{
 
     public Luigi(RealCoordonnee pos){
         super();
-        pv=100;
+        pv=200;
         degat = 20;
         prix = 20;
         range = 1;

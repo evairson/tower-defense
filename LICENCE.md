@@ -2,6 +2,7 @@ Toutes les images utilisés sont libres de droit et d'utilisation (à des fins n
 Les images de mario peach et luigi ont été retouchés (ajout de la tour et des pouvoirs)
 
 - Bouton replay et play : Anais Herson
+- autres boutons : Eva Herson
 
 spritedatabase.net : 
     - Goomba : Glukom

@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -13,6 +15,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.text.View;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import jav.*;
 
 import jav.Maps.Case;
@@ -75,19 +81,37 @@ public class GameController {
            }
     }
 
-    public void levelSuivant(){
+    public void levelSuivant(int level){
         view.dispose();
-        System.out.println(Game.getLvl());
         EventQueue.invokeLater( () -> {
-            switch(Game.getLvl()){
-                case 1 : Game.setNextLvl(); view = new GameView(3,10,10, app, app.getLevelDificulty());  break;
-                case 2 : Game.setNextLvl(); view = new GameView(4,10,20, app, app.getLevelDificulty());  break;
-                case 3 : Game.setNextLvl();  view = new GameView(5,10,50, app, app.getLevelDificulty()); break;
+            switch(level){
+                case 1 : app.setNextLvl(); view = new GameView(3,10,10, app, app.getLevelDificulty(), 1);  break;
+                case 2 : app.setNextLvl(); view = new GameView(4,10,20, app, app.getLevelDificulty(), 1);  break;
+                case 3 : app.setNextLvl();  view = new GameView(5,10,50, app, app.getLevelDificulty(), 1); break;
                 case 4 : new GameOverView(app, "ecranWin"); break;
             }
-            
-            view.setVisible(true);
+            unlockLVL();
+            if(level!=4){
+                view.setVisible(true);
+            }
         });
+    }
+
+    public void unlockLVL(){
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(App.currentDirectory+"/src/main/resources/campagne.json")));
+            JSONObject jsonObject = new JSONObject(content);
+
+            JSONArray levels = jsonObject.getJSONArray("levels");
+            JSONObject level = levels.getJSONObject(app.getLevelDificulty()-1);
+
+            level.put(String.valueOf(app.getLvl()),true);
+
+            Files.write(Paths.get(App.currentDirectory+"/src/main/resources/campagne.json"), jsonObject.toString().getBytes());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void afficheGameOver(){

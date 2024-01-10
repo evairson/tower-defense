@@ -20,13 +20,38 @@ import javax.print.attribute.standard.RequestingUserName;
 public class App {
     private GameView view;
     private JeuTexte jeuTexte;
-    private int levelDificulty = 1;
+    private int levelDificulty = 1; // 1 - facile 2 - moyen 3 - difficile
+    private int mode = 1; // 1 - campagne 2 - marathon 3 - personnalisé
+    private int lvl = 1;
 
     private MenuDepartView viewMenuDepart;
     public static final String currentDirectory = System.getProperty("user.dir");
 
+    public int getLvl(){
+        return lvl;
+    }
+
+    public void setNextLvl(){
+        lvl++;
+    }
+
+    public void setLevel(int lvl){
+        this.lvl = lvl;
+    }
+
+    public int getMode(){
+        return mode;
+    }
+
     public void setDificulty(int i){
         levelDificulty = i;
+    }
+
+    public void setMode(int i){
+        mode = i;
+        if(i == 3){
+            menuPersonnalise();
+        }
     }
 
     public int getLevelDificulty(){
@@ -53,9 +78,16 @@ public class App {
         }
     }
 
-    public void GameInterface(){
+    public void GameInterface(int level){
             EventQueue.invokeLater( () -> {
-            view = new GameView(2,10,5, this, levelDificulty);
+                switch(level){
+                    case 1 : view = new GameView(2,10,5, this, getLevelDificulty(), mode);  break;
+                    case 2 : view = new GameView(3,10,10, this, getLevelDificulty(), mode);  break;
+                    case 3 : view = new GameView(4,10,20, this, getLevelDificulty(), mode);  break;
+                    case 4 : view = new GameView(5,10,50, this, getLevelDificulty(), mode); break;
+                    case 5 : new GameOverView(this, "ecranWin"); break;
+                    default : new GameView(5,10,0, this, getLevelDificulty(), mode);
+                }
             view.setVisible(true);}
             );
     }
@@ -85,11 +117,22 @@ public class App {
         afficheMenu();
     }
 
-    public void lanceJeuInterface(){
-        viewMenuDepart.dispose();
-        GameInterface();
+    public void menuPersonnalise(){
+        // a remplir
     }
 
-    
+    public void lanceJeuInterface(){
+        viewMenuDepart.dispose();
+        if(mode==1){
+            new MenuCampagne(this);
+        }
+        else {
+            GameInterface(0);
+        }
+    }
+
+    public void startCampagneGame(int level){
+        GameInterface(level);
+    }
 
 }

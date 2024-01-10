@@ -46,6 +46,10 @@ public class GameView extends JFrame {
         return panelTour;
     }
 
+    public App getApp(){
+        return app;
+    }
+
     public GameController getControl(){
         return control;
     }
@@ -88,13 +92,13 @@ public class GameView extends JFrame {
 
     // -----------------------------------------------------
 
-    public GameView(int longeur, int largeur, int ennemis, App app, int levelDificulty){  
+    public GameView(int longeur, int largeur, int ennemis, App app, int levelDificulty, int mode){  
         this.app = app;
 
         buttonTours = new HashMap<>();
         imageTours = new HashMap<>();
 
-        game = new Game(longeur, largeur, ennemis, this, 1);
+        game = new Game(longeur, largeur, ennemis, this, levelDificulty, mode);
         this.control = new GameController(this, app);  
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -104,7 +108,7 @@ public class GameView extends JFrame {
         sizeCase = (int)Math.min(width/largeur, height/(longeur+1));
         Game.sizecase = sizeCase;
 
-        this.setTitle("LEVEL " + Game.getLvl());
+        this.setTitle("LEVEL " + app.getLvl());
         this.setSize(sizeCase*largeur, sizeCase*(longeur+1));
         this.setResizable(false); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
