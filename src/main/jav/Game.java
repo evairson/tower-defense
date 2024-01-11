@@ -85,11 +85,13 @@ public class Game {
         toursEnJeu = new ArrayList<Tours>();
         vitesseApparition = 8000;
         typeEnnemi=0;
-        if(100%nbEnnemis==0){
-            this.nbEnnemis=nbEnnemis;
-        }
-        else {
+        if(mode==1){
+            if(100%nbEnnemis==0){
+                this.nbEnnemis=nbEnnemis;
+            }
+            else {
             this.nbEnnemis= nbEnnemis-100%nbEnnemis;
+            }
         }
     }
 
@@ -145,6 +147,7 @@ public class Game {
                 }
 
                 if(end){
+                    System.out.println("j'ai perdu");
                     if(view == null){
                         System.out.println("Vous avez perdu");
                         System.exit(0);

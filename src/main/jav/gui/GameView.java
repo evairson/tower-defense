@@ -34,7 +34,6 @@ public class GameView extends JFrame {
     private JPanel plateauSprite;
     private Game game;
     private int sizeCase;
-    private JPanel[][] casesPanel;
     private HashMap<String, JButton> buttonTours;
     private HashMap<String, JLabel> imageTours;
     private JPanel panelTour;
@@ -131,27 +130,9 @@ public class GameView extends JFrame {
 
         inventairePane = createInventairePane(largeur);
 
-        plateauGame = new JPanel();
+        plateauGame = new JPanelPlateau(game);
         plateauGame.setLayout(new GridLayout(game.getMap().getLongeur(), game.getMap().getLargeur()));
         plateauGame.setBounds(0, sizeCase, sizeCase*largeur, sizeCase*longeur);
-
-
-        casesPanel = new ImagePane[game.getMap().getLongeur()][game.getMap().getLargeur()];
-
-        for(int i =0;i<game.getMap().getLongeur();i++){
-            for(int j =0; j<game.getMap().getLargeur();j++){
-                if(i==game.getMap().getLongeur()-1){
-                    casesPanel[i][j] = new ImagePane(game, "case-bas.png");
-                }
-                else if(i==0){
-                    casesPanel[i][j] = new ImagePane(game, "case-haut.png");
-                }
-                else {
-                    casesPanel[i][j] = new ImagePane(game, "case-milieu.png");
-                }
-                this.plateauGame.add(casesPanel[i][j]);
-            }
-        }
 
         plateauSprite = new JPanel();
         plateauSprite.setBounds(0, 0, sizeCase*largeur, sizeCase*(longeur+1));

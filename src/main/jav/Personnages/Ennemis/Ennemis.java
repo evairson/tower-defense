@@ -127,7 +127,7 @@ public abstract class Ennemis extends Perso {
             mort(game.getEnnemis(), game);
         }
 
-        if(pos.getX()==0){
+        if(pos.getX()<=0){
             game.gameOver();
         }
     }

@@ -112,7 +112,7 @@ public class App {
                     case 3 : view = new GameView(4,10,20, this, getLevelDificulty(), mode);  break;
                     case 4 : view = new GameView(5,10,50, this, getLevelDificulty(), mode); break;
                     case 5 : new GameOverView(this, "ecranWin"); break;
-                    default : new GameView(5,10,0, this, getLevelDificulty(), mode);
+                    default : view = new GameView(5,10,0, this, getLevelDificulty(), mode);
                 }
             view.setVisible(true);}
             );
