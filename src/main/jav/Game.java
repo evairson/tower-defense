@@ -264,8 +264,13 @@ public class Game {
     }
 
     public void gagner(){
-        System.out.println("Bravo c'est gagné");
-        view.control.levelSuivant(view.getApp().getLvl());
+        if(view==null){
+            System.out.println("Bravo c'est gagné");
+        }
+        else {
+
+            view.control.levelSuivant(view.getApp().getLvl());
+        }
     }
     
 }

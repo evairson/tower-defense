@@ -3,6 +3,7 @@ package jav.Personnages.Ennemis;
 
 import jav.Game;
 import jav.Personnages.Tours.Tours;
+import jav.Personnages.Tours.Tuyau;
 
 public class Goomba extends Ennemis {
     private int sprintRange;
@@ -29,8 +30,9 @@ public class Goomba extends Ennemis {
 
     public boolean RangeIsTour(Game g){
         if(g.getToursEnJeu().size()!=0){
-            for(Tours t : g.getToursEnJeu()){
-                if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= sprintRange){
+            for(Tours t : g.getToursEnJeu() ){
+                if(t.getPos().getIntCoordonnee().getY()==pos.getIntCoordonnee().getY() && this.pos.getIntCoordonnee().getX() - t.getPos().getIntCoordonnee().getX()<= sprintRange
+                 && !(t instanceof Tuyau)){
                     return true;
                 }
             }

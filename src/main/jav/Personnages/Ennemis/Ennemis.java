@@ -68,7 +68,9 @@ public abstract class Ennemis extends Perso {
 
     public void avancer(Game g){
         if(canMove(g)){
-            pos.setX(pos.getX()-(Game.sizecase/ frame));
+
+            pos.setX(pos.getX()-((double)Game.sizecase/ (double)frame));
+            
         }
     }
 

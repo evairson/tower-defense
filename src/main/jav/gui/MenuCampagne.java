@@ -18,37 +18,15 @@ import java.nio.file.Paths;
 
 import jav.*;
 
-public class MenuCampagne extends JFrame {
-    private JButton start;
-    private App app;
-    private JPanel difficultyPanel;
-    private GameController control;
-
-    private Dimension buttonSize = new Dimension(300, 100);
+public class MenuCampagne extends MenuView {
     private HashMap<Integer, JButton> buttons;
 
     public MenuCampagne(App app){
         
-        super("Menu de la Campagne");
+        super(app, "Menu de la Campagne");
+        
         buttons = new HashMap<>();
-        this.app = app;
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(screenSize.width, screenSize.height);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JPanel fondPanel = new JPanel(){
-          protected void paintComponent(Graphics g) {
-              super.paintComponent(g);
-              ImageIcon imageIcon = new ImageIcon(App.currentDirectory+"/src/main/resources/FondMenuDepart.png");
-              Image fond = imageIcon.getImage();
-              g.drawImage(fond,0,0,getWidth(),getHeight(),null);
-          }
-        };
-        
-
-        fondPanel.setLayout(new BoxLayout(fondPanel, BoxLayout.Y_AXIS));
-        
         for(int i = 1; i<5; i ++){
             JPanel panel = new JPanel();
             JButton b = createButton(i, 0.3);

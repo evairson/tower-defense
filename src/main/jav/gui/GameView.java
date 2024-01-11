@@ -14,6 +14,8 @@ import jav.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -195,7 +197,7 @@ public class GameView extends JFrame {
 
         
 
-        argent = new JLabel("Argent : " + String.valueOf(game.getJoueur().getMonnaie()), SwingConstants.CENTER);
+        argent = new JLabel(String.valueOf(game.getJoueur().getMonnaie()) + "$", SwingConstants.CENTER);
         argent.setBackground(new Color(121,203,219));
         argent.setFont(new Font("Serif", Font.BOLD, 20));
         argent.setForeground(Color.white);

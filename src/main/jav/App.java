@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.http.WebSocket.Listener;
 import java.util.Scanner;
 
 import javax.print.attribute.standard.RequestingUserName;
@@ -24,8 +25,36 @@ public class App {
     private int mode = 1; // 1 - campagne 2 - marathon 3 - personnalisé
     private int lvl = 1;
 
+    private int nbEnnemis;
+    private int largeur;
+    private int hauteur;
+
     private MenuDepartView viewMenuDepart;
     public static final String currentDirectory = System.getProperty("user.dir");
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public int getHauteur() {
+        return hauteur;
+    }
+
+    public void setNbEnnemis(int i){
+        nbEnnemis = i;
+    }
+
+    public void setHauteur(int i){
+        hauteur = i;
+    }
+
+    public void setLargeur(int i){
+        largeur = i;
+    }
+
+    public int getNbEnnemis(){
+        return nbEnnemis;
+    }
 
     public int getLvl(){
         return lvl;
@@ -49,9 +78,6 @@ public class App {
 
     public void setMode(int i){
         mode = i;
-        if(i == 3){
-            menuPersonnalise();
-        }
     }
 
     public int getLevelDificulty(){
@@ -117,14 +143,13 @@ public class App {
         afficheMenu();
     }
 
-    public void menuPersonnalise(){
-        // a remplir
-    }
-
     public void lanceJeuInterface(){
         viewMenuDepart.dispose();
         if(mode==1){
             new MenuCampagne(this);
+        }
+        else if(mode==3){
+            new MenuPersonnalise(this);
         }
         else {
             GameInterface(0);
@@ -133,6 +158,13 @@ public class App {
 
     public void startCampagneGame(int level){
         GameInterface(level);
+    }
+
+    public void lanceJeuPersonnalise(){
+        EventQueue.invokeLater( () -> {
+            view = new GameView(hauteur, largeur,nbEnnemis, this, getLevelDificulty(), mode); 
+        view.setVisible(true);}
+        );
     }
 
 }

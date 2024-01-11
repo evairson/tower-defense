@@ -188,7 +188,7 @@ public class GameController {
     }  
 
     public void changeArgent(){
-        view.getArgent().setText("Argent : " + String.valueOf(game.getJoueur().getMonnaie()));
+        view.getArgent().setText(String.valueOf(game.getJoueur().getMonnaie()) + "$");
         view.getInventairePane().repaint();
     }
 
