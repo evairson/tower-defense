@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 
 public abstract class Tours extends Perso{
-    protected int prix;
     protected int niveau;
     protected boolean isAnimed;
     public static final String[] listTour = {"mario","luigi","peach","tuyau","fleur","etoile"};
@@ -33,9 +32,6 @@ public abstract class Tours extends Perso{
         isAnimed = b;
     }
 
-    public int getPrix(){
-        return this.prix;
-    }
     public int getNiveau(){
         return this.niveau;
     }

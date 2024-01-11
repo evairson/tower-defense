@@ -43,7 +43,6 @@ public class JPanelPlateau extends JPanel{
                 }
             }
         }
-      
     }
 
 

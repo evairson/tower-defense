@@ -121,6 +121,7 @@ public class JeuTexte {
             if (g.getJoueur().getBoutique().get(tours) > g.getJoueur().getMonnaie()){
                 System.out.println("Vous ne pouvez pas acheter cet objet");
             }else{
+                System.out.println("Recommencez");
                 g.getJoueur().acheter(tours);
             }
         }

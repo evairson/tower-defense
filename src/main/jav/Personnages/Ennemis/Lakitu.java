@@ -15,7 +15,7 @@ public class Lakitu extends Ennemis implements Lanceur {
         super();
         lettre="L ";
         pv=50;
-        valeur=20;
+        valeur=15;
         timebetweenMov=3000;
         degat=5;
         range=1;

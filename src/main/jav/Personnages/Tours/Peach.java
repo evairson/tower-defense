@@ -11,7 +11,6 @@ public class Peach extends Tours implements TourAttaque, Fleur, Etoile{
         super();
         pv=150;
         degat = 15;
-        prix = 20;
         range = 4;
         timebetweendegat = 3000;
         this.pos = pos;

@@ -14,7 +14,7 @@ public class Koopa extends Ennemis implements Lanceur {
         super();
         lettre="K ";
         pv=40;
-        valeur=18;
+        valeur=10;
         timebetweenMov=3000;
         degat=2;
         range=1;

@@ -16,9 +16,8 @@ public class Mario extends Tours implements Lanceur, TourAttaque, Fleur, Etoile{
         super();
         timeAttaque = System.currentTimeMillis();
         timebetweendegat = 2000;
-        pv=150;
+        pv = 150;
         degat = 5;
-        prix = 20;
         range = 1;
         rangeCara= 4;
         this.pos = pos;

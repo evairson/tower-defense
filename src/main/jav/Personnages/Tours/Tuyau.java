@@ -9,7 +9,6 @@ public class Tuyau extends Tours{
     
     public Tuyau(RealCoordonnee pos){
         super();
-        prix = 30;
         this.pos = pos;
         url = "tours/Mario_pipe.png";
         lettre = "TT";

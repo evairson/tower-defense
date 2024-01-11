@@ -13,7 +13,6 @@ public class Luigi extends Tours implements TourAttaque, Fleur, Etoile{
         super();
         pv=200;
         degat = 20;
-        prix = 20;
         range = 1;
         timebetweendegat = 3000;
         this.pos = pos;
