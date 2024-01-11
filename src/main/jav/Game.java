@@ -147,7 +147,6 @@ public class Game {
                 }
 
                 if(end){
-                    System.out.println("j'ai perdu");
                     if(view == null){
                         System.out.println("Vous avez perdu");
                         System.exit(0);
